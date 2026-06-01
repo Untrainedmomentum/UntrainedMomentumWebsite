@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untrained Momentum | We Help You Launch, Grow & Get Found</title>
+  <meta name="description" content="Websites, automations, operations, and business formation for startups, small businesses, and nonprofits across Mid-Michigan and beyond. We work with people at the beginning." />
+  <link rel="canonical" href="https://www.untrainedmomentum.com" />
+  <meta property="og:title" content="Untrained Momentum | Less Friction. More Momentum." />
+  <meta property="og:description" content="You have something real. We build the infrastructure to back it up." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.untrainedmomentum.com" />
+  <meta name="geo.region" content="US-MI" />
+  <meta name="geo.placename" content="Big Rapids, Michigan" />
+  <meta name="geo.position" content="43.6983;-85.4836" />
+  <meta name="ICBM" content="43.6983, -85.4836" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Untrained Momentum, LLC",
+    "url": "https://www.untrainedmomentum.com",
+    "email": "support@untrainedmomentum.com",
+    "description": "Websites, automations, operations, and business formation for startups, small businesses, and nonprofits across Mid-Michigan and beyond.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Big Rapids",
+      "addressRegion": "MI",
+      "addressCountry": "US"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Big Rapids"},
+      {"@type": "County", "name": "Mecosta County"},
+      {"@type": "County", "name": "Montcalm County"},
+      {"@type": "County", "name": "Isabella County"},
+      {"@type": "County", "name": "Osceola County"},
+      {"@type": "County", "name": "Newaygo County"},
+      {"@type": "State", "name": "Michigan"}
+    ],
+    "knowsAbout": ["Website Design", "Business Automation", "Google Business Profile", "LLC Formation", "Operations Management", "Nonprofit Support"]
+  }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white:     #ffffff;
+      --off:       #f4f4f4;
+      --light:     #e0e0e0;
+      --mid:       #888888;
+      --dark:      #333333;
+      --black:     #0a0a0a;
+      --red:       #c03a28;
+      --red-dim:   rgba(192,58,40,.08);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--black); border-bottom: 1px solid #222;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 1.15em; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo em { font-style: normal; color: var(--red); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .82em; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--light); text-decoration: none; position: relative; padding-bottom: 2px;
+      transition: color .2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px;
+      background: var(--red); transition: width .25s ease;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .82em; letter-spacing: .16em; text-transform: uppercase;
+      background: var(--red); color: var(--white); padding: 8px 20px;
+      text-decoration: none; border-radius: 2px; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: all .25s; }
+    .mobile-menu {
+      display: none; position: fixed; inset: 60px 0 0 0; background: var(--black);
+      z-index: 99; flex-direction: column; padding: 32px 24px; gap: 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.4em; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; border-bottom: 1px solid #222;
+      padding-bottom: 20px;
+    }
+    .mobile-menu .nav-cta { text-align: center; border-bottom: none; padding: 14px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black); padding: 80px 48px 88px;
+      border-bottom: 1px solid #222; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -120px; right: -120px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,58,40,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 780px; position: relative; z-index: 1; }
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .82em; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 24px;
+      opacity: 0; animation: fadeUp .5s ease forwards .1s;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(3.6em, 9vw, 7.5em); line-height: .88;
+      text-transform: uppercase; color: var(--white);
+      opacity: 0; animation: fadeUp .5s ease forwards .2s;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      font-size: clamp(1em, 2vw, 1.15em); color: var(--mid);
+      line-height: 1.8; margin: 32px 0 48px; max-width: 560px;
+      opacity: 0; animation: fadeUp .5s ease forwards .35s;
+    }
+    .hero-sub strong { color: var(--white); font-weight: 500; }
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .5s ease forwards .5s;
+    }
+    .btn-primary {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .9em; letter-spacing: .14em; text-transform: uppercase;
+      background: var(--red); color: var(--white); padding: 14px 34px;
+      border-radius: 2px; text-decoration: none; transition: opacity .2s; display: inline-block;
+    }
+    .btn-primary:hover { opacity: .85; }
+    .btn-ghost {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .9em; letter-spacing: .14em; text-transform: uppercase;
+      border: 1.5px solid #444; color: var(--mid); padding: 14px 34px;
+      border-radius: 2px; text-decoration: none; transition: all .2s; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+    /* ── TICKER ── */
+    .ticker-wrap { background: var(--red); overflow: hidden; padding: 9px 0; }
+    .ticker-track { display: flex; width: max-content; animation: ticker 28s linear infinite; }
+    .ticker-item {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .78em; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(255,255,255,.9); padding: 0 24px; white-space: nowrap;
+    }
+    .ticker-sep { color: rgba(255,255,255,.3); }
+
+    /* ── ENTRY LADDER ── */
+    .ladder { padding: 0; border-bottom: 1px solid var(--light); }
+    .ladder-inner { display: grid; grid-template-columns: repeat(5, 1fr); }
+    .ladder-step {
+      padding: 28px 24px; border-right: 1px solid var(--light);
+      position: relative; transition: background .2s;
+      text-decoration: none; display: block;
+    }
+    .ladder-step:last-child { border-right: none; }
+    .ladder-step:hover { background: var(--off); }
+    .ladder-step::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    }
+    .ladder-step:hover::before { transform: scaleX(1); }
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: .72em; letter-spacing: .2em; color: var(--red); margin-bottom: 10px;
+    }
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: .95em; text-transform: uppercase; color: var(--black);
+      line-height: 1.15; margin-bottom: 8px;
+    }
+    .step-price {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .82em; color: var(--mid); letter-spacing: .05em;
+    }
+    .step-arrow { position: absolute; bottom: 24px; right: 20px; color: var(--light); font-size: .8em; }
+
+    /* ── SECTIONS ── */
+    section { padding: 60px 48px; border-bottom: 1px solid var(--light); }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .78em; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2em, 4.5vw, 3.2em); line-height: .93;
+      text-transform: uppercase; color: var(--black); margin-bottom: 18px;
+    }
+    .section-title em { font-style: normal; color: var(--red); }
+    .section-body { font-size: .98em; color: var(--dark); line-height: 1.8; max-width: 600px; }
+    .section-body strong { color: var(--black); font-weight: 600; }
+
+    /* ── WHO WE HELP ── */
+    .who-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--light); border: 1px solid var(--light); margin-top: 32px;
+    }
+    .who-card { background: var(--white); padding: 28px; transition: background .2s; }
+    .who-card:hover { background: var(--off); }
+    .who-icon { font-size: 1.4em; margin-bottom: 14px; }
+    .who-q {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1em; text-transform: uppercase; color: var(--black);
+      line-height: 1.2; margin-bottom: 12px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--light);
+    }
+    .who-a { font-size: .88em; color: var(--dark); line-height: 1.75; }
+
+    /* ── SERVICES GRID ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--light); border: 1px solid var(--light); margin-top: 32px;
+    }
+    .service-card {
+      background: var(--white); padding: 32px;
+      position: relative; transition: background .2s; text-decoration: none; display: block;
+    }
+    .service-card:hover { background: var(--off); }
+    .service-card::after {
+      content: '→'; position: absolute; top: 32px; right: 28px;
+      font-size: .85em; color: var(--light); transition: color .2s, transform .2s;
+    }
+    .service-card:hover::after { color: var(--red); transform: translateX(3px); }
+    .service-tag {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .72em; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 10px;
+    }
+    .service-name {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 1.3em; text-transform: uppercase; color: var(--black);
+      line-height: 1.1; margin-bottom: 12px;
+    }
+    .service-desc { font-size: .88em; color: var(--dark); line-height: 1.7; margin-bottom: 16px; }
+    .service-price {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .82em; color: var(--mid); letter-spacing: .05em;
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--light); border: 1px solid var(--light); margin-top: 32px;
+    }
+    .portfolio-card {
+      background: var(--white); padding: 28px 24px;
+      transition: background .2s; text-decoration: none; display: block;
+    }
+    .portfolio-card:hover { background: var(--off); }
+    .portfolio-industry {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .72em; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 10px;
+    }
+    .portfolio-name {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 1.15em; text-transform: uppercase; color: var(--black);
+      margin-bottom: 10px; line-height: 1.1;
+    }
+    .portfolio-work { font-size: .85em; color: var(--dark); line-height: 1.65; margin-bottom: 14px; }
+    .portfolio-link {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .75em; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--red); text-decoration: none;
+    }
+    .portfolio-badge {
+      display: inline-block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65em; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      background: var(--off); color: var(--mid); padding: 3px 8px; margin-bottom: 10px;
+    }
+
+    /* ── JEN ── */
+    .jen-split { display: grid; grid-template-columns: 300px 1fr; }
+    .jen-photo-wrap {
+      border-right: 1px solid var(--light); overflow: hidden; min-height: 420px; background: #111;
+    }
+    .jen-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; filter: grayscale(10%); }
+    .jen-content { padding: 52px; }
+    .jen-p { font-size: .96em; color: var(--dark); line-height: 1.85; margin-bottom: 16px; }
+    .jen-p strong { color: var(--black); font-weight: 600; }
+    .creds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .cred-tag {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .7em; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--dark); border: 1px solid var(--light); padding: 4px 10px;
+    }
+
+    /* ── AREA ── */
+    .area-bar {
+      padding: 16px 48px; background: var(--off);
+      border-bottom: 1px solid var(--light);
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .area-label {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .72em; letter-spacing: .22em; text-transform: uppercase; color: var(--red);
+    }
+    .area-div { width: 1px; height: 18px; background: var(--light); }
+    .area-text { font-size: .85em; color: var(--dark); }
+    .area-text span { color: var(--black); font-weight: 600; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--black); padding: 72px 48px; text-align: center; border-bottom: none;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); width: 600px; height: 600px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(192,58,40,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(2.8em, 6vw, 5em); text-transform: uppercase;
+      color: var(--white); line-height: .9; margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .cta-section h2 em { font-style: normal; color: var(--red); }
+    .cta-section p {
+      font-size: 1.05em; color: #888; line-height: 1.75;
+      margin-bottom: 40px; position: relative; z-index: 1;
+      max-width: 460px; margin-left: auto; margin-right: auto;
+    }
+    .cta-section p strong { color: var(--white); font-weight: 500; }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505; border-top: 1px solid #1a1a1a;
+      padding: 40px 48px; display: grid;
+      grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 1em; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; display: block; margin-bottom: 8px;
+    }
+    .footer-logo em { font-style: normal; color: var(--red); }
+    .footer-copy { font-size: .8em; color: #444; }
+    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links a {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .75em; letter-spacing: .14em; text-transform: uppercase;
+      color: #444; text-decoration: none; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: .1s; }
+    .reveal-d2 { transition-delay: .2s; }
+    .reveal-d3 { transition-delay: .3s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 60px 24px 72px; }
+      section { padding: 48px 24px; }
+      .area-bar { padding: 14px 24px; }
+      .ladder-inner { grid-template-columns: 1fr 1fr; }
+      .ladder-step:nth-child(2) { border-right: none; }
+      .ladder-step:nth-child(3) { border-top: 1px solid var(--light); }
+      .ladder-step:nth-child(4) { border-top: 1px solid var(--light); border-right: none; }
+      .ladder-step:nth-child(5) { grid-column: span 2; border-top: 1px solid var(--light); border-right: none; }
+      .who-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .jen-split { grid-template-columns: 1fr; }
+      .jen-photo-wrap { height: 300px; min-height: unset; border-right: none; border-bottom: 1px solid var(--light); }
+      .jen-content { padding: 36px 24px; }
+      footer { grid-template-columns: 1fr; padding: 32px 24px; }
+      .cta-section { padding: 56px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Untrained<em>.</em>Momentum</a>
+  <ul class="nav-links">
+    <li><a href="/digital-presence.html">Services</a></li>
+  </ul>
+  <a href="/inquire.html" class="nav-cta">Get Started</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/digital-presence.html" onclick="toggleMenu()">Services</a>
+  <a href="/inquire.html" class="nav-cta" onclick="toggleMenu()">Get Started</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Startups &nbsp;·&nbsp; Small Business &nbsp;·&nbsp; Nonprofits</p>
+    <h1>You Have<br>Something <em>Real.</em></h1>
+    <p class="hero-sub">
+      You just need the infrastructure to back it up. <strong>We build your digital presence, automate what's slowing you down, and get your operations running right</strong> — from your first Google listing to your full back office.
+    </p>
+    <div class="hero-actions">
+      <a href="/inquire.html" class="btn-primary">Start the Conversation</a>
+      <a href="/digital-presence.html" class="btn-ghost">See What We Do</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Google Presence</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Websites</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Automation</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">LLC Formation</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Operations</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Nonprofits</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Startups</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Small Business</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Registered Agent</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Mid-Michigan</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Google Presence</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Websites</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Automation</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">LLC Formation</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Operations</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Nonprofits</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Startups</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Small Business</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Registered Agent</span><span class="ticker-sep"> · </span>
+    <span class="ticker-item">Mid-Michigan</span><span class="ticker-sep"> · </span>
+  </div>
+</div>
+
+<!-- ENTRY LADDER -->
+<div class="ladder reveal">
+  <div class="ladder-inner">
+    <a href="/digital-presence.html#found" class="ladder-step">
+      <div class="step-num">Step 01</div>
+      <div class="step-title">Get Found on Google</div>
+      <div class="step-price">From $99</div>
+      <span class="step-arrow">→</span>
+    </a>
+    <a href="/digital-presence.html#website" class="ladder-step">
+      <div class="step-num">Step 02</div>
+      <div class="step-title">Build Your Website</div>
+      <div class="step-price">From $499</div>
+      <span class="step-arrow">→</span>
+    </a>
+    <a href="/digital-presence.html#found" class="ladder-step">
+      <div class="step-num">Step 03</div>
+      <div class="step-title">Automate the Busywork</div>
+      <div class="step-price">From $500</div>
+      <span class="step-arrow">→</span>
+    </a>
+    <a href="/digital-presence.html#found" class="ladder-step">
+      <div class="step-num">Step 04</div>
+      <div class="step-title">Run Your Operations</div>
+      <div class="step-price">From $300/mo</div>
+      <span class="step-arrow">→</span>
+    </a>
+    <a href="/inquire.html" class="ladder-step">
+      <div class="step-num">+</div>
+      <div class="step-title">LLC & Business Formation</div>
+      <div class="step-price">From $299</div>
+      <span class="step-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- AREA BAR -->
+<div class="area-bar reveal">
+  <div class="area-label">Where We Work</div>
+  <div class="area-div"></div>
+  <div class="area-text">
+    Rooted in <span>Big Rapids, Michigan.</span> Serving businesses and nonprofits <span>across Mid-Michigan</span> — and remotely, anywhere.
+  </div>
+</div>
+
+<!-- WHO WE HELP -->
+<section>
+  <div class="reveal">
+    <p class="section-label">Who We Help</p>
+    <h2 class="section-title">We Work With<br>People at the <em>Beginning.</em></h2>
+    <p class="section-body">Not the beginning of their idea — they know what they're doing. The beginning of having systems, presence, and infrastructure that actually works. <strong>That's our lane.</strong></p>
+  </div>
+  <div class="who-grid reveal reveal-d1">
+    <div class="who-card">
+      <div class="who-icon">⚡</div>
+      <p class="who-q">I'm launching and need it done right</p>
+      <p class="who-a">Most launches fail because the infrastructure isn't there before the doors open. We build the presence, systems, and foundations before you go live — so you start with momentum instead of scrambling to catch up.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🔧</div>
+      <p class="who-q">I'm running on duct tape and Google Docs</p>
+      <p class="who-a">You've been making it work, but it's costing you time every single day. We look at what's actually breaking, build automations that fix it, and get your operations off your plate and into systems.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🤝</div>
+      <p class="who-q">We're a nonprofit trying to do more with less</p>
+      <p class="who-a">We understand tight budgets and grant-funded timelines. We help nonprofits get online, get organized, and access programs like Google for Nonprofits — which includes $10K/month in free advertising.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section style="background: var(--off);">
+  <div class="reveal">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">One Place.<br>Everything You <em>Need.</em></h2>
+    <p class="section-body">You don't need five different vendors. You need one team that understands the whole picture and handles it.</p>
+  </div>
+  <div class="services-grid reveal reveal-d1">
+    <a href="/digital-presence.html#found" class="service-card">
+      <div class="service-tag">Digital Presence</div>
+      <div class="service-name">Google Business Profile</div>
+      <p class="service-desc">Most small businesses are invisible on Google Maps because their profile is wrong or missing. We fix that fast — setup done right, and kept current every month.</p>
+      <div class="service-price">$149 setup · $99/mo maintenance</div>
+    </a>
+    <a href="/digital-presence.html#website" class="service-card">
+      <div class="service-tag">Websites</div>
+      <div class="service-name">Website Design, Build & Hosting</div>
+      <p class="service-desc">Clean, fast websites built for small businesses and nonprofits. We handle the build, the hosting, and ongoing maintenance — so you never have to think about it.</p>
+      <div class="service-price">From $499 build · $99/mo hosting</div>
+    </a>
+    <a href="/digital-presence.html#reviews" class="service-card">
+      <div class="service-tag">Reputation</div>
+      <div class="service-name">Review Management</div>
+      <p class="service-desc">88% of people trust reviews as much as a personal recommendation. We set up monitoring, alerts, and response systems so your reputation works for you around the clock.</p>
+      <div class="service-price">$199 setup · $149/mo management</div>
+    </a>
+    <a href="/digital-presence.html#social" class="service-card">
+      <div class="service-tag">Social Media</div>
+      <div class="service-name">Social Media Management</div>
+      <p class="service-desc">You provide the photos, we handle the writing, scheduling, and posting. Your presence stays consistent without you living on your phone. Every engagement is quoted to fit your business.</p>
+      <div class="service-price">Quoted · starting at 3 posts/week</div>
+    </a>
+    <a href="/digital-presence.html#seo" class="service-card">
+      <div class="service-tag">SEO</div>
+      <div class="service-name">SEO Audit Report</div>
+      <p class="service-desc">We audit your existing site page by page and tell you exactly what's hurting your rankings and what to fix — in plain English. Included free in every website we build.</p>
+      <div class="service-price">$149 standalone · included in every build</div>
+    </a>
+    <div class="service-card" style="background: var(--black); border: none; cursor: default;">
+      <div class="service-tag" style="color: #555;">Start Here</div>
+      <div class="service-name" style="color: var(--white);">Business Clarity Session</div>
+      <p class="service-desc" style="color: #777;">60 minutes. We look at where you are, what's broken, and what to fix first. You leave with a clear roadmap — no fluff, no sales pitch.</p>
+      <div class="service-price" style="color: #555; margin-bottom: 16px;">$149 · one-time · no commitment</div>
+      <a href="/inquire.html" class="btn-primary">Book a Session</a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section>
+  <div class="reveal">
+    <p class="section-label">Our Work</p>
+    <h2 class="section-title">Real Businesses.<br>Real <em>Results.</em></h2>
+    <p class="section-body">We work across industries because the problems are usually the same — no presence, no systems, no time. Here's who we've helped.</p>
+  </div>
+  <div class="portfolio-grid reveal reveal-d1">
+    <div class="portfolio-card">
+      <div class="portfolio-badge">Events & Florals</div>
+      <div class="portfolio-name">Blooms & Bashes</div>
+      <p class="portfolio-work">Full website design and build. Clean, conversion-focused, and built to showcase their event work and drive inquiries.</p>
+      <a href="https://bloomsandbashes.com" target="_blank" class="portfolio-link">View Site →</a>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-badge">Supplements</div>
+      <div class="portfolio-name">Dr. Ward's Blends</div>
+      <p class="portfolio-work">Partnership booking portal, event strategy, and boutique outreach system for a PhD-formulated supplement line expanding into retail wellness locations.</p>
+      <a href="https://drwardsblends.com" target="_blank" class="portfolio-link">View Site →</a>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-badge">Veteran Nonprofit</div>
+      <div class="portfolio-name">HonorBound Heroes</div>
+      <p class="portfolio-work">Website redesign and digital presence for a 501(c)(3) supporting homeless veterans in West Michigan — built around their mission, not a template.</p>
+      <a href="https://www.honorboundheroes.com" target="_blank" class="portfolio-link">View Site →</a>
+    </div>
+  </div>
+</section>
+
+<!-- JEN -->
+<section style="padding: 0;">
+  <div class="jen-split">
+    <div class="jen-photo-wrap reveal">
+      <img
+        src="https://static.wixstatic.com/media/377674_566c776167814bf49d44b34bc86cf5d8~mv2.jpg"
+        alt="Jen, Founder of Untrained Momentum"
+        class="jen-photo"
+      />
+    </div>
+    <div class="jen-content reveal reveal-d1">
+      <p class="section-label">Who's Behind It</p>
+      <h2 class="section-title">Hi. I'm <em>Jen.</em></h2>
+      <p class="jen-p">I spent 20+ years in regulated tech environments — building systems, managing operations, and being the person organizations called when something was broken and nobody else knew how to fix it.</p>
+      <p class="jen-p">I started Untrained Momentum because I kept watching good businesses and passionate people stay stuck. Not because they weren't smart or driven — because they didn't have the infrastructure. A website that works. Systems that run without them. A presence that gets them found.</p>
+      <p class="jen-p"><strong>I don't come in with a template. I come in with questions.</strong> Then we build around what's actually true for your business — not what looks good on a service menu.</p>
+      <p class="jen-p">Based in Big Rapids, Michigan. Working with businesses and organizations everywhere.</p>
+      <div class="creds">
+        <span class="cred-tag">Lean Six Sigma</span>
+        <span class="cred-tag">Power Automate</span>
+        <span class="cred-tag">Project Management</span>
+        <span class="cred-tag">Business Analysis</span>
+        <span class="cred-tag">Information Security</span>
+        <span class="cred-tag">20+ Years</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready To <em>Move?</em></h2>
+  <p>Tell us where you are. <strong>We'll figure out what's in the way and handle it.</strong></p>
+  <div class="cta-actions">
+    <a href="/inquire.html" class="btn-primary">Start the Conversation</a>
+    <a href="/inquire.html" class="btn-ghost">Get Started</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="/" class="footer-logo">Untrained<em>.</em>Momentum</a>
+    <p class="footer-copy">© 2026 Untrained Momentum, LLC · Big Rapids, MI</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/digital-presence.html">Services</a></li>
+    <li><a href="/inquire.html">Contact</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+    <li><a href="/terms.html">Terms</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Operations Manager | Untrained Momentum</title>
+  <meta name="description" content="Back office services for businesses that know what they need. Books & Finance, Daily Operations, and Business Operations. Transparent pricing. No contracts." />
+  <link rel="canonical" href="https://www.untrainedmomentum.com/virtual-operations-manager" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:  #0a0a0a;
+      --white:  #ffffff;
+      --off:    #f2f2f2;
+      --pale:   #ebebeb;
+      --slate:  #444444;
+      --rule:   #cccccc;
+      --red:    #c03a28;
+      --red-dim: rgba(192,58,40,.08);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-1 { transition-delay: .12s; }
+    .reveal-2 { transition-delay: .24s; }
+
+    /* HERO */
+    .hero {
+      padding: 10px 48px 88px;
+      position: relative; overflow: hidden;
+      border-bottom: 3px solid var(--red);
+      background: var(--black);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; padding-top: 60px; }
+    .eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 1em; letter-spacing: .2em; text-transform: uppercase; color: #777; margin-bottom: 22px; opacity: 0; animation: fadeUp .55s ease forwards .1s; }
+    .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3.2em, 7.5vw, 6.2em); line-height: .93; text-transform: uppercase; color: var(--white); opacity: 0; animation: fadeUp .55s ease forwards .25s; }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub { font-size: clamp(1em, 2vw, 1.15em); font-weight: 400; color: #aaa; line-height: 1.8; margin: 28px 0 44px; max-width: 600px; opacity: 0; animation: fadeUp .55s ease forwards .4s; }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp .55s ease forwards .55s; }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95em; letter-spacing: .12em; text-transform: uppercase; background: var(--red); color: var(--white); padding: 15px 36px; border: none; cursor: pointer; text-decoration: none; transition: opacity .2s; display: inline-block; }
+    .btn-primary:hover { opacity: .85; }
+    .btn-ghost-dark { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95em; letter-spacing: .12em; text-transform: uppercase; border: 1.5px solid #444; color: #aaa; padding: 15px 36px; background: transparent; cursor: pointer; text-decoration: none; transition: all .2s; display: inline-block; }
+    .btn-ghost-dark:hover { border-color: var(--white); color: var(--white); }
+    .btn-ghost-light { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95em; letter-spacing: .12em; text-transform: uppercase; border: 1.5px solid var(--rule); color: var(--slate); padding: 15px 36px; background: transparent; cursor: pointer; text-decoration: none; transition: all .2s; display: inline-block; }
+    .btn-ghost-light:hover { border-color: var(--black); color: var(--black); }
+
+    /* MOMENT STRIP */
+    .moment-strip { border-bottom: 1.5px solid var(--rule); }
+    .moment-item { display: grid; grid-template-columns: 3fr 2fr; border-bottom: 1.5px solid var(--rule); background: var(--off); transition: background .2s; position: relative; }
+    .moment-item:last-child { border-bottom: none; }
+    .moment-item:hover { background: var(--pale); }
+    .moment-item::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: var(--red); transform: scaleY(0); transform-origin: top; transition: transform .4s; }
+    .moment-item:hover::before { transform: scaleY(1); }
+    .moment-img { overflow: hidden; aspect-ratio: 4/3; }
+    .moment-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(30%) brightness(.85); transition: filter .4s, transform .5s; }
+    .moment-item:hover .moment-img img { filter: grayscale(10%) brightness(.95); transform: scale(1.03); }
+    .moment-text { padding: 64px 72px; display: flex; flex-direction: column; justify-content: center; border-right: 1.5px solid var(--rule); min-height: 360px; }
+    .moment-scene { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(1.6em, 3vw, 2.4em); text-transform: uppercase; color: var(--black); margin-bottom: 16px; line-height: 1; }
+    .moment-scene em { font-style: normal; color: var(--red); }
+    .moment-reality { font-size: 1.05em; color: var(--slate); line-height: 1.8; max-width: 480px; }
+    .moment-reality strong { color: var(--black); font-weight: 600; }
+
+    /* SECTIONS */
+    section { padding: 72px 48px; border-bottom: 1.5px solid var(--rule); }
+    .section-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .9em; letter-spacing: .22em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2em, 4vw, 3.2em); line-height: .97; text-transform: uppercase; color: var(--black); margin-bottom: 24px; }
+    .section-title em { font-style: normal; color: var(--red); }
+    .section-body { font-size: 1.05em; font-weight: 400; color: var(--slate); line-height: 1.8; max-width: 640px; }
+    .section-body strong { color: var(--black); font-weight: 600; }
+
+    /* SERVICE CARDS */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--rule); border: 1.5px solid var(--rule); margin-top: 48px; }
+    .svc-card { background: var(--white); padding: 36px 32px; display: flex; flex-direction: column; position: relative; transition: background .2s; }
+    .svc-card:hover { background: var(--off); }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--rule); transition: background .3s; }
+    .svc-card:hover::before { background: var(--red); }
+    .svc-card.dark { background: var(--black); }
+    .svc-card.dark:hover { background: #1a1a1a; }
+    .svc-card.dark::before { background: var(--red); }
+    .svc-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6em; text-transform: uppercase; color: var(--black); line-height: 1; margin-bottom: 6px; }
+    .svc-name.light { color: var(--white); }
+    .svc-tagline { font-size: .92em; color: var(--slate); line-height: 1.6; margin-bottom: 20px; }
+    .svc-tagline.light { color: #aaa; }
+    .svc-tagline strong { color: var(--black); }
+    .svc-tagline.light strong { color: var(--white); }
+    .svc-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.8em; line-height: 1; color: var(--black); margin-bottom: 4px; }
+    .svc-price.light { color: var(--white); }
+    .svc-price sup { font-size: .32em; vertical-align: super; font-weight: 400; color: var(--slate); }
+    .svc-price.light sup { color: #aaa; }
+    .svc-price sub { font-size: .22em; font-weight: 400; color: var(--slate); }
+    .svc-price.light sub { color: #aaa; }
+    .svc-breakdown { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .svc-pill { font-family: 'Barlow Condensed', sans-serif; font-size: .75em; font-weight: 700; color: var(--slate); background: var(--off); padding: 2px 10px; border-radius: 20px; }
+    .svc-pill.light { background: rgba(255,255,255,.1); color: #aaa; }
+    .svc-divider { height: 1.5px; background: var(--rule); margin-bottom: 18px; }
+    .svc-divider.light { background: rgba(255,255,255,.15); }
+    .svc-features { list-style: none; flex: 1; margin-bottom: 24px; }
+    .svc-features li { font-size: .91em; color: var(--slate); padding: 6px 0; display: flex; gap: 10px; border-bottom: 1px solid var(--off); line-height: 1.4; }
+    .svc-features.light li { color: #aaa; border-bottom-color: rgba(255,255,255,.08); }
+    .svc-features li:last-child { border-bottom: none; }
+    .svc-features li::before { content: '—'; color: var(--red); flex-shrink: 0; font-weight: 700; }
+    .cap-note { font-size: .78em; color: #aaa; display: block; margin-top: 2px; }
+    .svc-features.light .cap-note { color: rgba(255,255,255,.4); }
+    .svc-includes { font-family: 'Barlow Condensed', sans-serif; font-size: .75em; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .svc-includes.light { color: #aaa; }
+    .svc-cta { display: block; width: 100%; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .86em; letter-spacing: .12em; text-transform: uppercase; text-align: center; padding: 12px; cursor: pointer; border: 1.5px solid var(--rule); color: var(--slate); background: transparent; transition: all .2s; text-decoration: none; }
+    .svc-cta:hover { border-color: var(--red); color: var(--red); }
+    .svc-card.dark .svc-cta { background: var(--red); border-color: var(--red); color: var(--white); }
+    .svc-card.dark .svc-cta:hover { opacity: .85; }
+
+    /* OVERAGE + NOTES */
+    .overage-bar { background: var(--off); border: 1.5px solid var(--rule); border-top: none; padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .overage-left strong { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95em; letter-spacing: .06em; text-transform: uppercase; color: var(--black); margin-bottom: 3px; }
+    .overage-left span { font-size: .9em; color: var(--slate); }
+    .overage-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6em; color: var(--black); white-space: nowrap; }
+    .overage-price span { font-size: .38em; font-weight: 400; color: var(--slate); }
+    .caps-note { background: var(--white); border: 1.5px solid var(--rule); border-top: none; padding: 16px 28px; }
+    .caps-note-text { font-size: .9em; color: var(--slate); line-height: 1.5; }
+    .caps-note-text strong { color: var(--black); }
+
+    /* GUARANTEE */
+    .guarantee-wrap { border: 1.5px solid var(--rule); background: var(--off); padding: 48px 52px; display: flex; gap: 44px; align-items: flex-start; margin-top: 40px; }
+    .guarantee-icon { font-size: 3em; flex-shrink: 0; line-height: 1; margin-top: 4px; }
+    .guarantee-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.9em; text-transform: uppercase; color: var(--black); margin-bottom: 12px; line-height: 1; }
+    .guarantee-title span { color: var(--red); }
+    .guarantee-body { font-size: 1em; color: var(--slate); line-height: 1.8; }
+    .guarantee-body strong { color: var(--black); font-weight: 600; }
+
+    /* WHY GRID */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--rule); border: 1.5px solid var(--rule); margin-top: 48px; }
+    .why-card { background: var(--white); padding: 40px 36px; position: relative; transition: background .25s; }
+    .why-card:hover { background: var(--off); }
+    .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .35s; }
+    .why-card:hover::before { transform: scaleX(1); }
+    .why-card.full { grid-column: span 2; background: var(--off); }
+    .why-card.full::before { display: none; }
+    .why-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 3.2em; line-height: 1; color: var(--rule); margin-bottom: 14px; }
+    .why-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.25em; text-transform: uppercase; color: var(--black); margin-bottom: 10px; line-height: 1.1; }
+    .why-title em { font-style: normal; color: var(--red); }
+    .why-body { font-size: .96em; color: var(--slate); line-height: 1.75; }
+    .why-body strong { color: var(--black); font-weight: 600; }
+    .article-callout { display: flex; gap: 36px; align-items: flex-start; }
+    .article-callout-text { flex: 1; }
+    .article-callout-text p { font-size: .96em; color: var(--slate); line-height: 1.75; margin-bottom: 14px; }
+    .article-callout-text p strong { color: var(--black); font-weight: 600; }
+    .article-link { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .82em; letter-spacing: .14em; text-transform: uppercase; color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red); padding-bottom: 2px; transition: opacity .2s; }
+    .article-link:hover { opacity: .7; }
+    .article-stat { flex-shrink: 0; text-align: center; border: 1.5px solid var(--rule); padding: 24px 32px; background: var(--white); }
+    .article-stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.8em; line-height: 1; color: var(--black); margin-bottom: 6px; }
+    .article-stat-num span { color: var(--red); }
+    .article-stat-label { font-size: .86em; color: var(--slate); line-height: 1.4; max-width: 130px; }
+
+    /* CTA */
+    .cta-section { padding: 80px 48px; text-align: center; position: relative; overflow: hidden; background: var(--black); border-top: 2px solid var(--red); }
+    .cta-section h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.8em, 5.5vw, 5em); text-transform: uppercase; color: var(--white); line-height: .93; margin-bottom: 24px; }
+    .cta-section h2 em { font-style: normal; color: var(--red); }
+    .cta-section p { font-size: 1.1em; color: #aaa; font-weight: 400; line-height: 1.75; margin-bottom: 44px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-section p strong { color: var(--white); font-weight: 600; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { padding: 10px 24px 72px; }
+      section { padding: 48px 24px; }
+      .moment-item { grid-template-columns: 1fr; }
+      .moment-img { display: none; }
+      .moment-text { padding: 40px 24px; border-right: none; min-height: auto; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-card.full { grid-column: span 1; }
+      .article-callout { flex-direction: column; }
+      .guarantee-wrap { flex-direction: column; gap: 20px; padding: 32px 24px; }
+      .cta-section { padding: 56px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Back Office Services &nbsp;·&nbsp; You Know What You Need</p>
+    <h1>Your Business.<br>Not Your<br><em>Paperwork.</em></h1>
+    <p class="hero-sub">
+      You started this business to do the work — not to spend your nights doing data entry and your Saturdays chasing invoices. <strong>Pick what you need. We handle it. You get your time back.</strong>
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">See Services &amp; Pricing</button>
+      <button class="btn-ghost-dark" onclick="document.getElementById('why-us').scrollIntoView({behavior:'smooth'})">Why Us</button>
+    </div>
+  </div>
+</section>
+
+<!-- MOMENT STRIP -->
+<div class="moment-strip reveal">
+  <div class="moment-item">
+    <div class="moment-text">
+      <div class="moment-scene">At your kid's game — <em>not your desk</em></div>
+      <div class="moment-reality">The back office keeps running whether you're on the sidelines or in the truck. You stop missing things that matter because you were buried in things that shouldn't be your problem.</div>
+    </div>
+    <div class="moment-img">
+      <img src="https://images.pexels.com/photos/8914019/pexels-photo-8914019.jpeg?w=600&q=80" alt="Family at a soccer game" loading="lazy" />
+    </div>
+  </div>
+  <div class="moment-item">
+    <div class="moment-img">
+      <img src="https://images.unsplash.com/photo-1668271001050-f10ca9b2f303?w=600&q=80&auto=format&fit=crop" alt="Business owner focused on their work" loading="lazy" />
+    </div>
+    <div class="moment-text" style="border-right:none; border-left:1.5px solid var(--rule);">
+      <div class="moment-scene">Stop wearing <em>every hat</em></div>
+      <div class="moment-reality">Bookkeeper, scheduler, systems manager — those are our hats now. You wear the one that says Owner.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES & PRICING -->
+<section id="services">
+  <div class="reveal">
+    <p class="section-label">Services &amp; Pricing</p>
+    <h2 class="section-title">Pick What You Need.<br><em>Pay For What You Get.</em></h2>
+    <p class="section-body">Three standalone services. No bundles forced on you. No hourly games. <strong>Every price is fixed, every scope is defined before you sign anything.</strong> We're not answering your emails or sitting on your helpdesk — we're managing the systems, processes, and operations that keep your business running.</p>
+  </div>
+
+  <div class="services-grid reveal reveal-1">
+
+    <!-- BOOKS & FINANCE -->
+    <div class="svc-card">
+      <div class="svc-name">Books &amp; Finance</div>
+      <p class="svc-tagline">Your finances stay clean and current <strong>without you touching them.</strong></p>
+      <div class="svc-price"><sup>$</sup>175<sub>/mo</sub></div>
+      <div class="svc-breakdown">
+        <span class="svc-pill">$5.83/day</span>
+        <span class="svc-pill">$43.75/week</span>
+      </div>
+      <div class="svc-divider"></div>
+      <ul class="svc-features">
+        <li>Up to 50 transactions/mo <span class="cap-note">+$50/mo per additional 100</span></li>
+        <li>Receipt capture via photo</li>
+        <li>Invoicing &amp; billing</li>
+        <li>Payment reminders</li>
+        <li>Spending dashboard access</li>
+        <li>Monthly plain-language financial summary</li>
+      </ul>
+      <a href="https://www.untrainedmomentum.com/inquire" target="_top" class="svc-cta">Get Started</a>
+    </div>
+
+    <!-- DAILY OPERATIONS -->
+    <div class="svc-card">
+      <div class="svc-name">Daily Operations</div>
+      <p class="svc-tagline">Your calendar, clients, and visibility <strong>handled automatically.</strong></p>
+      <div class="svc-price"><sup>$</sup>350<sub>/mo</sub></div>
+      <div class="svc-breakdown">
+        <span class="svc-pill">$11.67/day</span>
+        <span class="svc-pill">$87.50/week</span>
+      </div>
+      <div class="svc-divider"></div>
+      <ul class="svc-features">
+        <li>Inbox organization &amp; triage</li>
+        <li>Appointment scheduling &amp; client reminders</li>
+        <li>Cancellation notifications</li>
+        <li>Google Business Profile maintenance</li>
+        <li>Due date &amp; deadline tracking</li>
+        <li>Inventory tracking (where applicable)</li>
+      </ul>
+      <a href="https://www.untrainedmomentum.com/inquire" target="_top" class="svc-cta">Get Started</a>
+    </div>
+
+    <!-- BUSINESS OPERATIONS -->
+    <div class="svc-card dark">
+      <div class="svc-name light">Business Operations</div>
+      <p class="svc-tagline light">Your entire back office — <strong>fully managed.</strong></p>
+      <div class="svc-price light"><sup>$</sup>1,499<sub>/mo</sub></div>
+      <div class="svc-breakdown">
+        <span class="svc-pill light">$49.97/day</span>
+        <span class="svc-pill light">$374.75/week</span>
+      </div>
+      <div class="svc-divider light"></div>
+      <div class="svc-includes light">Everything in Books &amp; Finance and Daily Operations, plus:</div>
+      <ul class="svc-features light">
+        <li>KPI tracking &amp; reporting</li>
+        <li>Vendor coordination <span class="cap-note">up to 5 active vendors</span></li>
+        <li>Systems management &amp; optimization <span class="cap-note">up to 5 platforms — we manage the tools, not your helpdesk</span></li>
+        <li>Payroll processing <span class="cap-note">up to 100 employee submissions/mo</span></li>
+        <li>Cost saving &amp; waste identification</li>
+        <li>Employee-facing documentation &amp; workflow</li>
+      </ul>
+      <a href="https://www.untrainedmomentum.com/inquire" target="_top" class="svc-cta">Get Started</a>
+    </div>
+
+  </div>
+
+  <div class="overage-bar reveal reveal-1">
+    <div class="overage-left">
+      <strong>Transaction Overage — Books &amp; Finance</strong>
+      <span>Need more than 50 transactions per month? Add capacity in blocks of 100.</span>
+    </div>
+    <div class="overage-price">+$50<span>/mo per 100</span></div>
+  </div>
+
+  <div class="caps-note reveal reveal-1">
+    <p class="caps-note-text">All Business Operations caps are clearly defined. Exceed a cap and we discuss an upgrade or project quote — <strong>no surprise charges, ever.</strong></p>
+  </div>
+
+  <div class="guarantee-wrap reveal reveal-2">
+    <div class="guarantee-icon">🛡️</div>
+    <div>
+      <div class="guarantee-title">21-Day <span>Money-Back</span> Guarantee</div>
+      <p class="guarantee-body">Pay for your first month. Work with us. If it's not the right fit, <strong>let us know within the first 3 weeks and you get every dollar back. No questions. No hassle. No fine print.</strong> We offer this because we're confident in the work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why-us">
+  <div class="reveal">
+    <p class="section-label">Why Untrained Momentum</p>
+    <h2 class="section-title">A Real Person.<br>Real <em>Accountability.</em></h2>
+    <p class="section-body">There's no shortage of options. Offshore VAs, AI agents, cheap platforms. Here's what makes this different.</p>
+  </div>
+
+  <div class="why-grid reveal reveal-1">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div class="why-title">Rooted in Michigan.<br><em>Working Everywhere.</em></div>
+      <p class="why-body">When you hire Untrained Momentum you're working with a real Michigan-based business that understands what it costs to run one. Same pressures. Same community. And we work with businesses across the US — so wherever you are, you get the same accountability.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div class="why-title">Reachable.<br><em>We Fix It Together.</em></div>
+      <p class="why-body">Ask yourself one honest question: if something goes wrong with your financial data, your client list, your systems — do you know who has it, or what they're doing with it? With Untrained Momentum, I'm reachable. If something ever isn't right, we fix it together — no tickets, no time zones, no wondering if anyone's listening.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div class="why-title">20+ Years In.<br><em>So You Don't Have To Be.</em></div>
+      <p class="why-body">Twenty years in regulated tech, project management, and process improvement. Lean Six Sigma. Information Security. More real-world reps than I can count. You're already busy. You could figure most of this out yourself — but it would take ten times as long and there's a good chance you don't know what you don't know yet.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <div class="why-title">Smart Tools.<br><em>Human Oversight.</em></div>
+      <p class="why-body">We use the best tools available — including AI — to keep things running efficiently. The difference is there's always a real, credentialed person behind it. Verifying the output. Catching the exceptions. An AI running unsupervised on your business data isn't a solution — it's a liability.</p>
+    </div>
+    <div class="why-card full">
+      <div class="article-callout">
+        <div class="article-stat">
+          <div class="article-stat-num">9<span>sec</span></div>
+          <div class="article-stat-label">An AI tool wiped an entire business database. Gone.</div>
+        </div>
+        <div class="article-callout-text">
+          <div class="why-title" style="margin-bottom:14px;">The Risk Nobody Talks About Until It's <em>Too Late</em></div>
+          <p>A car rental company had their entire production database deleted in 9 seconds — by an AI tool running a routine fix. The backups were in the same place. All of it gone. Their customers showed up Saturday morning to empty reservation systems.</p>
+          <p>Those business owners didn't do anything wrong. They just trusted a platform with their most critical data and had no plan for when it went wrong. Before you hand your financials and customer records to any tool or platform — ask yourself who answers if something breaks.</p>
+          <a href="https://www.untrainedmomentum.com/post/don-t-wait-until-it-is-to-late-your-customer-data-isn-t-safe" class="article-link" target="_top">Read: Your Customer Data Isn't Safe &nbsp;→</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready To <em>Hand<br>It Off?</em></h2>
+  <p>Transparent pricing. Real accountability. <strong>21 days or your money back.</strong></p>
+  <div class="cta-actions">
+    <a href="https://www.untrainedmomentum.com/inquire" target="_top" class="btn-primary">Get Started</a>
+    <a href="https://www.untrainedmomentum.com" target="_top" class="btn-ghost-dark">Back to Home</a>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

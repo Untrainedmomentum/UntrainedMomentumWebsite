@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started — Untrained Momentum</title>
+<meta name="description" content="Tell us where you are and what you need. We'll figure out the right next step together." />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:  #0a0a0a;
+    --black2: #111111;
+    --black3: #1a1a1a;
+    --black4: #222222;
+    --white:  #ffffff;
+    --off:    #f4f4f4;
+    --light:  #e0e0e0;
+    --mid:    #888888;
+    --dark:   #333333;
+    --red:    #c03a28;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--black); border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 60px; }
+  .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.15em; letter-spacing: .08em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+  .nav-logo em { font-style: normal; color: var(--red); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .82em; letter-spacing: .16em; text-transform: uppercase; color: #ccc; text-decoration: none; position: relative; padding-bottom: 2px; transition: color .2s; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--red); transition: width .25s ease; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .82em; letter-spacing: .16em; text-transform: uppercase; background: var(--red); color: var(--white); padding: 8px 20px; text-decoration: none; border-radius: 2px; transition: opacity .2s; }
+  .nav-cta:hover { opacity: .85; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+  .mobile-menu { display: none; position: fixed; inset: 60px 0 0 0; background: var(--black); z-index: 99; flex-direction: column; padding: 32px 24px; gap: 24px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4em; letter-spacing: .12em; text-transform: uppercase; color: var(--white); text-decoration: none; border-bottom: 1px solid #222; padding-bottom: 20px; }
+  .mobile-menu .nav-cta { text-align: center; border-bottom: none; padding: 14px; }
+
+  /* PAGE WRAP */
+  .page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* HERO */
+  .form-hero { margin-bottom: 48px; }
+  .form-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .82em; letter-spacing: .25em; text-transform: uppercase; color: var(--mid); margin-bottom: 18px; }
+  .form-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3em, 9vw, 5.5em); line-height: .88; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+  .form-hero h1 em { font-style: normal; color: var(--red); }
+  .form-hero p { font-size: 1em; color: var(--mid); line-height: 1.75; max-width: 500px; }
+  .form-hero p strong { color: var(--white); font-weight: 500; }
+
+  /* PROGRESS */
+  .progress-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .78em; letter-spacing: .18em; text-transform: uppercase; color: var(--mid); margin-bottom: 10px; }
+  .progress-label strong { color: var(--red); font-weight: 700; }
+  .progress-bar { display: flex; gap: 3px; margin-bottom: 40px; }
+  .progress-seg { flex: 1; height: 2px; background: #333; transition: background .4s; }
+  .progress-seg.done { background: var(--red); }
+  .progress-seg.current { background: #e06050; }
+
+  /* STEPS */
+  .step { display: none; animation: fadeUp .3s ease both; }
+  .step.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* EYEBROW */
+  .section-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78em; letter-spacing: .22em; text-transform: uppercase; color: var(--red); margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
+  .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(192,58,40,.3); }
+
+  /* FIELDS */
+  .field { margin-bottom: 24px; }
+  .field label { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .75em; letter-spacing: .16em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; }
+  .field label .req { color: var(--red); margin-left: 3px; }
+
+  .field input[type=text],
+  .field input[type=email],
+  .field input[type=tel],
+  .field textarea,
+  .field select {
+    width: 100%;
+    background: var(--black3);
+    border: 1px solid #333;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: .95em;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color .2s, background .2s;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--red); background: var(--black4); }
+  .field input.error, .field textarea.error, .field select.error { border-color: #e06050; }
+  .field textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+  .field select option { background: var(--black2); }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* CHAR COUNT */
+  .char-count { font-family: 'Barlow Condensed', sans-serif; font-size: .68em; letter-spacing: .1em; color: #444; text-align: right; margin-top: 4px; }
+
+  /* ERROR */
+  .error-msg { font-family: 'Barlow Condensed', sans-serif; font-size: .72em; letter-spacing: .08em; color: #e06050; margin-top: 5px; display: none; }
+
+  /* OPTIONS */
+  .options-group { display: flex; flex-direction: column; gap: 6px; }
+  .opt-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 1px solid #333; background: var(--black3); cursor: pointer; transition: border-color .2s, background .2s; }
+  .opt-item:hover { border-color: #555; background: var(--black4); }
+  .opt-item.selected { border-color: var(--red); background: rgba(192,58,40,.08); }
+  .opt-item input[type=radio], .opt-item input[type=checkbox] { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; accent-color: var(--red); cursor: pointer; }
+  .opt-label { font-size: .95em; color: var(--white); line-height: 1.4; }
+  .opt-sub { font-size: .82em; color: var(--mid); margin-top: 3px; }
+
+  /* NOTICE */
+  .notice { border-left: 3px solid var(--red); background: rgba(192,58,40,.06); padding: 14px 16px; font-size: .9em; color: var(--mid); line-height: 1.65; margin-bottom: 24px; }
+  .notice strong { color: var(--white); }
+
+  /* CLARITY BOX */
+  .clarity-box { border: 1px solid #333; background: var(--black3); padding: 28px; margin-bottom: 24px; }
+  .clarity-box-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.3em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+  .clarity-box-title em { font-style: normal; color: var(--red); }
+  .clarity-box p { font-size: .9em; color: var(--mid); line-height: 1.7; }
+  .clarity-box p strong { color: var(--white); font-weight: 500; }
+
+  /* REVIEW TABLE */
+  .review-table { border: 1px solid #333; margin-bottom: 24px; }
+  .review-row { display: flex; border-bottom: 1px solid #1a1a1a; padding: 10px 14px; }
+  .review-row:last-child { border-bottom: none; }
+  .review-key { font-family: 'Barlow Condensed', sans-serif; font-size: .72em; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); width: 38%; flex-shrink: 0; padding-top: 2px; }
+  .review-val { font-size: .9em; color: var(--white); line-height: 1.5; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 28px; border-top: 1px solid #222; }
+  .btn-back { background: none; border: none; color: var(--mid); font-family: 'Barlow Condensed', sans-serif; font-size: .78em; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color .2s; }
+  .btn-back:hover { color: var(--white); }
+  .btn-next { background: var(--red); border: none; color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .9em; letter-spacing: .16em; text-transform: uppercase; padding: 14px 32px; cursor: pointer; transition: opacity .2s; display: flex; align-items: center; gap: 10px; }
+  .btn-next:hover { opacity: .85; }
+
+  /* SPECIAL SCREENS */
+  .special-screen { padding: 48px 0; text-align: center; }
+  .special-icon { width: 52px; height: 52px; border: 2px solid var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .special-icon svg { width: 22px; height: 22px; color: var(--red); }
+  .special-screen h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.5em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; line-height: 1; }
+  .special-screen h2 em { font-style: normal; color: var(--red); }
+  .special-screen p { font-size: .95em; color: var(--mid); max-width: 420px; margin: 0 auto 28px; line-height: 1.75; }
+
+  /* SUCCESS */
+  .success-bar { width: 100%; height: 3px; background: var(--red); margin-bottom: 40px; }
+
+  /* FOOTER */
+  footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 32px 48px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+  .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1em; letter-spacing: .08em; text-transform: uppercase; color: var(--white); text-decoration: none; display: block; margin-bottom: 6px; }
+  .footer-logo em { font-style: normal; color: var(--red); }
+  .footer-copy { font-size: .78em; color: #444; }
+  .footer-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+  .footer-links a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .72em; letter-spacing: .14em; text-transform: uppercase; color: #444; text-decoration: none; transition: color .2s; }
+  .footer-links a:hover { color: var(--white); }
+
+  /* HIDDEN NETLIFY */
+  .dn { display: none; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .field-row { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">Untrained<em>.</em>Momentum</a>
+  <ul class="nav-links">
+    <li><a href="/digital-presence.html">Services</a></li>
+    <li><a href="/inquire.html">Contact</a></li>
+  </ul>
+  <a href="/inquire.html" class="nav-cta">Get Started</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/digital-presence.html" onclick="toggleMenu()">Services</a>
+  <a href="/inquire.html" onclick="toggleMenu()">Contact</a>
+  <a href="/inquire.html" class="nav-cta" onclick="toggleMenu()">Get Started</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="form-hero">
+    <p class="form-eyebrow">Get Started &nbsp;·&nbsp; Untrained Momentum</p>
+    <h1>Let's Figure Out<br>What You <em>Need.</em></h1>
+    <p>Tell us where you are and what's in the way. <strong>We'll come back to you within 48 hours</strong> with a straight answer on whether and how we can help.</p>
+  </div>
+
+  <div class="progress-label" id="progressLabel"><strong>Step 1</strong> of 4 — About You</div>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- NETLIFY FORM (hidden) -->
+  <form name="um-inquiry" netlify netlify-honeypot="bot-field" id="mainForm" class="dn">
+    <input type="hidden" name="form-name" value="um-inquiry">
+    <p class="dn"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <input name="first-name" type="hidden" id="nf-fname">
+    <input name="last-name" type="hidden" id="nf-lname">
+    <input name="email" type="hidden" id="nf-email">
+    <input name="phone" type="hidden" id="nf-phone">
+    <input name="city" type="hidden" id="nf-city">
+    <input name="client-type" type="hidden" id="nf-clientType">
+    <input name="business-name" type="hidden" id="nf-bizName">
+    <input name="business-description" type="hidden" id="nf-bizDesc">
+    <input name="interested-in" type="hidden" id="nf-interest">
+    <input name="biggest-problem" type="hidden" id="nf-biggestProblem">
+    <input name="six-month-goal" type="hidden" id="nf-goal">
+    <input name="commitment-level" type="hidden" id="nf-commitment">
+    <input name="referral-source" type="hidden" id="nf-referralSource">
+    <input name="referred-by" type="hidden" id="nf-referralName">
+    <input name="clarity-session" type="hidden" id="nf-claritySession">
+  </form>
+
+  <!-- STEP 1 — About You -->
+  <div id="step1" class="step active">
+    <div class="section-eyebrow">About you</div>
+    <div class="field-row">
+      <div class="field">
+        <label>First name <span class="req">*</span></label>
+        <input type="text" id="fname" placeholder="First name">
+        <div class="error-msg" id="err-fname">Required.</div>
+      </div>
+      <div class="field">
+        <label>Last name</label>
+        <input type="text" id="lname" placeholder="Last name">
+      </div>
+    </div>
+    <div class="field">
+      <label>Email address <span class="req">*</span></label>
+      <input type="email" id="email" placeholder="you@example.com">
+      <div class="error-msg" id="err-email">A valid email is required.</div>
+    </div>
+    <div class="field">
+      <label>Phone number</label>
+      <input type="tel" id="phone" placeholder="(231) 555-0100">
+    </div>
+    <div class="field">
+      <label>City &amp; state</label>
+      <input type="text" id="city" placeholder="Big Rapids, MI">
+    </div>
+    <div class="field">
+      <label>Which best describes you? <span class="req">*</span></label>
+      <div class="options-group" id="grp-clientType">
+        <label class="opt-item" onclick="selectRadio('clientType',this,'Startup or new business')">
+          <input type="radio" name="clientType" value="Startup or new business">
+          <div><div class="opt-label">Startup or new business</div><div class="opt-sub">Building something from the ground up and need the right foundation</div></div>
+        </label>
+        <label class="opt-item" onclick="selectRadio('clientType',this,'Existing small business')">
+          <input type="radio" name="clientType" value="Existing small business">
+          <div><div class="opt-label">Existing small business</div><div class="opt-sub">Already running but something isn't working — visibility, systems, or operations</div></div>
+        </label>
+        <label class="opt-item" onclick="selectRadio('clientType',this,'Nonprofit or community organization')">
+          <input type="radio" name="clientType" value="Nonprofit or community organization">
+          <div><div class="opt-label">Nonprofit or community organization</div><div class="opt-sub">Mission-driven, working with a budget, need real infrastructure</div></div>
+        </label>
+        <label class="opt-item" onclick="selectRadio('clientType',this,'Creator or personal brand')">
+          <input type="radio" name="clientType" value="Creator or personal brand">
+          <div><div class="opt-label">Creator or personal brand</div><div class="opt-sub">Building around a skill, product, or expertise</div></div>
+        </label>
+      </div>
+      <div class="error-msg" id="err-clientType">Please select one option.</div>
+    </div>
+    <div class="btn-row">
+      <span></span>
+      <button class="btn-next" onclick="goNext(1)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 — Your Business -->
+  <div id="step2" class="step">
+    <div class="section-eyebrow">Your business</div>
+    <div class="field">
+      <label>Business or project name</label>
+      <input type="text" id="bizName" placeholder="Leave blank if not yet named">
+    </div>
+    <div class="field">
+      <label>What do you do or what are you building? <span class="req">*</span></label>
+      <textarea id="bizDesc" placeholder="What is it? Who is it for? What problem does it solve?"></textarea>
+      <div class="char-count"><span id="bizDescCount">0</span> / 500</div>
+      <div class="error-msg" id="err-bizDesc">Please provide at least 30 characters.</div>
+    </div>
+    <div class="field">
+      <label>What are you most interested in? <span class="req">*</span></label>
+      <div class="options-group" id="grp-interest">
+        <label class="opt-item" onclick="toggleCheck(this)"><input type="checkbox" value="Google Business Profile setup or maintenance"><div class="opt-label">Google Business Profile setup or maintenance</div></label>
+        <label class="opt-item" onclick="toggleCheck(this)"><input type="checkbox" value="Website build or hosting"><div class="opt-label">Website build or hosting</div></label>
+        <label class="opt-item" onclick="toggleCheck(this)"><input type="checkbox" value="Review management"><div class="opt-label">Review management</div></label>
+        <label class="opt-item" onclick="toggleCheck(this)"><input type="checkbox" value="Social media management"><div class="opt-label">Social media management</div></label>
+        <label class="opt-item" onclick="toggleCheck(this)"><input type="checkbox" value="SEO audit"><div class="opt-label">SEO audit</div></label>
+        <label class="opt-item" onclick="toggleCheck(this)"><input type="checkbox" value="Business Clarity Session — not sure where to start"><div class="opt-label">Business Clarity Session — not sure where to start</div></label>
+      </div>
+      <div class="error-msg" id="err-interest">Please select at least one option.</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goBack(2)">← Back</button>
+      <button class="btn-next" onclick="goNext(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 — Where Things Stand -->
+  <div id="step3" class="step">
+    <div class="section-eyebrow">Where things stand</div>
+    <div class="field">
+      <label>What is the biggest problem in your business right now? <span class="req">*</span></label>
+      <textarea id="biggestProblem" placeholder="Be specific — what's actually broken or missing?"></textarea>
+      <div class="char-count"><span id="problemCount">0</span> / 500</div>
+      <div class="error-msg" id="err-biggestProblem">Please provide at least 30 characters.</div>
+    </div>
+    <div class="field">
+      <label>Where do you want to be in 6 months? <span class="req">*</span></label>
+      <textarea id="goal6mo" placeholder="Revenue, customers, systems, lifestyle — what does success look like?"></textarea>
+      <div class="char-count"><span id="goal6moCount">0</span> / 500</div>
+      <div class="error-msg" id="err-goal6mo">Please provide at least 30 characters.</div>
+    </div>
+    <div class="field">
+      <label>How committed are you right now? <span class="req">*</span></label>
+      <div class="options-group" id="grp-commitment">
+        <label class="opt-item" onclick="selectRadio('commitment',this,'Ready to move — I show up and follow through')">
+          <input type="radio" name="commitment" value="Ready to move">
+          <div><div class="opt-label">Ready to move — I show up and follow through</div></div>
+        </label>
+        <label class="opt-item" onclick="selectRadio('commitment',this,'Mostly ready — life is busy but I am committed')">
+          <input type="radio" name="commitment" value="Mostly ready">
+          <div><div class="opt-label">Mostly ready — life is busy but I'm committed</div></div>
+        </label>
+        <label class="opt-item" onclick="selectRadio('commitment',this,'Not sure yet — still figuring things out')">
+          <input type="radio" name="commitment" value="Not sure yet">
+          <div><div class="opt-label">Not sure yet — still figuring things out</div></div>
+        </label>
+      </div>
+      <div class="error-msg" id="err-commitment">Please select one option.</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goBack(3)">← Back</button>
+      <button class="btn-next" onclick="goNext(3)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 — Review -->
+  <div id="step4" class="step">
+    <div class="section-eyebrow">Review &amp; submit</div>
+
+    <div class="clarity-box" id="clarityBox" style="display:none">
+      <div class="clarity-box-title">You selected: <em>Business Clarity Session</em></div>
+      <p>A 60-minute working session where we look at where you are, what's broken, and what to fix first. You leave with a clear roadmap. <strong>$149 · one-time · no commitment.</strong> After you submit we'll reach out within 48 hours to schedule and send a payment link.</p>
+    </div>
+
+    <div class="field">
+      <label>How did you find Untrained Momentum?</label>
+      <select id="referralSource" onchange="toggleReferralField()">
+        <option value="">Select one</option>
+        <option>Google search</option>
+        <option>Facebook</option>
+        <option>LinkedIn</option>
+        <option value="referral">Referral from someone I know</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field" id="referralNameField" style="display:none">
+      <label>Who referred you? <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.85em;color:var(--mid)">(they receive a $49 referral reward)</span></label>
+      <input type="text" id="referralName" placeholder="Full name of the person who referred you">
+    </div>
+
+    <div class="review-table" id="reviewContent"></div>
+
+    <div class="notice">
+      <strong>What happens next:</strong> We review your submission and respond within 48 hours. If it looks like a good fit we'll reach out to talk through next steps. No pressure, no pitch — just a straight conversation about whether and how we can help.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="goBack(4)">← Back</button>
+      <button class="btn-next" onclick="submitForm()">Submit →</button>
+    </div>
+  </div>
+
+  <!-- NOT READY -->
+  <div id="stepNotReady" class="step">
+    <div class="special-screen">
+      <div class="special-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      </div>
+      <h2>Come Back<br>When You're <em>Ready.</em></h2>
+      <p>We only work with people who are in a position to move. If now isn't the right time, that's honest — and the door is open when it is.</p>
+      <button class="btn-next" onclick="resetForm()">Start over →</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="stepSuccess" class="step">
+    <div class="success-bar"></div>
+    <div class="special-screen">
+      <h2>Got It.<br><em>Talk Soon.</em></h2>
+      <p>We'll review your submission and get back to you within 48 hours. Keep an eye on your inbox.</p>
+      <div class="review-table" id="successSummary" style="text-align:left;max-width:460px;margin:0 auto 28px;"></div>
+      <a href="/index.html" class="btn-next" style="display:inline-flex;text-decoration:none;">Back to Home →</a>
+    </div>
+  </div>
+
+</div><!-- end page-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="/index.html" class="footer-logo">Untrained<em>.</em>Momentum</a>
+    <p class="footer-copy">© 2026 Untrained Momentum, LLC · Big Rapids, MI</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/digital-presence.html">Services</a></li>
+    <li><a href="/work.html">Our Work</a></li>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+    <li><a href="/terms.html">Terms</a></li>
+  </ul>
+</footer>
+
+<script>
+  const TOTAL = 4;
+  let current = 1;
+  const rs = {};
+  const stepLabels = ['About You','Your Business','Where Things Stand','Review & Submit'];
+
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  function buildProgress() {
+    const bar = document.getElementById('progressBar');
+    const lbl = document.getElementById('progressLabel');
+    bar.innerHTML = '';
+    for (let i = 1; i <= TOTAL; i++) {
+      const seg = document.createElement('div');
+      seg.className = 'progress-seg' + (i < current ? ' done' : i === current ? ' current' : '');
+      bar.appendChild(seg);
+    }
+    lbl.innerHTML = '<strong>Step ' + current + '</strong> of ' + TOTAL + ' — ' + stepLabels[current - 1];
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('step' + n);
+    if (el) el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showSpecial(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('progressBar').style.display = 'none';
+    document.getElementById('progressLabel').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectRadio(group, el, value) {
+    rs[group] = value;
+    document.querySelectorAll('#grp-' + group + ' .opt-item').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    const err = document.getElementById('err-' + group);
+    if (err) err.style.display = 'none';
+  }
+
+  function toggleCheck(el) { el.classList.toggle('selected'); }
+
+  function toggleReferralField() {
+    const src = document.getElementById('referralSource');
+    document.getElementById('referralNameField').style.display = src.value === 'referral' ? 'block' : 'none';
+  }
+
+  function validate(step) {
+    let ok = true;
+
+    if (step === 1) {
+      const fn = document.getElementById('fname');
+      if (!fn.value.trim()) { fn.classList.add('error'); document.getElementById('err-fname').style.display = 'block'; ok = false; } else { fn.classList.remove('error'); document.getElementById('err-fname').style.display = 'none'; }
+      const em = document.getElementById('email');
+      if (!em.value.includes('@')) { em.classList.add('error'); document.getElementById('err-email').style.display = 'block'; ok = false; } else { em.classList.remove('error'); document.getElementById('err-email').style.display = 'none'; }
+      if (!rs['clientType']) { document.getElementById('err-clientType').style.display = 'block'; ok = false; }
+    }
+
+    if (step === 2) {
+      const desc = document.getElementById('bizDesc');
+      if (desc.value.trim().length < 30) { desc.classList.add('error'); document.getElementById('err-bizDesc').style.display = 'block'; ok = false; } else { desc.classList.remove('error'); document.getElementById('err-bizDesc').style.display = 'none'; }
+      const checked = document.querySelectorAll('#grp-interest .opt-item.selected');
+      if (checked.length === 0) { document.getElementById('err-interest').style.display = 'block'; ok = false; } else { document.getElementById('err-interest').style.display = 'none'; }
+    }
+
+    if (step === 3) {
+      const prob = document.getElementById('biggestProblem');
+      if (prob.value.trim().length < 30) { prob.classList.add('error'); document.getElementById('err-biggestProblem').style.display = 'block'; ok = false; } else { prob.classList.remove('error'); document.getElementById('err-biggestProblem').style.display = 'none'; }
+      const goal = document.getElementById('goal6mo');
+      if (goal.value.trim().length < 30) { goal.classList.add('error'); document.getElementById('err-goal6mo').style.display = 'block'; ok = false; } else { goal.classList.remove('error'); document.getElementById('err-goal6mo').style.display = 'none'; }
+      if (!rs['commitment']) { document.getElementById('err-commitment').style.display = 'block'; ok = false; }
+      if (ok && rs['commitment'] && rs['commitment'].startsWith('Not sure')) {
+        showSpecial('stepNotReady'); return false;
+      }
+    }
+
+    return ok;
+  }
+
+  function buildReview() {
+    const interests = Array.from(document.querySelectorAll('#grp-interest .opt-item.selected input')).map(i => i.value).join(', ') || '—';
+    const hasClarity = interests.includes('Business Clarity Session');
+    document.getElementById('clarityBox').style.display = hasClarity ? 'block' : 'none';
+
+    const rows = [
+      ['Name', (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim()],
+      ['Email', document.getElementById('email').value],
+      ['Phone', document.getElementById('phone').value || '—'],
+      ['Location', document.getElementById('city').value || '—'],
+      ['Type', rs['clientType'] || '—'],
+      ['Business', document.getElementById('bizName').value || 'Not yet named'],
+      ['Interested in', interests],
+      ['Biggest problem', document.getElementById('biggestProblem').value.substring(0,80) + (document.getElementById('biggestProblem').value.length > 80 ? '…' : '')],
+      ['6-month goal', document.getElementById('goal6mo').value.substring(0,80) + (document.getElementById('goal6mo').value.length > 80 ? '…' : '')],
+      ['Commitment', rs['commitment'] || '—'],
+    ];
+    document.getElementById('reviewContent').innerHTML = rows.map(r =>
+      '<div class="review-row"><div class="review-key">' + r[0] + '</div><div class="review-val">' + r[1] + '</div></div>'
+    ).join('');
+  }
+
+  function populateNetlifyForm() {
+    document.getElementById('nf-fname').value = document.getElementById('fname').value;
+    document.getElementById('nf-lname').value = document.getElementById('lname').value;
+    document.getElementById('nf-email').value = document.getElementById('email').value;
+    document.getElementById('nf-phone').value = document.getElementById('phone').value;
+    document.getElementById('nf-city').value = document.getElementById('city').value;
+    document.getElementById('nf-clientType').value = rs['clientType'] || '';
+    document.getElementById('nf-bizName').value = document.getElementById('bizName').value;
+    document.getElementById('nf-bizDesc').value = document.getElementById('bizDesc').value;
+    const interests = Array.from(document.querySelectorAll('#grp-interest .opt-item.selected input')).map(i => i.value).join('; ');
+    document.getElementById('nf-interest').value = interests;
+    document.getElementById('nf-biggestProblem').value = document.getElementById('biggestProblem').value;
+    document.getElementById('nf-goal').value = document.getElementById('goal6mo').value;
+    document.getElementById('nf-commitment').value = rs['commitment'] || '';
+    document.getElementById('nf-referralSource').value = document.getElementById('referralSource').value;
+    document.getElementById('nf-referralName').value = document.getElementById('referralName').value;
+    document.getElementById('nf-claritySession').value = interests.includes('Business Clarity Session') ? 'Yes' : 'No';
+  }
+
+  function goNext(step) {
+    if (!validate(step)) return;
+    if (step === 3) buildReview();
+    current = step + 1;
+    buildProgress();
+    showStep(current);
+  }
+
+  function goBack(step) {
+    current = step - 1;
+    buildProgress();
+    showStep(current);
+  }
+
+  function submitForm() {
+    populateNetlifyForm();
+    const form = document.getElementById('mainForm');
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    }).then(() => {
+      const summary = [
+        ['Name', (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim()],
+        ['Email', document.getElementById('email').value],
+        ['Type', rs['clientType'] || '—'],
+        ['Commitment', rs['commitment'] || '—'],
+      ];
+      document.getElementById('successSummary').innerHTML = summary.map(r =>
+        '<div class="review-row"><div class="review-key">' + r[0] + '</div><div class="review-val">' + r[1] + '</div></div>'
+      ).join('');
+      showSpecial('stepSuccess');
+    }).catch(() => {
+      alert('Submission failed — please try again or email support@untrainedmomentum.com directly.');
+    });
+  }
+
+  function resetForm() {
+    current = 1;
+    Object.keys(rs).forEach(k => delete rs[k]);
+    document.querySelectorAll('.opt-item').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('input[type=text], input[type=email], input[type=tel], textarea').forEach(el => { el.value = ''; el.classList.remove('error'); });
+    document.querySelectorAll('select').forEach(el => { el.value = ''; });
+    document.getElementById('referralNameField').style.display = 'none';
+    document.getElementById('progressBar').style.display = 'flex';
+    document.getElementById('progressLabel').style.display = 'block';
+    buildProgress();
+    showStep(1);
+  }
+
+  ['bizDesc','biggestProblem','goal6mo'].forEach(id => {
+    const el = document.getElementById(id);
+    const countId = id === 'bizDesc' ? 'bizDescCount' : id === 'biggestProblem' ? 'problemCount' : 'goal6moCount';
+    el.addEventListener('input', () => {
+      document.getElementById(countId).textContent = Math.min(el.value.length, 500);
+      if (el.value.length > 500) el.value = el.value.substring(0, 500);
+    });
+  });
+
+  buildProgress();
+</script>
+</body>
+</html>

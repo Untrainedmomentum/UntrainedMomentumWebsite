@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Presence | Get Found Online | Untrained Momentum</title>
+  <meta name="description" content="Help your business get found online, show up consistently, and keep customers coming back. Google Business Profile, websites, SEO, and social media for Mid-Michigan small businesses." />
+  <link rel="canonical" href="https://www.untrainedmomentum.com/digital-presence" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #0a0a0a;
+      --white:   #ffffff;
+      --off:     #f4f4f4;
+      --light:   #e0e0e0;
+      --mid:     #888888;
+      --dark:    #333333;
+      --red:     #c03a28;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-1 { transition-delay: .12s; }
+    .reveal-2 { transition-delay: .24s; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--black); border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 60px; }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.15em; letter-spacing: .08em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .nav-logo em { font-style: normal; color: var(--red); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .82em; letter-spacing: .16em; text-transform: uppercase; color: #ccc; text-decoration: none; position: relative; padding-bottom: 2px; transition: color .2s; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--red); transition: width .25s ease; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--white); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .82em; letter-spacing: .16em; text-transform: uppercase; background: var(--red); color: var(--white); padding: 8px 20px; text-decoration: none; border-radius: 2px; transition: opacity .2s; }
+    .nav-cta:hover { opacity: .85; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+    .mobile-menu { display: none; position: fixed; inset: 60px 0 0 0; background: var(--black); z-index: 99; flex-direction: column; padding: 32px 24px; gap: 24px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4em; letter-spacing: .12em; text-transform: uppercase; color: var(--white); text-decoration: none; border-bottom: 1px solid #222; padding-bottom: 20px; }
+    .mobile-menu .nav-cta { text-align: center; border-bottom: none; padding: 14px; }
+
+    /* HERO */
+    .hero { padding: 10px 48px 88px; position: relative; overflow: hidden; border-bottom: 3px solid var(--red); background: var(--black); }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; padding-top: 60px; }
+    .eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 1em; letter-spacing: .2em; text-transform: uppercase; color: #777; margin-bottom: 22px; opacity: 0; animation: fadeUp .55s ease forwards .1s; }
+    .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(3.2em, 7.5vw, 6.2em); line-height: .93; text-transform: uppercase; color: var(--white); opacity: 0; animation: fadeUp .55s ease forwards .25s; }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub { font-size: clamp(1em, 2vw, 1.15em); font-weight: 400; color: #aaa; line-height: 1.8; margin: 28px 0 44px; max-width: 600px; opacity: 0; animation: fadeUp .55s ease forwards .4s; }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; animation: fadeUp .55s ease forwards .55s; }
+    .btn-primary { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95em; letter-spacing: .12em; text-transform: uppercase; background: var(--red); color: var(--white); padding: 15px 36px; border: none; cursor: pointer; text-decoration: none; transition: opacity .2s; display: inline-block; }
+    .btn-primary:hover { opacity: .85; }
+    .btn-ghost { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95em; letter-spacing: .12em; text-transform: uppercase; border: 1.5px solid #444; color: #aaa; padding: 15px 36px; background: transparent; cursor: pointer; text-decoration: none; transition: all .2s; display: inline-block; }
+    .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+    /* SECTIONS */
+    section { padding: 72px 48px; border-bottom: 1.5px solid var(--light); }
+    .section-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .9em; letter-spacing: .22em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2em, 4vw, 3.2em); line-height: .97; text-transform: uppercase; color: var(--black); margin-bottom: 24px; }
+    .section-title em { font-style: normal; color: var(--red); }
+    .section-body { font-size: 1.05em; font-weight: 400; color: var(--dark); line-height: 1.85; max-width: 700px; }
+    .section-body strong { color: var(--black); font-weight: 600; }
+
+    /* STATS */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; background: var(--light); border: 1.5px solid var(--light); margin-top: 48px; }
+    .stat-card { background: var(--white); padding: 36px 28px; transition: background .25s; }
+    .stat-card:hover { background: var(--off); }
+    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 3.4em; line-height: 1; color: var(--black); margin-bottom: 8px; }
+    .stat-num span { color: var(--red); }
+    .stat-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.05em; text-transform: uppercase; color: var(--black); margin-bottom: 8px; }
+    .stat-desc { font-size: .95em; color: var(--dark); line-height: 1.65; }
+
+    /* FEATURE ROWS */
+    .feature-row { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--light); margin-top: 48px; }
+    .feature-row + .feature-row { border-top: none; }
+    .feature-img { position: relative; overflow: hidden; aspect-ratio: 16/10; }
+    .feature-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(25%) brightness(.85); transition: filter .5s, transform .6s; display: block; }
+    .feature-row:hover .feature-img img { filter: grayscale(10%) brightness(.95); transform: scale(1.03); }
+    .feature-img .img-accent { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+    .feature-body { padding: 48px; background: var(--white); display: flex; flex-direction: column; justify-content: center; border-left: 1.5px solid var(--light); }
+    .feature-row.flip .feature-img { order: 2; border-left: 1.5px solid var(--light); }
+    .feature-row.flip .feature-body { order: 1; border-left: none; }
+    .feature-tag { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .85em; letter-spacing: .2em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+    .feature-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.9em; text-transform: uppercase; color: var(--black); line-height: 1; margin-bottom: 16px; }
+    .feature-desc { font-size: 1em; color: var(--dark); line-height: 1.8; margin-bottom: 20px; }
+    .feature-desc strong { color: var(--black); font-weight: 600; }
+    .feature-list { list-style: none; }
+    .feature-list li { font-size: .95em; color: var(--dark); padding: 7px 0; display: flex; gap: 12px; border-bottom: 1px solid var(--off); line-height: 1.5; }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li::before { content: '—'; color: var(--red); flex-shrink: 0; font-weight: 700; }
+
+    /* SERVICE CARDS */
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--light); border: 1.5px solid var(--light); margin-top: 36px; }
+    .svc-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .svc-card { background: var(--white); padding: 32px 28px; display: flex; flex-direction: column; position: relative; transition: background .2s; }
+    .svc-card:hover { background: var(--off); }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--light); transition: background .3s; }
+    .svc-card:hover::before { background: var(--red); }
+    .svc-card.dark { background: var(--black); }
+    .svc-card.dark:hover { background: #1a1a1a; }
+    .svc-card.dark::before { background: var(--red); }
+    .svc-card-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.4em; text-transform: uppercase; color: var(--black); line-height: 1; margin-bottom: 8px; }
+    .svc-card-name.light { color: var(--white); }
+    .svc-card-desc { font-size: .95em; color: var(--dark); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+    .svc-card-desc.light { color: #aaa; }
+    .svc-card-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2em; color: var(--black); line-height: 1; margin-bottom: 4px; }
+    .svc-card-price.light { color: var(--white); }
+    .svc-card-price sup { font-size: .35em; vertical-align: super; font-weight: 400; color: var(--mid); }
+    .svc-card-price.light sup { color: #aaa; }
+    .svc-card-price sub { font-size: .28em; font-weight: 400; color: var(--mid); }
+    .svc-card-price.light sub { color: #aaa; }
+    .svc-card-note { font-size: .85em; color: var(--mid); line-height: 1.5; }
+    .svc-card-note.light { color: #aaa; }
+    .svc-divider { height: 1.5px; background: var(--light); margin: 14px 0; }
+    .svc-divider.light { background: rgba(255,255,255,.15); }
+    .svc-features { list-style: none; }
+    .svc-features li { font-size: .92em; color: var(--dark); padding: 5px 0; display: flex; gap: 8px; border-bottom: 1px solid var(--off); line-height: 1.4; }
+    .svc-features.light li { color: #aaa; border-bottom-color: rgba(255,255,255,.08); }
+    .svc-features li:last-child { border-bottom: none; }
+    .svc-features li::before { content: '—'; color: var(--red); flex-shrink: 0; font-weight: 700; }
+
+    /* HONEST BOX */
+    .honest-box { background: var(--off); border: 1.5px solid var(--light); padding: 48px 52px; margin-top: 48px; }
+    .honest-box-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2em; text-transform: uppercase; color: var(--black); margin-bottom: 18px; line-height: 1; }
+    .honest-box-title em { font-style: normal; color: var(--red); }
+    .honest-box-body { font-size: 1.02em; color: var(--dark); line-height: 1.85; max-width: 720px; }
+    .honest-box-body strong { color: var(--black); font-weight: 600; }
+
+    /* ADS */
+    .ad-section { background: var(--black); border-bottom: 1.5px solid #222; padding: 72px 48px; }
+    .ad-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: center; }
+    .ad-left { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2em, 3.5vw, 3em); text-transform: uppercase; color: var(--white); line-height: .97; }
+    .ad-left em { font-style: normal; color: var(--red); }
+    .ad-right p { font-size: 1.05em; color: #aaa; line-height: 1.85; margin-bottom: 18px; }
+    .ad-right p:last-child { margin-bottom: 0; }
+    .ad-right strong { color: var(--white); font-weight: 600; }
+
+    /* CTA */
+    .cta-section { padding: 80px 48px; text-align: center; background: var(--black); border-top: 2px solid var(--red); }
+    .cta-section h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(2.8em, 5.5vw, 5em); text-transform: uppercase; color: var(--white); line-height: .93; margin-bottom: 24px; }
+    .cta-section h2 em { font-style: normal; color: var(--red); }
+    .cta-section p { font-size: 1.1em; color: #aaa; line-height: 1.75; margin-bottom: 44px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-section p strong { color: var(--white); font-weight: 600; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 40px 48px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1em; letter-spacing: .08em; text-transform: uppercase; color: var(--white); text-decoration: none; display: block; margin-bottom: 8px; }
+    .footer-logo em { font-style: normal; color: var(--red); }
+    .footer-copy { font-size: .8em; color: #444; }
+    .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .75em; letter-spacing: .14em; text-transform: uppercase; color: #444; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 10px 24px 72px; }
+      section { padding: 48px 24px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .feature-row { grid-template-columns: 1fr; }
+      .feature-row.flip .feature-img { order: 0; }
+      .feature-row.flip .feature-body { order: 0; border-left: none; }
+      .feature-body { border-left: none; border-top: 1.5px solid var(--light); padding: 32px 24px; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .svc-grid-2 { grid-template-columns: 1fr; }
+      .ad-section { padding: 48px 24px; }
+      .ad-inner { grid-template-columns: 1fr; gap: 32px; }
+      .honest-box { padding: 32px 24px; }
+      .cta-section { padding: 56px 24px; }
+      footer { grid-template-columns: 1fr; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">Untrained<em>.</em>Momentum</a>
+  <ul class="nav-links">
+    <li><a href="/services.html">Services</a></li>
+    <li><a href="/work.html">Our Work</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/insights.html">Insights</a></li>
+  </ul>
+  <a href="/inquire.html" class="nav-cta">Get Started</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/services.html" onclick="toggleMenu()">Services</a>
+  <a href="/work.html" onclick="toggleMenu()">Our Work</a>
+  <a href="/about.html" onclick="toggleMenu()">About</a>
+  <a href="/insights.html" onclick="toggleMenu()">Insights</a>
+  <a href="/inquire.html" class="nav-cta" onclick="toggleMenu()">Get Started</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Digital Presence &nbsp;·&nbsp; Small Businesses &amp; Nonprofits</p>
+    <h1>Your Customers<br>Are Looking.<br><em>Are They Finding You?</em></h1>
+    <p class="hero-sub">
+      Right now, someone is searching for exactly what you offer. Whether they find you or your competitor comes down to a few things that are completely fixable.<br><br>
+      <strong>We help you get found, show up consistently, and keep the customers you work hard to earn.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="#found" class="btn-primary" onclick="document.getElementById('found').scrollIntoView({behavior:'smooth'}); return false;">Show Me How</a>
+      <a href="#website" class="btn-ghost" onclick="document.getElementById('website').scrollIntoView({behavior:'smooth'}); return false;">Website Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section>
+  <div class="reveal">
+    <p class="section-label">Why This Matters</p>
+    <h2 class="section-title">The Way People Find<br>Businesses Has <em>Changed.</em></h2>
+    <p class="section-body">Word of mouth still matters — but it starts online now. Before someone calls you, drives by, or walks through your door, they've already looked you up. Being visible, credible, and consistent online is what separates businesses that grow from businesses that wonder why the phone stopped ringing.</p>
+  </div>
+  <div class="stats-grid reveal reveal-1">
+    <div class="stat-card">
+      <div class="stat-num">97<span>%</span></div>
+      <div class="stat-title">Search Before They Visit</div>
+      <p class="stat-desc">Nearly every customer looks a business up online before going there. If they can't find you — or don't like what they see — they move on to whoever shows up next.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">76<span>%</span></div>
+      <div class="stat-title">Visit Within 24 Hours</div>
+      <p class="stat-desc">Of people who search for something local visit a business that same day. When someone's ready, they move fast. You need to be there when they look.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3<span>x</span></div>
+      <div class="stat-title">More Trusted</div>
+      <p class="stat-desc">Businesses with complete, active online profiles are seen as significantly more credible. How you look online is how you look — full stop.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">88<span>%</span></div>
+      <div class="stat-title">Trust Reviews</div>
+      <p class="stat-desc">Of people trust online reviews as much as a personal recommendation from a friend. Your reputation lives online whether you manage it or not.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GET FOUND — GBP -->
+<section id="found">
+  <div class="reveal">
+    <p class="section-label">Get Found on Google</p>
+    <h2 class="section-title">If You're Not Showing Up,<br><em>Someone Else Is.</em></h2>
+    <p class="section-body">When someone searches for what you do, Google decides who shows up. That decision is based almost entirely on your Google Business Profile. Most businesses have one that's incomplete, outdated, or just wrong — and it's costing them customers every single day.</p>
+  </div>
+
+  <div class="feature-row reveal reveal-1">
+    <div class="feature-img">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80&auto=format&fit=crop" alt="Google Business Profile" loading="lazy" />
+      <div class="img-accent"></div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-tag">Google Business Profile</div>
+      <div class="feature-title">Your Free Storefront on Google</div>
+      <p class="feature-desc">Your Google Business Profile is the map listing that shows up when someone searches for you. We set it up right, optimize every field, and make sure Google knows exactly what you do and where you do it. Then we keep it running every month so nothing goes stale — and so Google doesn't silently change your info without you knowing.</p>
+      <ul class="feature-list">
+        <li>Full profile setup and category optimization</li>
+        <li>Hours, service areas, and contact info verified</li>
+        <li>Photo strategy and Google Posts to keep the profile active</li>
+        <li>Q&amp;A section populated so customers get answers before they call</li>
+        <li>Monthly maintenance keeps everything current and catches Google's auto-edits</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-grid svc-grid-2 reveal reveal-2" style="margin-top:48px;">
+    <div class="svc-card">
+      <div class="svc-card-name">GBP Setup</div>
+      <p class="svc-card-desc">Full profile setup and optimization. Your Google presence done right the first time — categories, hours, photos, Q&amp;A, and everything Google needs to rank you properly.</p>
+      <div class="svc-card-price"><sup>$</sup>149</div>
+      <div class="svc-card-note">One-time setup</div>
+    </div>
+    <div class="svc-card dark">
+      <div class="svc-card-name light">GBP Monthly Maintenance</div>
+      <p class="svc-card-desc light">We keep your profile active and accurate every month — Google Posts, photo updates, Q&amp;A monitoring, and catching any changes Google tries to make without your approval.</p>
+      <div class="svc-card-price light"><sup>$</sup>99<sub>/mo</sub></div>
+      <div class="svc-card-note light">Ongoing · no long-term contract</div>
+      <div class="svc-divider light"></div>
+      <ul class="svc-features light">
+        <li>Monthly Google Post published</li>
+        <li>Photo and info updates</li>
+        <li>Q&amp;A monitoring and responses</li>
+        <li>Google auto-edit monitoring and rejection</li>
+        <li>Monthly status check-in</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reveal">
+    <p class="section-label">Your Reputation Online</p>
+    <h2 class="section-title">Your Reviews Are<br><em>Your Best Sales Team.</em></h2>
+    <p class="section-body">88% of people trust online reviews as much as a personal recommendation. Most small businesses get reviews but never manage them — no responses, no system, no way to ask for more. That silence costs you customers who were already interested.</p>
+  </div>
+
+  <div class="feature-row reveal reveal-1">
+    <div class="feature-img">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80&auto=format&fit=crop" alt="Reviews" loading="lazy" />
+      <div class="img-accent"></div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-tag">Review Management</div>
+      <div class="feature-title">Never Miss a Review Again</div>
+      <p class="feature-desc">We set up a system that monitors your reviews across platforms, alerts you instantly when one comes in, and gives you the tools to respond fast and professionally — good reviews and bad ones. When you respond, customers see that you care. When you don't, they notice that too.</p>
+      <ul class="feature-list">
+        <li>Review monitoring across Google, Yelp, Facebook and more</li>
+        <li>Instant alerts when a review comes in</li>
+        <li>Response templates for positive reviews, neutral feedback, and complaints</li>
+        <li>Automated review request system — customers get asked after every job</li>
+        <li>Monthly management available so nothing slips through</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-grid svc-grid-2 reveal reveal-2" style="margin-top:48px;">
+    <div class="svc-card">
+      <div class="svc-card-name">Review Management Setup</div>
+      <p class="svc-card-desc">Monitoring, instant alerts, response templates, and automated review requests — set up once, runs forever. You stop missing reviews and start building a reputation that works for you.</p>
+      <div class="svc-card-price"><sup>$</sup>199</div>
+      <div class="svc-card-note">One-time setup</div>
+    </div>
+    <div class="svc-card dark">
+      <div class="svc-card-name light">Review Management Monthly</div>
+      <p class="svc-card-desc light">We monitor your reviews across every platform, respond on your behalf, and flag anything that needs your personal attention. Your reputation stays protected without you watching it constantly.</p>
+      <div class="svc-card-price light"><sup>$</sup>149<sub>/mo</sub></div>
+      <div class="svc-card-note light">Ongoing · no long-term contract</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section id="social">
+  <div class="reveal">
+    <p class="section-label">Show Up Every Day</p>
+    <h2 class="section-title">Consistency Builds Trust.<br><em>Silence Loses Business.</em></h2>
+    <p class="section-body">Customers notice when a business goes quiet. It makes them wonder if you're still open, still reliable, still worth calling. We handle the scheduling, writing, and posting so your presence keeps running even when you're buried in actual work.</p>
+  </div>
+
+  <div class="feature-row reveal reveal-1">
+    <div class="feature-img">
+      <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=900&q=80&auto=format&fit=crop" alt="Social media" loading="lazy" />
+      <div class="img-accent"></div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-tag">Social Media Management</div>
+      <div class="feature-title">Show Up Without Living On Your Phone</div>
+      <p class="feature-desc">Most business owners either post sporadically when they remember, or spend way too much time on it every day. Neither works. We handle it — writing, scheduling, and posting on your behalf using the photos and media you provide. <strong>Every engagement is quoted based on your platforms, posting frequency, and whether you need content creation.</strong></p>
+      <ul class="feature-list">
+        <li>Starting at 3 posts per week on Facebook and Instagram</li>
+        <li>You provide photos and media — we write, edit captions, and post</li>
+        <li>Additional platforms available — LinkedIn, TikTok, and more</li>
+        <li>Content creation and video editing quoted separately</li>
+        <li>Every quote is scoped to your actual business needs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="honest-box reveal reveal-2" style="margin-top: 48px;">
+    <div class="honest-box-title">Social Media is <em>Quoted.</em></div>
+    <p class="honest-box-body">Every business is different. A restaurant posting daily specials is a different job than a contractor posting project photos once a week. We scope every social media engagement individually so you're paying for exactly what your business needs — not a package built for someone else. <strong>Reach out and we'll put together a number that makes sense for you.</strong></p>
+  </div>
+</section>
+
+<!-- SEO -->
+<section id="seo">
+  <div class="reveal">
+    <p class="section-label">Search Engine Optimization</p>
+    <h2 class="section-title">Know What's Hurting<br>Your <em>Rankings.</em></h2>
+    <p class="section-body">Most small business websites have fixable SEO problems — wrong page titles, missing meta descriptions, slow load times, no schema markup. You don't know what you don't know. We look at everything and tell you exactly what needs to change and why.</p>
+  </div>
+
+  <div class="svc-grid svc-grid-2 reveal reveal-1" style="margin-top: 48px;">
+    <div class="svc-card">
+      <div class="svc-card-name">SEO Audit Report</div>
+      <p class="svc-card-desc">We audit your existing website page by page — meta tags, headings, keywords, schema markup, load speed, and content gaps. You get a clear written report of what's wrong and what to fix, in plain English. You take it from there, or hire us to implement.</p>
+      <div class="svc-card-price"><sup>$</sup>149</div>
+      <div class="svc-card-note">One-time · advisory report · you own the findings</div>
+    </div>
+    <div class="svc-card dark">
+      <div class="svc-card-name light">Already Building With Us?</div>
+      <p class="svc-card-desc light">Every website we build includes SEO at no extra charge. Meta tags, headings, schema markup, keyword optimization — done right from the start, not bolted on after.</p>
+      <div class="svc-card-price light" style="font-size:1.4em; margin-top: auto;">Included in every build.</div>
+      <div class="svc-card-note light" style="margin-top: 8px;">No extra charge with any website package.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEBSITE -->
+<section id="website">
+  <div class="reveal">
+    <p class="section-label">Websites</p>
+    <h2 class="section-title">Not Everyone Needs a Website —<br><em>Until They Do.</em></h2>
+    <p class="section-body">If you're just starting out and getting most of your work through word of mouth and a solid Google Business Profile, you might not need a website yet. We'll tell you that straight. But when customers start asking where to find you online — that's when a website stops being optional.</p>
+  </div>
+
+  <div class="honest-box reveal reveal-1">
+    <div class="honest-box-title">Clean. Fast. <em>Yours.</em></div>
+    <p class="honest-box-body">We build clean, fast websites — you provide the words and photos and we handle everything else. No platform lock-in, no dependency on us after it's built. <strong>You own it.</strong> We build it right the first time, optimize every page for search, and hand you the keys. Then we keep it running month to month — hosting and minor content updates covered so you never have to think about it.</p>
+  </div>
+
+  <div class="svc-grid reveal reveal-2" style="margin-top:24px;">
+    <div class="svc-card">
+      <div class="svc-card-name">Website Starter</div>
+      <p class="svc-card-desc">Your home base online. A clean landing page plus Terms of Service and Privacy Policy — the three pages every business needs to look legitimate and get found. SEO included on every page. You provide copy and photos.</p>
+      <div class="svc-card-price"><sup>$</sup>499</div>
+      <div class="svc-card-note">One-time · Landing Page + TOS + Privacy · SEO included</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-card-name">Additional Pages</div>
+      <p class="svc-card-desc">Services page, about page, contact page, FAQ — whatever your business needs next. Each page built, optimized, and matched to your existing site. You provide copy and photos.</p>
+      <div class="svc-card-price"><sup>$</sup>129<sub>/page</sub></div>
+      <div class="svc-card-note">One-time · SEO included per page</div>
+    </div>
+    <div class="svc-card dark">
+      <div class="svc-card-name light">Website Hosting &amp; Maintenance</div>
+      <p class="svc-card-desc light">We handle hosting and keep your site running. Minor content updates included — hours, pricing, new photos, small copy changes. No ticket systems. No runaround. Just handled.</p>
+      <div class="svc-card-price light"><sup>$</sup>99<sub>/mo</sub></div>
+      <div class="svc-card-note light">Ongoing · hosting + minor content updates · no long-term contract</div>
+    </div>
+  </div>
+</section>
+
+<!-- ADS -->
+<div class="ad-section reveal">
+  <div class="ad-inner">
+    <div class="ad-left">What About<br><em>Paid Ads?</em></div>
+    <div class="ad-right">
+      <p>Facebook, Instagram, and Google all let you pay to show up in front of people based on exactly where they live, what they're interested in, and what they're searching for. For the right business at the right time, it works really well.</p>
+      <p><strong>Ads only work when your foundation is solid first.</strong> If your Google Business Profile is incomplete, your reviews are a mess, and your website doesn't exist — spending money on ads just sends people somewhere that doesn't convert. Get the foundation right first. Then advertising amplifies something that's already working.</p>
+      <p>Ready to talk ads? Reach out and we'll figure out the right targets for your market. <strong>Ad spend is always separate — paid directly to the platform by you.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Not Sure<br><em>Where to Start?</em></h2>
+  <p>Tell us where you are right now — no profile, no website, inconsistent listings, whatever it is. We'll tell you exactly what needs fixing and what it costs. <strong>No pressure. No pitch. Just a straight answer.</strong></p>
+  <div class="cta-actions">
+    <a href="/inquire.html" class="btn-primary">Let's Talk</a>
+    <a href="/index.html" class="btn-ghost">Back to Home</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="/index.html" class="footer-logo">Untrained<em>.</em>Momentum</a>
+    <p class="footer-copy">© 2026 Untrained Momentum, LLC · Big Rapids, MI</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/services.html">Services</a></li>
+    <li><a href="/work.html">Our Work</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/insights.html">Insights</a></li>
+    <li><a href="/inquire.html">Contact</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+    <li><a href="/terms.html">Terms</a></li>
+  </ul>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
