@@ -47,36 +47,5 @@ if (contactForm) {
     contactForm.elements.service.value = serviceMap[requestedService];
   }
 
-  contactForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const submitButton = contactForm.querySelector('[type="submit"]');
-    const status = contactForm.querySelector('[data-form-status]');
-    const originalLabel = submitButton.innerHTML;
-
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending…';
-    status.className = 'form-status';
-    status.textContent = '';
-
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { Accept: 'application/json' }
-      });
-
-      if (!response.ok) throw new Error('Submission failed');
-
-      contactForm.reset();
-      status.classList.add('success');
-      status.textContent = 'Thank you. Your inquiry has been sent. We will be in touch within two business days.';
-    } catch (error) {
-      status.classList.add('error');
-      status.textContent = 'Your inquiry could not be sent. Please try again, email info@untrainedmomentum.com, or call us.';
-    } finally {
-      submitButton.disabled = false;
-      submitButton.innerHTML = originalLabel;
-    }
-  });
 }
 
