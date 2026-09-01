@@ -47,20 +47,36 @@ if (contactForm) {
     contactForm.elements.service.value = serviceMap[requestedService];
   }
 
-  contactForm.addEventListener('submit', (event) => {
+  contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const data = new FormData(contactForm);
-    const subject = encodeURIComponent(`Website inquiry: ${data.get('service') || 'Technology help'}`);
-    const body = encodeURIComponent([
-      `Name: ${data.get('name') || ''}`,
-      `Email: ${data.get('email') || ''}`,
-      `Phone: ${data.get('phone') || ''}`,
-      `Location: ${data.get('location') || ''}`,
-      `Service: ${data.get('service') || ''}`,
-      '',
-      data.get('message') || ''
-    ].join('\n'));
-    window.location.href = `mailto:support@untrainedmomentum.com?subject=${subject}&body=${body}`;
+    const submitButton = contactForm.querySelector('[type="submit"]');
+    const status = contactForm.querySelector('[data-form-status]');
+    const originalLabel = submitButton.innerHTML;
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending…';
+    status.className = 'form-status';
+    status.textContent = '';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' }
+      });
+
+      if (!response.ok) throw new Error('Submission failed');
+
+      contactForm.reset();
+      status.classList.add('success');
+      status.textContent = 'Thank you. Your inquiry has been sent. We will be in touch within two business days.';
+    } catch (error) {
+      status.classList.add('error');
+      status.textContent = 'Your inquiry could not be sent. Please try again, email info@untrainedmomentum.com, or call us.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalLabel;
+    }
   });
 }
 
