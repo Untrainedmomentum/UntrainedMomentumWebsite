@@ -40,7 +40,8 @@ if (contactForm) {
     business: 'Technology project or vendor coordination',
     assessment: 'Business process or automation',
     project: 'Technology project or vendor coordination',
-    ongoing: 'Microsoft 365 or workplace technology'
+    ongoing: 'Microsoft 365 or workplace technology',
+    website: 'Website or digital operations'
   };
   if (requestedService && serviceMap[requestedService]) {
     contactForm.elements.service.value = serviceMap[requestedService];
