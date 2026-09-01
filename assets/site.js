@@ -36,7 +36,7 @@ const contactForm = document.querySelector('[data-contact-form]');
 if (contactForm) {
   const requestedService = new URLSearchParams(window.location.search).get('service');
   const serviceMap = {
-    local: 'Local home or senior tech help',
+    local: 'Local home or senior technology configuration',
     business: 'Technology project or vendor coordination',
     assessment: 'Business process or automation',
     project: 'Technology project or vendor coordination',
