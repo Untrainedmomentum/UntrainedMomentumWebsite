@@ -221,6 +221,10 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 }
 .field textarea { min-height: 150px; resize: vertical; }
 .form-note { margin-top: 14px; color: var(--muted); font-size: 0.82rem; }
+.form-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+.form-status { min-height: 28px; margin: 16px 0 0; font-weight: 750; }
+.form-status.success { color: var(--sage); }
+.form-status.error { color: var(--red-dark); }
 
 .cta-band { padding: clamp(64px, 8vw, 100px) 0; background: var(--red); color: var(--white); }
 .cta-band-inner { display: flex; justify-content: space-between; gap: 50px; align-items: end; }
