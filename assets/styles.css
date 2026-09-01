@@ -172,8 +172,8 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 
 .founder { overflow: hidden; border-radius: var(--radius); background: var(--ink); color: var(--white); }
 .founder-grid { display: grid; grid-template-columns: minmax(280px, 0.78fr) 1.22fr; }
-.founder-photo { min-height: 590px; background: #242321; }
-.founder-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; filter: saturate(0.75) contrast(1.03); }
+.founder-photo { display: flex; align-items: center; justify-content: center; min-height: 0; padding: clamp(20px, 3vw, 38px); background: #242321; }
+.founder-photo img { width: 100%; height: auto; max-height: 540px; object-fit: contain; object-position: center; filter: saturate(0.75) contrast(1.03); }
 .founder-copy { padding: clamp(38px, 7vw, 80px); align-self: center; }
 .founder-copy p { color: rgba(255,255,255,0.72); }
 .founder-copy p + p { margin-top: 20px; }
@@ -245,7 +245,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
   .choice-card { min-height: 420px; }
   .grid-3 { grid-template-columns: 1fr 1fr; }
   .sticky { position: static; }
-  .founder-photo { min-height: 470px; }
+  .founder-photo { min-height: 0; }
   .page-note { max-width: 540px; }
 }
 
@@ -274,7 +274,8 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
   .service-card .number { margin-bottom: 24px; }
   .proof-item { grid-template-columns: 1fr; gap: 10px; padding: 26px 0; }
   .process-step { grid-template-columns: 42px 1fr; gap: 16px; }
-  .founder-photo { min-height: 390px; }
+  .founder-photo { min-height: 0; padding: 20px; }
+  .founder-photo img { max-height: 420px; }
   .founder-copy { padding: 36px 24px 42px; }
   .page-hero { padding: 64px 0 58px; }
   .page-note, .price-card, .contact-card { padding: 24px 20px; }
