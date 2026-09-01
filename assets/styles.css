@@ -190,6 +190,12 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 
 .price-card { padding: 30px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--white); }
 .price { margin: 18px 0; font-family: Georgia, serif; font-size: 2.2rem; letter-spacing: -0.04em; }
+.website-service { background: var(--paper-deep); }
+.website-plan { box-shadow: var(--shadow); }
+.website-plan .plan-label { margin-bottom: 8px; color: var(--red); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+.website-plan .price { margin-top: 4px; font-size: clamp(3rem, 6vw, 5rem); line-height: 1; }
+.website-plan .price span { display: block; margin-bottom: 10px; font-family: "Aptos", "Segoe UI", Arial, sans-serif; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.website-plan .price small { font-family: "Aptos", "Segoe UI", Arial, sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0; }
 .price-card ul { margin: 20px 0 26px; padding: 0; list-style: none; }
 .price-card li { padding: 8px 0 8px 23px; position: relative; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.92rem; }
 .price-card li::before { content: "—"; position: absolute; left: 0; color: var(--red); }
@@ -279,6 +285,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
   .founder-copy { padding: 36px 24px 42px; }
   .page-hero { padding: 64px 0 58px; }
   .page-note, .price-card, .contact-card { padding: 24px 20px; }
+  .website-service .button { margin-top: 8px; }
   .cta-band-inner, .footer-bottom { flex-direction: column; align-items: flex-start; }
   .cta-band-inner { gap: 30px; }
   .cta-band .button { width: auto; }
