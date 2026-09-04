@@ -79,6 +79,13 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .muted { color: var(--muted); }
 .red { color: var(--red); }
 
+.local-photo-section { padding-top: 32px; padding-bottom: 32px; background: var(--ink); }
+.local-photo-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; }
+.local-service-photo { margin: 0; overflow: hidden; background: #fff; border-radius: 18px; }
+.local-service-photo img { display: block; width: 100%; height: clamp(270px, 36vw, 470px); object-fit: cover; }
+.local-service-photo figcaption { padding: 18px 20px 20px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.5; }
+.local-service-photo figcaption strong { display: block; margin-bottom: 3px; color: var(--ink); font-size: 1.03rem; }
+
 .site-header {
   position: sticky; top: 0; z-index: 100; min-height: 78px;
   background: rgba(243, 240, 233, 0.94); border-bottom: 1px solid var(--rule);
@@ -300,6 +307,8 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
   .button-row { gap: 10px; }
   .button { width: 100%; padding-inline: 18px; }
   .trust-grid, .choice-grid, .grid-3, .grid-2, .form-grid, .footer-grid { grid-template-columns: 1fr; }
+  .local-photo-grid { grid-template-columns: 1fr; }
+  .local-service-photo img { height: 300px; }
   .trust-item { padding: 20px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.13); }
   .choice-grid, .grid-3, .grid-2 { gap: 14px; margin-top: 32px; }
   .choice-card { min-height: 0; padding: 30px 24px; }
