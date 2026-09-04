@@ -1,17 +1,7 @@
 {
-  "name": "untrained-momentum",
+  "name": "untrainedmomentumwebsite",
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "."
-  },
-  "routes": [
-    {
-      "pattern": "untrainedmomentum.com",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.untrainedmomentum.com",
-      "custom_domain": true
-    }
-  ]
+  }
 }
