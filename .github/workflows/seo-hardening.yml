@@ -1,10 +1,6 @@
 name: One-time SEO hardening
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/seo-hardening.yml'
   workflow_dispatch:
 
 permissions:
@@ -12,267 +8,29 @@ permissions:
 
 jobs:
   harden-seo:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Normalize canonicals, metadata, schema, and crawl files
+      - name: Recover and run SEO hardening script
         shell: bash
         run: |
+          git show d47b23c55bf90df48cfd0692464941093032738d:.github/workflows/seo-hardening.yml > /tmp/seo-original.yml
           python - <<'PY'
           from pathlib import Path
-          import html
-          import json
-          import re
 
-          ROOT = "https://untrainedmomentum.com"
-          OG_IMAGE = f"{ROOT}/og-image.png"
-          MODIFIED = "2026-09-04"
-
-          PAGES = {
-              "index.html": {
-                  "path": "/",
-                  "title": "Small Business Operations & Technology Support | Untrained Momentum",
-                  "description": "Untrained Momentum helps owner-led service businesses improve operations, Microsoft 365, workflows, automation, documentation, websites, and technology projects nationwide.",
-                  "label": "Home",
-              },
-              "business-services.html": {
-                  "path": "/business-services.html",
-                  "title": "Small Business IT & Operations Support | Untrained Momentum",
-                  "description": "Small business IT and operations support for Microsoft 365, workflow automation, documentation, websites, vendor coordination, and technology projects across the U.S.",
-                  "label": "Business Services",
-              },
-              "business-startup-support.html": {
-                  "path": "/business-startup-support.html",
-                  "title": "Michigan Resident Agent & Business Startup Support | Untrained Momentum",
-                  "description": "Michigan resident agent service plus nationwide business startup support for filing preparation, domains, professional email, websites, workflows, and operating systems.",
-                  "label": "Business Startup Support",
-              },
-              "local-tech-help.html": {
-                  "path": "/local-tech-help.html",
-                  "title": "Computer Help in Big Rapids, MI | Untrained Momentum",
-                  "description": "Local and in-home computer help in Big Rapids and Mid-Michigan for Wi-Fi, printers, devices, accounts, software, seniors, families, and home offices.",
-                  "label": "Local Tech Help",
-              },
-              "business-planning-accountability.html": {
-                  "path": "/business-planning-accountability.html",
-                  "title": "Small Business Accountability & Systems Coaching | Untrained Momentum",
-                  "description": "Practical small business planning, accountability, technology guidance, and systems coaching for owners who need clearer priorities and consistent follow-through.",
-                  "label": "Business Planning & Accountability",
-              },
-              "business-launch-blueprint.html": {
-                  "path": "/business-launch-blueprint.html",
-                  "title": "Free Business Startup Checklist & Systems Blueprint | Untrained Momentum",
-                  "description": "Get the free Business Launch Systems Blueprint, a practical 30-day startup checklist for organizing your offer, administration, technology, website, and sales process.",
-                  "label": "Free Business Launch Blueprint",
-              },
-              "how-to-start-a-business.html": {
-                  "path": "/how-to-start-a-business.html",
-                  "title": "How to Start a Small Business: 12-Step Guide | Untrained Momentum",
-                  "description": "A practical 12-step guide to starting a small business, including structure, registration, banking, technology, website, sales workflow, and ongoing compliance.",
-                  "label": "How to Start a Small Business",
-              },
-              "about.html": {
-                  "path": "/about.html",
-                  "title": "About Untrained Momentum | Small Business Technology & Operations",
-                  "description": "Meet Jen, founder of Untrained Momentum, with 20+ years of experience across technology, information security, project management, automation, and process improvement.",
-                  "label": "About",
-              },
-              "contact.html": {
-                  "path": "/contact.html",
-                  "title": "Contact Untrained Momentum | Business & Local Tech Support",
-                  "description": "Contact Untrained Momentum for small business operations and technology support, startup help, websites, Michigan resident agent service, or local tech help in Big Rapids.",
-                  "label": "Contact",
-              },
-          }
-
-          LEGACY = {
-              "VOP.html": "/business-services.html",
-              "Digital Presence.html": "/business-services.html",
-              "digital-presence.html": "/business-services.html",
-              "inquire.html": "/contact.html",
-              "Intake.html": "/contact.html",
-          }
-
-          def canonical(path):
-              return ROOT + path
-
-          def set_title(text, title):
-              return re.sub(r"<title>.*?</title>", f"<title>{html.escape(title)}</title>", text, count=1, flags=re.S | re.I)
-
-          def set_description(text, description):
-              tag = f'<meta name="description" content="{html.escape(description, quote=True)}">'
-              if re.search(r'<meta\s+name="description"\s+content="[^"]*"\s*/?>', text, flags=re.I):
-                  return re.sub(r'<meta\s+name="description"\s+content="[^"]*"\s*/?>', tag, text, count=1, flags=re.I)
-              return text.replace("</title>", "</title>\n  " + tag, 1)
-
-          def set_canonical(text, url):
-              tag = f'<link rel="canonical" href="{url}">'
-              if re.search(r'<link\s+rel="canonical"\s+href="[^"]*"\s*/?>', text, flags=re.I):
-                  return re.sub(r'<link\s+rel="canonical"\s+href="[^"]*"\s*/?>', tag, text, count=1, flags=re.I)
-              marker = re.search(r'<meta\s+name="description"[^>]*>', text, flags=re.I)
-              if marker:
-                  return text[:marker.end()] + "\n  " + tag + text[marker.end():]
-              return text.replace("</title>", "</title>\n  " + tag, 1)
-
-          def set_robots(text, value):
-              tag = f'<meta name="robots" content="{value}">'
-              if re.search(r'<meta\s+name="robots"\s+content="[^"]*"\s*/?>', text, flags=re.I):
-                  return re.sub(r'<meta\s+name="robots"\s+content="[^"]*"\s*/?>', tag, text, count=1, flags=re.I)
-              m = re.search(r'<link\s+rel="canonical"[^>]*>', text, flags=re.I)
-              if m:
-                  return text[:m.end()] + "\n  " + tag + text[m.end():]
-              return text.replace("</title>", "</title>\n  " + tag, 1)
-
-          def remove_social_meta(text):
-              return re.sub(r'\s*<meta\b(?=[^>]*(?:property="og:|name="twitter:))[^>]*>', '', text, flags=re.I)
-
-          def add_social_meta(text, title, description, url):
-              text = remove_social_meta(text)
-              block = (
-                  f'  <meta property="og:title" content="{html.escape(title, quote=True)}">\n'
-                  f'  <meta property="og:description" content="{html.escape(description, quote=True)}">\n'
-                  f'  <meta property="og:type" content="website">\n'
-                  f'  <meta property="og:url" content="{url}">\n'
-                  f'  <meta property="og:image" content="{OG_IMAGE}">\n'
-                  f'  <meta property="og:image:alt" content="Untrained Momentum — small business operations and technology support">\n'
-                  f'  <meta property="og:site_name" content="Untrained Momentum">\n'
-                  f'  <meta property="og:locale" content="en_US">\n'
-                  f'  <meta name="twitter:card" content="summary_large_image">\n'
-                  f'  <meta name="twitter:title" content="{html.escape(title, quote=True)}">\n'
-                  f'  <meta name="twitter:description" content="{html.escape(description, quote=True)}">\n'
-                  f'  <meta name="twitter:image" content="{OG_IMAGE}">\n'
-              )
-              theme = re.search(r'\s*<meta\s+name="theme-color"', text, flags=re.I)
-              if theme:
-                  return text[:theme.start()] + "\n" + block + text[theme.start():]
-              stylesheet = re.search(r'\s*<link\s+rel="stylesheet"', text, flags=re.I)
-              if stylesheet:
-                  return text[:stylesheet.start()] + "\n" + block + text[stylesheet.start():]
-              return text.replace("</head>", block + "</head>", 1)
-
-          def add_structured_data(text, name, info):
-              if "SEO-STRUCTURED-DATA:START" in text:
-                  return text
-              url = canonical(info["path"])
-              if name == "index.html":
-                  # Link the existing ProfessionalService entity to a stable Organization id.
-                  text = text.replace(
-                      '"@type": "ProfessionalService",',
-                      f'"@type": ["ProfessionalService", "Organization"],\n    "@id": "{ROOT}/#organization",',
-                      1,
-                  )
-                  text = text.replace(
-                      f'"url": "{ROOT}/",',
-                      f'"url": "{ROOT}/",\n    "logo": "{ROOT}/Logo_Red_SVG.svg",\n    "image": "{OG_IMAGE}",',
-                      1,
-                  )
-                  data = {
-                      "@context": "https://schema.org",
-                      "@type": "WebSite",
-                      "@id": f"{ROOT}/#website",
-                      "url": f"{ROOT}/",
-                      "name": "Untrained Momentum",
-                      "publisher": {"@id": f"{ROOT}/#organization"},
-                      "inLanguage": "en-US",
-                  }
-              else:
-                  graph = [{
-                      "@type": "BreadcrumbList",
-                      "itemListElement": [
-                          {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{ROOT}/"},
-                          {"@type": "ListItem", "position": 2, "name": info["label"], "item": url},
-                      ],
-                  }]
-                  if name == "how-to-start-a-business.html":
-                      graph.append({
-                          "@type": "Article",
-                          "headline": "How to Start a Small Business: 12-Step Guide",
-                          "description": info["description"],
-                          "mainEntityOfPage": url,
-                          "dateModified": MODIFIED,
-                          "author": {"@type": "Organization", "name": "Untrained Momentum, LLC", "url": f"{ROOT}/"},
-                          "publisher": {"@type": "Organization", "name": "Untrained Momentum, LLC", "url": f"{ROOT}/", "logo": {"@type": "ImageObject", "url": f"{ROOT}/Logo_Red_SVG.svg"}},
-                          "image": OG_IMAGE,
-                          "inLanguage": "en-US",
-                      })
-                  data = {"@context": "https://schema.org", "@graph": graph}
-              block = (
-                  "  <!-- SEO-STRUCTURED-DATA:START -->\n"
-                  "  <script type=\"application/ld+json\">\n"
-                  + json.dumps(data, ensure_ascii=False, indent=2)
-                  + "\n  </script>\n"
-                  "  <!-- SEO-STRUCTURED-DATA:END -->\n"
-              )
-              return text.replace("</head>", block + "</head>", 1)
-
-          for file_name, info in PAGES.items():
-              p = Path(file_name)
-              if not p.exists():
-                  continue
-              text = p.read_text(encoding="utf-8")
-              text = text.replace("https://www.untrainedmomentum.com", ROOT)
-              text = set_title(text, info["title"])
-              text = set_description(text, info["description"])
-              text = set_canonical(text, canonical(info["path"]))
-              text = set_robots(text, "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
-              text = add_social_meta(text, info["title"], info["description"], canonical(info["path"]))
-              text = add_structured_data(text, file_name, info)
-              if file_name == "local-tech-help.html":
-                  text = text.replace(
-                      'Technology help that feels like <span class="red">help.</span>',
-                      'Computer and technology help in Big Rapids that feels like <span class="red">help.</span>',
-                      1,
-                  )
-                  text = text.replace(
-                      '"provider":{"@type":"ProfessionalService","name":"Untrained Momentum, LLC","telephone":"+12317070037","email":"info@untrainedmomentum.com"}',
-                      f'"provider":{{"@type":"ProfessionalService","@id":"{ROOT}/#organization","name":"Untrained Momentum, LLC","url":"{ROOT}/","telephone":"+12317070037","email":"info@untrainedmomentum.com"}}',
-                      1,
-                  )
-              p.write_text(text, encoding="utf-8")
-
-          for file_name, target_path in LEGACY.items():
-              p = Path(file_name)
-              if not p.exists():
-                  continue
-              text = p.read_text(encoding="utf-8").replace("https://www.untrainedmomentum.com", ROOT)
-              text = set_canonical(text, canonical(target_path))
-              text = set_robots(text, "noindex,follow")
-              if not re.search(r'<meta\s+http-equiv="refresh"', text, flags=re.I):
-                  refresh = f'<meta http-equiv="refresh" content="0; url={target_path}">'
-                  text = text.replace("</title>", "</title>\n  " + refresh, 1)
-              p.write_text(text, encoding="utf-8")
-
-          sitemap_urls = [canonical(info["path"]) for info in PAGES.values()]
-          sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-          for url in sitemap_urls:
-              sitemap.append(f'  <url><loc>{url}</loc><lastmod>{MODIFIED}</lastmod></url>')
-          sitemap.append('</urlset>')
-          Path("sitemap.xml").write_text("\n".join(sitemap) + "\n", encoding="utf-8")
-
-          Path("robots.txt").write_text(
-              "User-agent: *\nAllow: /\n\nSitemap: https://untrainedmomentum.com/sitemap.xml\n",
-              encoding="utf-8",
-          )
-
-          redirect_additions = [
-              "/digital-presence.html /business-services.html 301",
-              "/inquire.html /contact.html 301",
-              "/Intake.html /contact.html 301",
-          ]
-          redirects = Path("_redirects")
-          if redirects.exists():
-              text = redirects.read_text(encoding="utf-8").rstrip() + "\n"
-              for rule in redirect_additions:
-                  if rule not in text:
-                      text += rule + "\n"
-              redirects.write_text(text, encoding="utf-8")
-
-          print("SEO hardening complete")
+          lines = Path('/tmp/seo-original.yml').read_text(encoding='utf-8').splitlines()
+          start = next(i for i, line in enumerate(lines) if "python - <<'PY'" in line) + 1
+          end = next(i for i, line in enumerate(lines[start:], start) if line.strip() == 'PY')
+          block = lines[start:end]
+          indents = [len(line) - len(line.lstrip()) for line in block if line.strip()]
+          indent = min(indents)
+          script = '\n'.join(line[indent:] if line.strip() else '' for line in block) + '\n'
+          Path('/tmp/seo-hardening.py').write_text(script, encoding='utf-8')
           PY
+          python /tmp/seo-hardening.py
 
       - name: Commit SEO hardening
         shell: bash
@@ -283,6 +41,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No SEO changes needed"
           else
-            git commit -m "Harden technical SEO, canonicals, metadata, and schema [skip ci]"
+            git commit -m "Harden technical SEO, canonicals, metadata, and schema"
             git push
           fi
