@@ -37,7 +37,7 @@ if (contactForm) {
   const requestedService = new URLSearchParams(window.location.search).get('service');
   const serviceMap = {
     local: 'Local home or senior technology configuration',
-    business: 'Technology project or vendor coordination',
+    business: 'Not sure—business technology or operations',
     assessment: 'Business process or automation',
     project: 'Technology project or vendor coordination',
     ongoing: 'Microsoft 365 or workplace technology',
