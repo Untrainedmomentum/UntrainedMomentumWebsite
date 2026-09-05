@@ -1,0 +1,20 @@
+name: Trigger SEO hardening
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'seo-trigger.txt'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch SEO hardening
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run seo-hardening.yml --repo ${{ github.repository }}
