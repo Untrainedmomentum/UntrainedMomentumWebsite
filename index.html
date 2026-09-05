@@ -1,47 +1,1387 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Small Business Technology & Operations Support | Untrained Momentum</title>
-  <meta name="description" content="Untrained Momentum helps small businesses fix the technology, websites, systems, and processes slowing them down.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Small Business Technology, Website & Operations Support | Untrained Momentum</title>
+
+  <meta
+    name="description"
+    content="Untrained Momentum helps small businesses with websites, Microsoft 365, workflow automation, business systems, technology projects, and operations support nationwide."
+  >
+
   <link rel="canonical" href="https://www.untrainedmomentum.com/">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta property="og:title" content="Technology and business systems that actually work | Untrained Momentum">
-  <meta property="og:description" content="Practical technology, website, workflow, and project support for small businesses nationwide.">
-  <meta property="og:type" content="website"><meta property="og:url" content="https://www.untrainedmomentum.com/">
-  <meta property="og:image" content="https://www.untrainedmomentum.com/og-image.png"><meta property="og:image:alt" content="Untrained Momentum — small business operations and technology support"><meta property="og:site_name" content="Untrained Momentum"><meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Technology and business systems that actually work | Untrained Momentum"><meta name="twitter:description" content="Practical technology, website, workflow, and project support for small businesses nationwide."><meta name="twitter:image" content="https://www.untrainedmomentum.com/og-image.png">
-  <meta name="theme-color" content="#171716"><link rel="stylesheet" href="assets/styles.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["ProfessionalService","Organization"],"@id":"https://www.untrainedmomentum.com/#organization","name":"Untrained Momentum, LLC","url":"https://www.untrainedmomentum.com/","logo":"https://www.untrainedmomentum.com/Logo_Red_SVG.svg","image":"https://www.untrainedmomentum.com/og-image.png","telephone":"+12312875169","contactPoint":[{"@type":"ContactPoint","telephone":"+12312875169","contactType":"business services"},{"@type":"ContactPoint","telephone":"+12317070037","contactType":"home technology service"}],"email":"info@untrainedmomentum.com","description":"Small-business technology, website, operations, workflow, documentation, and project support nationwide, with home technology help in Mid-Michigan.","founder":{"@type":"Person","name":"Jen B."},"address":{"@type":"PostalAddress","addressLocality":"Big Rapids","addressRegion":"MI","postalCode":"49307","addressCountry":"US"},"areaServed":["Mid-Michigan","United States"]},{"@type":"WebSite","@id":"https://www.untrainedmomentum.com/#website","url":"https://www.untrainedmomentum.com/","name":"Untrained Momentum","publisher":{"@id":"https://www.untrainedmomentum.com/#organization"},"inLanguage":"en-US"}]}</script>
+
+  <meta
+    name="robots"
+    content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+  >
+
+  <!-- OPEN GRAPH -->
+  <meta
+    property="og:title"
+    content="Small Business Technology, Website & Operations Support | Untrained Momentum"
+  >
+
+  <meta
+    property="og:description"
+    content="Practical help with websites, business systems, Microsoft 365, workflows, automation, technology projects, and the operational work slowing your business down."
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.untrainedmomentum.com/">
+  <meta property="og:site_name" content="Untrained Momentum">
+  <meta property="og:locale" content="en_US">
+
+  <meta
+    property="og:image"
+    content="https://www.untrainedmomentum.com/og-image.png"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Untrained Momentum small business technology, website, and operations support"
+  >
+
+  <!-- TWITTER / SOCIAL -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="Small Business Technology, Website & Operations Support | Untrained Momentum"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Practical small-business help with websites, Microsoft 365, workflow automation, technology projects, and business systems."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://www.untrainedmomentum.com/og-image.png"
+  >
+
+  <meta name="theme-color" content="#171716">
+
+  <link rel="stylesheet" href="assets/styles.css">
+
+  <!-- TESTIMONIAL SLIDER STYLES -->
+  <style>
+    .testimonial-area {
+      margin-top: 3rem;
+    }
+
+    .testimonial-heading {
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-slider {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .testimonial-slide {
+      display: none;
+    }
+
+    .testimonial-slide.active {
+      display: block;
+      animation: testimonialFade .35s ease;
+    }
+
+    .testimonial-slide .recommendation {
+      margin: 0;
+    }
+
+    .testimonial-slide blockquote {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      font-weight: 400;
+      margin: 0 0 1.5rem;
+    }
+
+    .testimonial-slide cite {
+      font-size: .95rem;
+    }
+
+    .testimonial-type {
+      display: inline-block;
+      margin-bottom: .85rem;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .recommendation-role {
+      display: block;
+      margin-top: .35rem;
+      font-size: .83rem;
+      line-height: 1.45;
+    }
+
+    .testimonial-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .testimonial-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      font-size: 1.2rem;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .testimonial-arrow:hover {
+      transform: translateY(-2px);
+    }
+
+    .testimonial-arrow:focus-visible,
+    .testimonial-dot:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    .testimonial-dots {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .testimonial-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: .25;
+      cursor: pointer;
+    }
+
+    .testimonial-dot.active {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+
+    .testimonial-disclosure {
+      max-width: 900px;
+      margin: 1.5rem auto 0;
+      text-align: center;
+    }
+
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      margin-top: .75rem;
+    }
+
+    @keyframes testimonialFade {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .testimonial-slide.active {
+        animation: none;
+      }
+
+      .testimonial-arrow {
+        transition: none;
+      }
+    }
+  </style>
+
+  <!-- STRUCTURED DATA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": [
+          "ProfessionalService",
+          "Organization"
+        ],
+        "@id": "https://www.untrainedmomentum.com/#organization",
+        "name": "Untrained Momentum, LLC",
+        "url": "https://www.untrainedmomentum.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.untrainedmomentum.com/Logo_Red_SVG.svg"
+        },
+        "image": "https://www.untrainedmomentum.com/og-image.png",
+        "telephone": "+12312875169",
+        "email": "info@untrainedmomentum.com",
+        "description": "Small-business technology, website, operations, workflow automation, documentation, and project support nationwide, with home technology help in Mid-Michigan.",
+        "founder": {
+          "@id": "https://www.untrainedmomentum.com/#jennifer-brynelsen"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Big Rapids",
+          "addressRegion": "MI",
+          "postalCode": "49307",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          {
+            "@type": "Country",
+            "name": "United States"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Mid-Michigan"
+          }
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+12312875169",
+            "contactType": "business services",
+            "areaServed": "US"
+          },
+          {
+            "@type": "ContactPoint",
+            "telephone": "+12317070037",
+            "contactType": "home technology service",
+            "areaServed": "Mid-Michigan"
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/jenbrynelsen/"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.untrainedmomentum.com/#jennifer-brynelsen",
+        "name": "Jennifer Brynelsen",
+        "url": "https://www.untrainedmomentum.com/about.html",
+        "jobTitle": "Founder",
+        "worksFor": {
+          "@id": "https://www.untrainedmomentum.com/#organization"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jenbrynelsen/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.untrainedmomentum.com/#website",
+        "url": "https://www.untrainedmomentum.com/",
+        "name": "Untrained Momentum",
+        "publisher": {
+          "@id": "https://www.untrainedmomentum.com/#organization"
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.untrainedmomentum.com/#webpage",
+        "url": "https://www.untrainedmomentum.com/",
+        "name": "Small Business Technology, Website & Operations Support",
+        "description": "Practical small-business support for websites, Microsoft 365, workflow automation, technology projects, systems, and operations.",
+        "isPartOf": {
+          "@id": "https://www.untrainedmomentum.com/#website"
+        },
+        "about": {
+          "@id": "https://www.untrainedmomentum.com/#organization"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://www.untrainedmomentum.com/og-image.png"
+        },
+        "inLanguage": "en-US"
+      }
+    ]
+  }
+  </script>
 </head>
+
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header"><nav class="nav shell" aria-label="Main navigation"><a class="brand" href="index.html" aria-label="Untrained Momentum home"><img class="brand-logo" src="Logo_Red_SVG.svg" alt="Untrained Momentum"></a><button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button><div class="nav-links"><a href="business-services.html">Business Services</a><a href="business-startup-support.html">Start a Business</a><a href="local-tech-help.html">Home Tech Help</a><a href="about.html">About</a><a class="nav-cta" href="https://calendar.app.google/p8WxqCkjcLdiQiSYA">Book a Call</a></div></nav></header>
+
+  <a class="skip-link" href="#main">
+    Skip to main content
+  </a>
+
+
+  <header class="site-header">
+
+    <nav
+      class="nav shell"
+      aria-label="Main navigation"
+    >
+
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="Untrained Momentum home"
+      >
+        <img
+          class="brand-logo"
+          src="Logo_Red_SVG.svg"
+          alt="Untrained Momentum"
+        >
+      </a>
+
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+
+      <div class="nav-links">
+
+        <a href="business-services.html">
+          Business Services
+        </a>
+
+        <a href="business-startup-support.html">
+          Start a Business
+        </a>
+
+        <a href="local-tech-help.html">
+          Home Tech Help
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a
+          class="nav-cta"
+          href="https://calendar.app.google/p8WxqCkjcLdiQiSYA"
+        >
+          Book a Call
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
   <main id="main">
-    <section class="hero hero-compact"><div class="hero-inner shell"><p class="eyebrow">Websites · Email · Computers · Office Work</p><h1>Technology and business systems that <em>actually work.</em></h1><p class="hero-copy">Untrained Momentum helps small businesses fix the technology, websites, systems, and processes slowing them down.</p><p class="hero-plain">In plain English: I fix messy websites, email and file problems, repetitive office work, disconnected software, and tech projects you do not have time to finish.</p><div class="button-row"><a class="button" href="https://calendar.app.google/p8WxqCkjcLdiQiSYA">Book a Free 30-Minute Call <span aria-hidden="true">→</span></a><a class="button button-secondary" href="business-services.html">See What I Fix</a></div><p class="hero-reassurance">Not sure what you need? Tell me what isn’t working.</p></div></section>
 
-    <section class="path-section" aria-labelledby="choose-path"><div class="shell"><p class="eyebrow">Choose your path</p><h2 id="choose-path" class="section-heading-small">Start where you are.</h2><div class="path-grid">
-      <a class="path-card path-card-primary reveal" href="business-services.html"><span class="path-label">Primary service</span><h3>Run a Business</h3><p>Fix frustrating technology, disconnected tools, manual work, confusing websites, and projects that keep getting pushed aside.</p><span class="text-link">Explore Business Services →</span></a>
-      <a class="path-card reveal" href="business-startup-support.html"><span class="path-label">Building the foundation</span><h3>Starting a Business</h3><p>Set up the practical systems, website, email, and administrative foundation behind your new business.</p><span class="text-link">Start a Business →</span></a>
-      <a class="path-card reveal" href="local-tech-help.html"><span class="path-label">Mid-Michigan</span><h3>Home Tech Help</h3><p>Patient, local help configuring computers, printers, Wi-Fi, devices, and smart-home technology.</p><span class="text-link">Get Home Tech Help →</span></a>
-    </div></div></section>
+    <!-- HERO -->
 
-    <section class="section section-dark"><div class="shell problem-layout"><div><p class="eyebrow">Start with the problem</p><h2>What keeps getting in the way?</h2><p class="lede">You do not need to know the computer terms. Just tell me what is frustrating, confusing, taking too long, or not getting done.</p></div><div class="problem-list">
-      <a href="business-services.html#services"><strong>Our website is confusing—or embarrassing to share.</strong><span>Website design, hosting, maintenance, forms, and clearer customer journeys.</span></a>
-      <a href="business-services.html#services"><strong>We repeat the same manual work every week.</strong><span>Process cleanup, forms, alerts, approvals, and right-sized automation.</span></a>
-      <a href="business-services.html#services"><strong>Our Microsoft 365 accounts and files are a mess.</strong><span>Account configuration, permissions, shared files, collaboration, and documentation.</span></a>
-      <a href="business-services.html#services"><strong>Our tools do not work together.</strong><span>System review, practical integrations, vendor coordination, and simpler handoffs.</span></a>
-      <a href="business-services.html#services"><strong>Nobody has time to manage the project.</strong><span>Requirements, planning, coordination, testing, communication, and follow-through.</span></a>
-    </div></div></section>
+    <section class="hero hero-compact">
 
-    <section class="section proof-section"><div class="shell"><p class="eyebrow">Verified experience &amp; client proof</p><h2>Experienced enough for the complicated parts. Practical enough to make them usable.</h2><div class="proof-summary">
-      <div class="metric"><strong>20+ years</strong><span>Fixing technology and improving how work gets done</span></div><div class="metric"><strong>50%</strong><span>Cut the time needed for one work process in half by simplifying and automating it</span></div><div class="metric"><strong>$200K+</strong><span>Unnecessary phone and vendor costs identified; this was potential savings found, not confirmed money saved</span></div>
-    </div><article class="recommendation reveal"><blockquote>“What a game changer it’s been bringing Untrained Momentum onboard to help us out… in under two weeks this company has… organized all my files, made sure all my important documents were up to date, has brought our social media back to life, drastically improved our website… I would always choose you to work with us again.”</blockquote><cite>John McAlisair<span class="recommendation-role">CEO, HonorBound Heroes Incorporated · Public Facebook recommendation</span></cite></article><p class="form-note proof-note">The recommendation is shortened for space using ellipses. Accomplishments describe prior work and do not guarantee identical outcomes.</p></div></section>
+      <div class="hero-inner shell">
 
-    <section class="section section-white section-rule"><div class="shell founder-intro"><div><p class="eyebrow">Meet Jen</p><h2>One accountable lead, with access to the right team.</h2></div><div><p class="lede">I’m Jen, the founder of Untrained Momentum. My background spans regulated technology, information security, project management, business analysis, automation, and process improvement.</p><p>I lead each relationship directly. When work requires added expertise or capacity, I can coordinate trusted specialists without handing you off to a faceless queue.</p><a class="text-link" href="about.html">Meet Jen and learn how I work →</a></div></div></section>
-    <section class="cta-band"><div class="cta-band-inner shell"><div><p class="eyebrow cta-eyebrow">Ready for a clearer next step?</p><h2>Not sure what you need? Tell me what isn’t working.</h2></div><a class="button" href="https://calendar.app.google/p8WxqCkjcLdiQiSYA">Book a Free 30-Minute Call <span aria-hidden="true">→</span></a></div></section>
+        <p class="eyebrow">
+          Websites · Business Systems · Technology · Automation
+        </p>
+
+        <h1>
+          Technology and business systems that
+          <em>actually work.</em>
+        </h1>
+
+        <p class="hero-copy">
+          Untrained Momentum helps small businesses fix the websites,
+          technology, systems, workflows, and operational problems
+          slowing them down.
+        </p>
+
+        <p class="hero-plain">
+          In plain English: I fix messy websites, Microsoft 365 and
+          email problems, disorganized files, repetitive office work,
+          disconnected software, confusing processes, and technology
+          projects you do not have time to finish.
+        </p>
+
+
+        <div class="button-row">
+
+          <a
+            class="button"
+            href="https://calendar.app.google/p8WxqCkjcLdiQiSYA"
+          >
+            Book a Free 30-Minute Call
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a
+            class="button button-secondary"
+            href="business-services.html"
+          >
+            See Business Services
+          </a>
+
+        </div>
+
+
+        <p class="hero-reassurance">
+          Not sure what you need? Tell me what isn’t working.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHOOSE YOUR PATH -->
+
+    <section
+      class="path-section"
+      aria-labelledby="choose-path"
+    >
+
+      <div class="shell">
+
+        <p class="eyebrow">
+          How Untrained Momentum can help
+        </p>
+
+        <h2
+          id="choose-path"
+          class="section-heading-small"
+        >
+          Start where you are.
+        </h2>
+
+
+        <div class="path-grid">
+
+          <a
+            class="path-card path-card-primary reveal"
+            href="business-services.html"
+          >
+
+            <span class="path-label">
+              Small Business Support
+            </span>
+
+            <h3>
+              Run a Business
+            </h3>
+
+            <p>
+              Fix frustrating technology, disconnected tools,
+              repetitive office work, confusing websites,
+              broken workflows, and projects that keep getting
+              pushed aside.
+            </p>
+
+            <span class="text-link">
+              Explore Business Services →
+            </span>
+
+          </a>
+
+
+          <a
+            class="path-card reveal"
+            href="business-startup-support.html"
+          >
+
+            <span class="path-label">
+              Business Startup Support
+            </span>
+
+            <h3>
+              Starting a Business
+            </h3>
+
+            <p>
+              Get help setting up the website, professional email,
+              domains, business systems, technology, and practical
+              administrative foundation behind your new business.
+            </p>
+
+            <span class="text-link">
+              Explore Startup Support →
+            </span>
+
+          </a>
+
+
+          <a
+            class="path-card reveal"
+            href="local-tech-help.html"
+          >
+
+            <span class="path-label">
+              Mid-Michigan
+            </span>
+
+            <h3>
+              Home Tech Help
+            </h3>
+
+            <p>
+              Patient local help setting up computers, printers,
+              Wi-Fi, smart-home devices, streaming technology,
+              and everyday home technology.
+            </p>
+
+            <span class="text-link">
+              Get Home Tech Help →
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROBLEM-BASED SERVICES -->
+
+    <section class="section section-dark">
+
+      <div class="shell problem-layout">
+
+        <div>
+
+          <p class="eyebrow">
+            Start with the problem
+          </p>
+
+          <h2>
+            What keeps getting in the way?
+          </h2>
+
+          <p class="lede">
+            You do not need to know which software or service you need.
+            Tell me what is frustrating, confusing, taking too long,
+            or simply not getting done.
+          </p>
+
+        </div>
+
+
+        <div class="problem-list">
+
+          <a href="business-services.html#services">
+
+            <strong>
+              Our website is confusing—or embarrassing to share.
+            </strong>
+
+            <span>
+              Small-business website design, hosting, maintenance,
+              forms, updates, and clearer customer journeys.
+            </span>
+
+          </a>
+
+
+          <a href="business-services.html#services">
+
+            <strong>
+              We repeat the same manual work every week.
+            </strong>
+
+            <span>
+              Workflow improvement, forms, approvals, alerts,
+              Power Automate, and right-sized automation.
+            </span>
+
+          </a>
+
+
+          <a href="business-services.html#services">
+
+            <strong>
+              Our Microsoft 365 accounts and files are a mess.
+            </strong>
+
+            <span>
+              Microsoft 365 setup, account configuration,
+              permissions, shared files, collaboration,
+              organization, and documentation.
+            </span>
+
+          </a>
+
+
+          <a href="business-services.html#services">
+
+            <strong>
+              Our tools do not work together.
+            </strong>
+
+            <span>
+              Business system reviews, practical integrations,
+              process cleanup, vendor coordination,
+              and simpler handoffs.
+            </span>
+
+          </a>
+
+
+          <a href="business-services.html#services">
+
+            <strong>
+              Nobody has time to manage the project.
+            </strong>
+
+            <span>
+              Technology project planning, requirements,
+              vendor coordination, implementation, testing,
+              communication, and follow-through.
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- EXPERIENCE & PROOF -->
+
+    <section class="section proof-section">
+
+      <div class="shell">
+
+        <p class="eyebrow">
+          Experience &amp; recommendations
+        </p>
+
+        <h2>
+          Experienced enough for the complicated parts.
+          Practical enough to make them usable.
+        </h2>
+
+
+        <div class="proof-summary">
+
+          <div class="metric">
+
+            <strong>
+              20+ years
+            </strong>
+
+            <span>
+              Technology, systems, operations,
+              process improvement, and project experience
+            </span>
+
+          </div>
+
+
+          <div class="metric">
+
+            <strong>
+              50%
+            </strong>
+
+            <span>
+              Processing-time reduction achieved through
+              workflow redesign and automation
+            </span>
+
+          </div>
+
+
+          <div class="metric">
+
+            <strong>
+              $200K+
+            </strong>
+
+            <span>
+              Unnecessary telecom and vendor costs identified
+              through analysis and process review
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- TESTIMONIAL SLIDER -->
+
+        <div
+          class="testimonial-area"
+          aria-labelledby="testimonial-heading"
+        >
+
+          <p
+            id="testimonial-heading"
+            class="eyebrow testimonial-heading"
+          >
+            What it is like to work with Jen
+          </p>
+
+
+          <div
+            class="testimonial-slider"
+            aria-roledescription="carousel"
+            aria-label="Client and professional recommendations"
+          >
+
+
+            <!-- CLIENT -->
+
+            <div class="testimonial-slide active">
+
+              <article class="recommendation reveal">
+
+                <span class="testimonial-type">
+                  Client recommendation
+                </span>
+
+                <blockquote>
+                  “What a game changer it’s been bringing Untrained Momentum
+                  onboard to help us out. We were a mess—and when I say mess,
+                  I mean a BIG mess. In under two weeks, they organized our
+                  files, made sure our important documents were up to date,
+                  brought our social media back to life, and drastically
+                  improved our website. When I was ready to walk away,
+                  they came in and lit a fire under the charity again.
+                  I would always choose Untrained Momentum to work with us
+                  again anytime.”
+                </blockquote>
+
+                <cite>
+                  John McAlisair
+
+                  <span class="recommendation-role">
+                    CEO, HonorBound Heroes Incorporated ·
+                    Public Facebook recommendation
+                  </span>
+                </cite>
+
+              </article>
+
+            </div>
+
+
+            <!-- JOHN DYKSTRA -->
+
+            <div class="testimonial-slide">
+
+              <article class="recommendation">
+
+                <span class="testimonial-type">
+                  Professional LinkedIn recommendation
+                </span>
+
+                <blockquote>
+                  “Jen has a real talent for keeping teams organized,
+                  focused, and on track without making the process feel
+                  like a burden. She’s dependable, driven, and when
+                  something needs to get done, she gets it done.
+                  Simply put, Jen is a badass, and I’d happily work
+                  with her again.”
+                </blockquote>
+
+                <cite>
+                  John Dykstra
+
+                  <span class="recommendation-role">
+                    Senior Platform Engineer · Worked professionally
+                    with Jen for approximately five years
+                  </span>
+                </cite>
+
+              </article>
+
+            </div>
+
+
+            <!-- UTKARSH -->
+
+            <div class="testimonial-slide">
+
+              <article class="recommendation">
+
+                <span class="testimonial-type">
+                  Professional LinkedIn recommendation
+                </span>
+
+                <blockquote>
+                  “Her impact was truly transformative. She not only
+                  guided me through the nuances of agile practices but
+                  also created a streamlined internal workflow that
+                  elevated our team’s efficiency and collaboration.
+                  Her ability to simplify complex processes, foster a
+                  culture of learning, and encourage continuous improvement
+                  helped me grow both professionally and personally.”
+                </blockquote>
+
+                <cite>
+                  Utkarsh Dwivedi
+
+                  <span class="recommendation-role">
+                    Senior Endpoint Management Engineer ·
+                    Former teammate of Jen
+                  </span>
+                </cite>
+
+              </article>
+
+            </div>
+
+
+            <!-- MOHAMMAD -->
+
+            <div class="testimonial-slide">
+
+              <article class="recommendation">
+
+                <span class="testimonial-type">
+                  Professional LinkedIn recommendation
+                </span>
+
+                <blockquote>
+                  “She consistently demonstrates strong leadership,
+                  excellent facilitation skills, and a deep understanding
+                  of Agile principles. What sets her apart is her ability
+                  to create a collaborative and positive team environment
+                  while ensuring that projects stay on track and deliver
+                  value. She effectively removes impediments, facilitates
+                  productive discussions, and supports the team in
+                  continuously improving their processes.”
+                </blockquote>
+
+                <cite>
+                  Mohammad Tariq Ansari
+
+                  <span class="recommendation-role">
+                    Senior Analyst &amp; Microsoft 365 Endpoint Administrator ·
+                    Former teammate of Jen
+                  </span>
+                </cite>
+
+              </article>
+
+            </div>
+
+
+            <!-- MARLON -->
+
+            <div class="testimonial-slide">
+
+              <article class="recommendation">
+
+                <span class="testimonial-type">
+                  Professional LinkedIn recommendation
+                </span>
+
+                <blockquote>
+                  “Jennifer is an exceptional professional who consistently
+                  demonstrates strong leadership, sound judgment, and a
+                  commitment to achieving outstanding outcomes. She has a
+                  talent for bringing people together, driving initiatives
+                  forward, and ensuring projects are completed successfully.”
+                </blockquote>
+
+                <cite>
+                  Marlon Charles
+
+                  <span class="recommendation-role">
+                    Senior Platform Engineer ·
+                    Former teammate of Jen
+                  </span>
+                </cite>
+
+              </article>
+
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="testimonial-controls">
+
+              <button
+                class="testimonial-arrow testimonial-prev"
+                type="button"
+                aria-label="Previous recommendation"
+              >
+                ←
+              </button>
+
+
+              <div
+                class="testimonial-dots"
+                aria-label="Choose recommendation"
+              >
+
+                <button
+                  class="testimonial-dot active"
+                  type="button"
+                  aria-label="Show recommendation 1"
+                ></button>
+
+                <button
+                  class="testimonial-dot"
+                  type="button"
+                  aria-label="Show recommendation 2"
+                ></button>
+
+                <button
+                  class="testimonial-dot"
+                  type="button"
+                  aria-label="Show recommendation 3"
+                ></button>
+
+                <button
+                  class="testimonial-dot"
+                  type="button"
+                  aria-label="Show recommendation 4"
+                ></button>
+
+                <button
+                  class="testimonial-dot"
+                  type="button"
+                  aria-label="Show recommendation 5"
+                ></button>
+
+              </div>
+
+
+              <button
+                class="testimonial-arrow testimonial-next"
+                type="button"
+                aria-label="Next recommendation"
+              >
+                →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <p class="form-note testimonial-disclosure">
+            HonorBound Heroes reflects a client relationship with
+            Untrained Momentum. LinkedIn recommendations reflect
+            colleagues’ professional experience working with Jennifer
+            Brynelsen and are not presented as customer testimonials.
+            Some excerpts have been shortened for readability.
+            Prior accomplishments do not guarantee identical results.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOUNDER -->
+
+    <section class="section section-white section-rule">
+
+      <div class="shell founder-intro">
+
+        <div>
+
+          <p class="eyebrow">
+            Meet Jennifer Brynelsen
+          </p>
+
+          <h2>
+            One accountable lead,
+            with access to the right support.
+          </h2>
+
+        </div>
+
+
+        <div>
+
+          <p class="lede">
+            I’m Jen, founder of Untrained Momentum.
+            My background spans regulated technology,
+            Microsoft workplace systems, information security,
+            project management, business analysis,
+            workflow automation, documentation,
+            and process improvement.
+          </p>
+
+          <p>
+            I lead each relationship directly. When a project
+            requires added expertise or capacity, I coordinate
+            trusted specialists without handing you off to a
+            faceless queue.
+          </p>
+
+
+          <a
+            class="text-link"
+            href="about.html"
+          >
+            Meet Jen and learn how I work →
+          </a>
+
+          <br>
+
+          <a
+            class="text-link linkedin-link"
+            href="https://www.linkedin.com/in/jenbrynelsen/"
+            target="_blank"
+            rel="noopener noreferrer me"
+          >
+            View Jen’s LinkedIn profile →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta-band">
+
+      <div class="cta-band-inner shell">
+
+        <div>
+
+          <p class="eyebrow cta-eyebrow">
+            Ready for a clearer next step?
+          </p>
+
+          <h2>
+            Not sure what you need?
+            Tell me what isn’t working.
+          </h2>
+
+        </div>
+
+
+        <a
+          class="button"
+          href="https://calendar.app.google/p8WxqCkjcLdiQiSYA"
+        >
+          Book a Free 30-Minute Call
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </section>
+
   </main>
-  <footer class="site-footer"><div class="footer-grid shell"><div><a class="brand" href="index.html"><img class="brand-logo" src="Logo_Red_SVG.svg" alt="Untrained Momentum"></a><p class="footer-copy">Small-business technology, websites, systems, and operations support nationwide, with home technology help in Mid-Michigan.</p></div><div><p class="footer-label">Explore</p><div class="footer-links"><a href="business-services.html">Business Services</a><a href="business-startup-support.html">Start a Business</a><a href="local-tech-help.html">Home Tech Help</a><a href="about.html">About</a><a href="https://calendar.app.google/p8WxqCkjcLdiQiSYA">Book a Call</a></div></div><div><p class="footer-label">Contact</p><div class="footer-links"><a href="tel:+12312875169">Business: (231) 287-5169</a><a href="tel:+12317070037">Home tech: (231) 707-0037</a><a href="mailto:info@untrainedmomentum.com">info@untrainedmomentum.com</a></div></div></div><div class="footer-bottom shell"><span>© <span data-year></span> Untrained Momentum, LLC</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div></footer>
+
+
+  <!-- FOOTER -->
+
+  <footer class="site-footer">
+
+    <div class="footer-grid shell">
+
+      <div>
+
+        <a
+          class="brand"
+          href="index.html"
+        >
+          <img
+            class="brand-logo"
+            src="Logo_Red_SVG.svg"
+            alt="Untrained Momentum"
+          >
+        </a>
+
+
+        <p class="footer-copy">
+          Small-business technology, websites,
+          Microsoft 365, systems, workflow automation,
+          and operations support nationwide,
+          with home technology help in Mid-Michigan.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <p class="footer-label">
+          Services
+        </p>
+
+
+        <div class="footer-links">
+
+          <a href="business-services.html">
+            Business Services
+          </a>
+
+          <a href="business-startup-support.html">
+            Start a Business
+          </a>
+
+          <a href="local-tech-help.html">
+            Home Tech Help
+          </a>
+
+          <a href="about.html">
+            About Jennifer
+          </a>
+
+          <a
+            href="https://calendar.app.google/p8WxqCkjcLdiQiSYA"
+          >
+            Book a Call
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <p class="footer-label">
+          Contact
+        </p>
+
+
+        <div class="footer-links">
+
+          <a href="tel:+12312875169">
+            Business: (231) 287-5169
+          </a>
+
+          <a href="tel:+12317070037">
+            Home tech: (231) 707-0037
+          </a>
+
+          <a href="mailto:info@untrainedmomentum.com">
+            info@untrainedmomentum.com
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/jenbrynelsen/"
+            target="_blank"
+            rel="noopener noreferrer me"
+          >
+            Jennifer on LinkedIn
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom shell">
+
+      <span>
+        © <span data-year></span> Untrained Momentum, LLC
+      </span>
+
+      <span>
+        <a href="privacy.html">
+          Privacy
+        </a>
+        ·
+        <a href="terms.html">
+          Terms
+        </a>
+      </span>
+
+    </div>
+
+  </footer>
+
+
   <script src="assets/site.js" defer></script>
+
+
+  <!-- TESTIMONIAL SLIDER SCRIPT -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slider = document.querySelector('.testimonial-slider');
+
+      if (!slider) {
+        return;
+      }
+
+      const slides = Array.from(
+        slider.querySelectorAll('.testimonial-slide')
+      );
+
+      const dots = Array.from(
+        slider.querySelectorAll('.testimonial-dot')
+      );
+
+      const previousButton =
+        slider.querySelector('.testimonial-prev');
+
+      const nextButton =
+        slider.querySelector('.testimonial-next');
+
+      let currentIndex = 0;
+      let autoplayTimer = null;
+
+      const reducedMotion =
+        window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+
+      function showSlide(index) {
+        currentIndex =
+          (index + slides.length) % slides.length;
+
+        slides.forEach(function (slide, slideIndex) {
+          const active = slideIndex === currentIndex;
+
+          slide.classList.toggle('active', active);
+
+          slide.setAttribute(
+            'aria-hidden',
+            String(!active)
+          );
+        });
+
+
+        dots.forEach(function (dot, dotIndex) {
+          const active = dotIndex === currentIndex;
+
+          dot.classList.toggle(
+            'active',
+            active
+          );
+
+          dot.setAttribute(
+            'aria-current',
+            active ? 'true' : 'false'
+          );
+        });
+      }
+
+
+      function nextSlide() {
+        showSlide(currentIndex + 1);
+      }
+
+
+      function previousSlide() {
+        showSlide(currentIndex - 1);
+      }
+
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          window.clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+
+      function startAutoplay() {
+        if (reducedMotion) {
+          return;
+        }
+
+        stopAutoplay();
+
+        autoplayTimer =
+          window.setInterval(
+            nextSlide,
+            8000
+          );
+      }
+
+
+      previousButton.addEventListener(
+        'click',
+        function () {
+          previousSlide();
+          startAutoplay();
+        }
+      );
+
+
+      nextButton.addEventListener(
+        'click',
+        function () {
+          nextSlide();
+          startAutoplay();
+        }
+      );
+
+
+      dots.forEach(function (dot, index) {
+        dot.addEventListener(
+          'click',
+          function () {
+            showSlide(index);
+            startAutoplay();
+          }
+        );
+      });
+
+
+      slider.addEventListener(
+        'mouseenter',
+        stopAutoplay
+      );
+
+
+      slider.addEventListener(
+        'mouseleave',
+        startAutoplay
+      );
+
+
+      slider.addEventListener(
+        'focusin',
+        stopAutoplay
+      );
+
+
+      slider.addEventListener(
+        'focusout',
+        function (event) {
+          if (!slider.contains(event.relatedTarget)) {
+            startAutoplay();
+          }
+        }
+      );
+
+
+      showSlide(0);
+      startAutoplay();
+    });
+  </script>
+
 </body>
 </html>
