@@ -80,6 +80,8 @@ for (const file of htmlFiles) {
   const source = await fs.readFile(file, 'utf8');
   const name = htmlName(file);
   const hasMain = /<main\b/i.test(source);
+  const noIndex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(source) ||
+    /<meta\b[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["']robots["']/i.test(source);
 
   if (/<a\b[^>]*href=["']#["']/i.test(source)) {
     errors.push(`${name}: placeholder href="#" found`);
@@ -107,10 +109,10 @@ for (const file of htmlFiles) {
   if (!/<html\b[^>]*lang=["']en["']/i.test(source)) errors.push(`${name}: missing html lang="en"`);
   if (!/<meta\b[^>]*name=["']viewport["']/i.test(source)) errors.push(`${name}: missing viewport meta`);
   if (!/<title>[^<]+<\/title>/i.test(source)) errors.push(`${name}: missing non-empty title`);
-  if (!/<meta\b[^>]*name=["']description["'][^>]*content=["'][^"']+/i.test(source) &&
-      !/<meta\b[^>]*content=["'][^"']+[^>]*name=["']description["']/i.test(source)) {
-    errors.push(`${name}: missing meta description`);
-  }
+
+  const hasDescription = /<meta\b[^>]*name=["']description["'][^>]*content=["'][^"']+/i.test(source) ||
+    /<meta\b[^>]*content=["'][^"']+[^>]*name=["']description["']/i.test(source);
+  if (!noIndex && !hasDescription) errors.push(`${name}: missing meta description`);
 
   const h1Count = count(source, /<h1\b/gi);
   if (h1Count !== 1) errors.push(`${name}: expected exactly one h1, found ${h1Count}`);
