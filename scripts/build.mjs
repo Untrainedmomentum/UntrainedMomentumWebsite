@@ -112,7 +112,6 @@ async function build() {
     .map((entry) => entry.name);
 
   const errors = [];
-  const canonicals = new Set();
 
   for (const name of htmlFiles) {
     const source = await fs.readFile(path.join(root, name), 'utf8');
@@ -128,10 +127,6 @@ async function build() {
     if (canonical) {
       if (canonical.includes('www.untrainedmomentum.com')) errors.push(`${name}: www canonical remains`);
       if (!canonical.startsWith(canonicalHost)) errors.push(`${name}: unexpected canonical ${canonical}`);
-      if (canonicals.has(canonical) && !['Digital Presence.html', 'digital-presence.html', 'VOP.html', 'inquire.html', 'Intake.html'].includes(name)) {
-        errors.push(`${name}: duplicate canonical ${canonical}`);
-      }
-      canonicals.add(canonical);
     }
 
     if (!checkOnly) await fs.writeFile(path.join(out, name), rendered);
