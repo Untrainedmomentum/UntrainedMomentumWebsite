@@ -1,0 +1,27 @@
+name: Build check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build static site
+        run: npm run build
+      - name: Verify generated output
+        run: |
+          test -f _site/index.html
+          test -f _site/404.html
+          test -f _site/_redirects
+          test -f _site/_headers
+          test -f _site/robots.txt
+          test -f _site/sitemap.xml
+          grep -q 'https://untrainedmomentum.com' _site/index.html
+          ! grep -R 'https://www.untrainedmomentum.com' _site --include='*.html'
