@@ -26,14 +26,14 @@ function buildHead(source) {
   const head = extract(source, /<head[^>]*>([\s\S]*?)<\/head>/i);
   if (!head) return '';
 
-  // Base owns charset, viewport, and the shared stylesheet. Everything else is
+  // Base owns charset, viewport, and shared stylesheets. Everything else is
   // deliberately carried forward so page-specific SEO/social/schema intent is preserved.
   return normalizeCanonicalHost(
     head
       .replace(/<meta\s+charset=[^>]*>\s*/gi, '')
       .replace(/<meta[^>]+name=["']viewport["'][^>]*>\s*/gi, '')
-      .replace(/<link[^>]+href=["']\/?assets\/styles\.css["'][^>]*>\s*/gi, '')
-      .replace(/<link[^>]+href=["']assets\/styles\.css["'][^>]*>\s*/gi, '')
+      .replace(/<link[^>]+href=["']\/?assets\/styles\.css(?:\?[^"']*)?["'][^>]*>\s*/gi, '')
+      .replace(/<link[^>]+href=["']\/?assets\/mobile-nav\.css(?:\?[^"']*)?["'][^>]*>\s*/gi, '')
       .trim()
   );
 }
@@ -85,6 +85,40 @@ function render(source) {
   );
 }
 
+function applyPublishedOverrides(name, source) {
+  let output = source;
+
+  // Keep the currently published local-tech launch pricing centralized until
+  // the long-form source pages are converted to data-driven pricing fields.
+  if (name === 'local-tech-help.html') {
+    output = output
+      .replaceAll('"price": "75"', '"price": "50"')
+      .replaceAll('"price": "99"', '"price": "75"')
+      .replaceAll('$75', '$50')
+      .replaceAll('$99', '$75');
+
+    const heroPricing = 'then <strong>$50/hour</strong> if additional time is needed.\n          </p>';
+    const heroPricingWithTravel = 'then <strong>$50/hour</strong> if additional time is needed.\n            <br>Travel within <strong>15 miles of Big Rapids</strong> is included. Longer trips are quoted before booking.\n          </p>';
+    if (output.includes(heroPricing) && !/15 miles of Big Rapids/i.test(output)) {
+      output = output.replace(heroPricing, heroPricingWithTravel);
+    }
+  }
+
+  if (name === 'terms.html') {
+    output = output
+      .replaceAll('$99 for the first hour of on-site technology help', '$75 for the first hour of on-site technology help')
+      .replaceAll('$75 per hour for additional on-site time', '$50 per hour for additional on-site time');
+
+    const pricingList = '          <li>$50 per hour for additional on-site time</li>\n        </ul>';
+    const pricingListWithTravel = '          <li>$50 per hour for additional on-site time</li>\n        </ul>\n\n        <p>\n          On-site pricing includes travel within 15 miles of Big Rapids.\n          Longer trips may require an additional travel fee,\n          which will be quoted before booking.\n        </p>';
+    if (output.includes(pricingList) && !/15 miles of Big Rapids/i.test(output)) {
+      output = output.replace(pricingList, pricingListWithTravel);
+    }
+  }
+
+  return output;
+}
+
 async function copyFile(from, to) {
   await fs.mkdir(path.dirname(to), { recursive: true });
   await fs.copyFile(from, to);
@@ -115,18 +149,26 @@ async function build() {
 
   for (const name of htmlFiles) {
     const source = await fs.readFile(path.join(root, name), 'utf8');
-    const rendered = render(source);
+    const rendered = applyPublishedOverrides(name, render(source));
 
     if (/<main\b/i.test(source)) {
       if (!/<header class="site-header">/i.test(rendered)) errors.push(`${name}: shared header missing`);
       if (!/<footer class="site-footer">/i.test(rendered)) errors.push(`${name}: shared footer missing`);
-      if (!/assets\/site\.js/i.test(rendered)) errors.push(`${name}: shared site script missing`);
+      if (!/assets\/site\.js\?v=/i.test(rendered)) errors.push(`${name}: versioned shared site script missing`);
+      if (!/assets\/styles\.css\?v=/i.test(rendered)) errors.push(`${name}: versioned shared stylesheet missing`);
+      if (!/assets\/mobile-nav\.css\?v=/i.test(rendered)) errors.push(`${name}: hardened mobile navigation stylesheet missing`);
     }
 
     const canonical = rendered.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)/i)?.[1];
     if (canonical) {
       if (canonical.includes('www.untrainedmomentum.com')) errors.push(`${name}: www canonical remains`);
       if (!canonical.startsWith(canonicalHost)) errors.push(`${name}: unexpected canonical ${canonical}`);
+    }
+
+    if (name === 'local-tech-help.html') {
+      if (rendered.includes('$99')) errors.push(`${name}: stale $99 local-tech price remains`);
+      if (!rendered.includes('$75') || !rendered.includes('$50')) errors.push(`${name}: current $75/$50 pricing missing`);
+      if (!/15 miles of Big Rapids/i.test(rendered)) errors.push(`${name}: service radius missing`);
     }
 
     if (!checkOnly) await fs.writeFile(path.join(out, name), rendered);
