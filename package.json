@@ -1,0 +1,10 @@
+{
+  "name": "untrained-momentum-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:site": "node scripts/build.mjs",
+    "build": "npm run build:site && node scripts/qa.mjs _site",
+    "check": "node scripts/build.mjs --check"
+  }
+}
