@@ -127,20 +127,18 @@ for (const file of htmlFiles) {
 const localTechPath = path.join(root, 'local-tech-help.html');
 if (await exists(localTechPath)) {
   const local = await fs.readFile(localTechPath, 'utf8');
-  if (local.includes('$99')) errors.push('local-tech-help.html: stale $99 on-site price found');
-  if (!local.includes('$75') || !local.includes('$50')) errors.push('local-tech-help.html: expected current $75/$50 on-site pricing');
+  if (!local.includes('$99') || !local.includes('$75')) {
+    errors.push('local-tech-help.html: expected current $99 first-hour / $75 additional-hour on-site pricing');
+  }
   if (!/15 miles of Big Rapids/i.test(local)) errors.push('local-tech-help.html: 15-mile included travel area is not stated');
 }
 
 const termsPath = path.join(root, 'terms.html');
 if (await exists(termsPath)) {
   const terms = await fs.readFile(termsPath, 'utf8');
-  if (terms.includes('$99 for the first hour of on-site technology help')) {
-    errors.push('terms.html: stale local on-site price found');
-  }
-  if (!terms.includes('$75 for the first hour of on-site technology help') ||
-      !terms.includes('$50 per hour for additional on-site time')) {
-    errors.push('terms.html: local pricing does not match current $75/$50 rates');
+  if (!terms.includes('$99 for the first hour of on-site technology help') ||
+      !terms.includes('$75 per hour for additional on-site time')) {
+    errors.push('terms.html: local pricing does not match current $99/$75 rates');
   }
 }
 
