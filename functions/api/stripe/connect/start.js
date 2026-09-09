@@ -1,6 +1,8 @@
 import { json, readJson, requestOrigin, errorMessage } from '../../../_lib/http.js';
 import { requireUser } from '../../../_lib/auth.js';
-import { stripePost } from '../../../_lib/stripe.js';
+import { stripePost, stripePostVersioned } from '../../../_lib/stripe.js';
+
+const DEFAULT_CONNECT_API_VERSION = '2026-06-24.preview';
 
 export async function onRequestPost(context) {
   try {
@@ -14,13 +16,28 @@ export async function onRequestPost(context) {
 
     let accountId = site.stripe_account_id;
     if (!accountId) {
-      const account = await stripePost(context.env, '/accounts', {
-        type: 'express',
-        country: context.env.CONNECT_DEFAULT_COUNTRY || 'US',
-        email: user.email,
-        business_profile: { product_description: `${site.name} sales processed through its Untrained Momentum hosted website` },
-        metadata: { um_site_id: site.id, um_site_slug: site.slug }
-      });
+      const account = await stripePostVersioned(
+        context.env,
+        '/accounts',
+        {
+          country: context.env.CONNECT_DEFAULT_COUNTRY || 'US',
+          email: user.email,
+          controller: {
+            fees: { payer: 'account' },
+            losses: { payments: 'stripe' },
+            requirement_collection: 'stripe',
+            stripe_dashboard: { type: 'express' }
+          },
+          capabilities: {
+            card_payments: { requested: true }
+          },
+          business_profile: {
+            product_description: `${site.name} sales processed through its Untrained Momentum hosted website`
+          },
+          metadata: { um_site_id: site.id, um_site_slug: site.slug }
+        },
+        context.env.STRIPE_CONNECT_API_VERSION || DEFAULT_CONNECT_API_VERSION
+      );
       accountId = account.id;
       await context.env.DB.prepare('UPDATE sites SET stripe_account_id = ?, updated_at = ? WHERE id = ?')
         .bind(accountId, new Date().toISOString(), site.id).run();
