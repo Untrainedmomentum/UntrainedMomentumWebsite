@@ -5,7 +5,7 @@
   "scripts": {
     "build:site": "node scripts/build.mjs",
     "check:js": "node scripts/check-js.mjs",
-    "build": "npm run check:js && npm run build:site && node scripts/qa.mjs _site && node scripts/copy-platform.mjs",
+    "build": "npm run check:js && npm run build:site && node scripts/normalize-experience.mjs _site && node scripts/qa.mjs _site && node scripts/copy-platform.mjs",
     "check": "npm run check:js && node scripts/build.mjs --check"
   }
 }
