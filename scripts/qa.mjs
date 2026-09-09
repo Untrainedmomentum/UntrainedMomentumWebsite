@@ -79,11 +79,15 @@ const htmlFiles = await listHtml(root);
 for (const file of htmlFiles) {
   const source = await fs.readFile(file, 'utf8');
   const name = htmlName(file);
+  const isClientApp = name.startsWith('client/');
   const hasMain = /<main\b/i.test(source);
   const noIndex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(source) ||
     /<meta\b[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["']robots["']/i.test(source);
 
-  if (/<a\b[^>]*href=["']#["']/i.test(source)) {
+  // Public marketing pages should never ship placeholder anchors. Client-app
+  // pages may use hash anchors as JS controls, so those are validated by the
+  // client-app JavaScript checks instead of the public-page rule.
+  if (!isClientApp && /<a\b[^>]*href=["']#["']/i.test(source)) {
     errors.push(`${name}: placeholder href="#" found`);
   }
 
@@ -117,11 +121,16 @@ for (const file of htmlFiles) {
   const h1Count = count(source, /<h1\b/gi);
   if (h1Count !== 1) errors.push(`${name}: expected exactly one h1, found ${h1Count}`);
 
-  if (!/<header class=["']site-header["']>/i.test(source)) errors.push(`${name}: shared header missing`);
-  if (!/<footer class=["']site-footer["']>/i.test(source)) errors.push(`${name}: shared footer missing`);
-  if (!/assets\/styles\.css\?v=/i.test(source)) errors.push(`${name}: versioned shared stylesheet missing`);
-  if (!/assets\/mobile-nav\.css\?v=/i.test(source)) errors.push(`${name}: hardened mobile nav stylesheet missing`);
-  if (!/assets\/site\.js\?v=/i.test(source)) errors.push(`${name}: versioned shared script missing`);
+  // Client portal pages intentionally use their own app shell and client.css;
+  // the shared marketing header/footer/mobile-nav assertions apply only to
+  // public site pages.
+  if (!isClientApp) {
+    if (!/<header class=["']site-header["']>/i.test(source)) errors.push(`${name}: shared header missing`);
+    if (!/<footer class=["']site-footer["']>/i.test(source)) errors.push(`${name}: shared footer missing`);
+    if (!/assets\/styles\.css\?v=/i.test(source)) errors.push(`${name}: versioned shared stylesheet missing`);
+    if (!/assets\/mobile-nav\.css\?v=/i.test(source)) errors.push(`${name}: hardened mobile nav stylesheet missing`);
+    if (!/assets\/site\.js\?v=/i.test(source)) errors.push(`${name}: versioned shared script missing`);
+  }
 }
 
 const localTechPath = path.join(root, 'local-tech-help.html');
@@ -151,7 +160,8 @@ for (const required of [
   'sitemap.xml',
   'assets/styles.css',
   'assets/mobile-nav.css',
-  'assets/site.js'
+  'assets/site.js',
+  'client/login.html'
 ]) {
   if (!await exists(path.join(root, required))) errors.push(`output missing ${required}`);
 }

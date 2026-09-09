@@ -1,0 +1,18 @@
+-- Production schema is applied to Supabase project tamyxenqhgstjorvsiym.
+-- This file documents the Supabase-backed client platform used by the browser portal.
+-- Migrations applied in Supabase:
+--   client_platform_foundation
+--   harden_security_definer_functions
+--   client_invites_publication_and_media
+--   optimize_rls_and_invite_index
+--
+-- Security model:
+-- * Supabase Auth owns credentials and password hashing.
+-- * public.profiles, public.sites, public.orders, and public.booking_payments use RLS.
+-- * Clients may update only their profile display name and their own site's content/updated_at columns.
+-- * app_private.client_invites gates activation; uninvited signups are created disabled.
+-- * public.site_publications exposes only published site content for safe public previews.
+-- * storage bucket site-media is public-read and authenticated-write only within auth.uid() folders.
+--
+-- Do not place Supabase secret/service-role keys in this repository. The browser portal uses only
+-- the project publishable key; authorization is enforced by database RLS and column privileges.
