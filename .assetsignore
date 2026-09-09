@@ -14,6 +14,16 @@
 !client/
 !client/**
 
+# Keep unfinished platform/admin screens out of the production pilot.
+client/admin.html
+client/builder.html
+client/orders.html
+client/setup.html
+client/site-settings.html
+assets/builder.js
+assets/hosted-site.js
+assets/site-settings.js
+
 !_headers
 !_redirects
 !robots.txt
