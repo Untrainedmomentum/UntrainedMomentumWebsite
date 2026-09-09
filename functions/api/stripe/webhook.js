@@ -28,12 +28,15 @@ export async function onRequestPost(context) {
           .bind(event.account).first();
         if (site) {
           const amount = Number(object.amount_total || 0);
-          const fee = Math.max(0, Math.round(amount * Number(site.platform_fee_bps || 0) / 10000));
+          const storedFee = Number(object.metadata?.um_platform_fee_amount);
+          const fee = Number.isFinite(storedFee)
+            ? Math.max(0, Math.round(storedFee))
+            : Math.max(0, Math.round(amount * Number(site.platform_fee_bps || 0) / 10000));
           await context.env.DB.prepare(`
             INSERT INTO orders (id, site_id, stripe_account_id, stripe_checkout_session_id, stripe_payment_intent_id,
               customer_email, amount_total, currency, platform_fee_amount, status, payload_json, created_at, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT(stripe_checkout_session_id) DO UPDATE SET status=excluded.status, payload_json=excluded.payload_json, updated_at=excluded.updated_at
+            ON CONFLICT(stripe_checkout_session_id) DO UPDATE SET status=excluded.status, platform_fee_amount=excluded.platform_fee_amount, payload_json=excluded.payload_json, updated_at=excluded.updated_at
           `).bind(
             crypto.randomUUID(), site.id, event.account, object.id, object.payment_intent || null,
             object.customer_details?.email || object.customer_email || null, amount, object.currency || 'usd', fee,
