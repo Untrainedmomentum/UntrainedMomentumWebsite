@@ -33,12 +33,20 @@ Add the following Pages environment variables/secrets:
 | `STRIPE_WEBHOOK_SECRET` | Secret | Signing secret for the Stripe webhook endpoint |
 | `LOCAL_TECH_CALENDAR_URL` | Variable/secret | Google appointment schedule URL revealed only after a verified $99 payment |
 | `STRIPE_BOOKING_PRICE_ID` | Optional variable | Stripe Price ID for the $99 first-hour booking product; if omitted the server creates the Checkout line item from the fixed $99 amount |
-| `STRIPE_API_VERSION` | Optional variable | Only set when intentionally pinning a Stripe API version |
+| `STRIPE_API_VERSION` | Optional variable | Global Stripe API version pin. Leave unset unless intentionally pinning all Stripe requests. |
+| `STRIPE_CONNECT_API_VERSION` | Optional variable | Version used only when creating connected accounts. Defaults in code to `2026-06-24.preview` for the Stripe-owned pricing/loss-liability Express configuration. |
 | `CONNECT_DEFAULT_COUNTRY` | Variable | Default connected-account country; use `US` for the initial U.S. service |
 
 Current local-tech calendar URL to use for `LOCAL_TECH_CALENDAR_URL`:
 
 `https://calendar.google.com/calendar/appointments/schedules/AcZssZ2xQsIL1iYdfPe73afv1n9JkLJJA0WixbdMLWzZlGinBDGOLn-mO3w6ErmR3uqilIP47LQxWRVZ?gv=true`
+
+A Stripe test-mode product and price have already been created for the first on-site hour:
+
+- Product: `prod_VEMZcvA5x8TJqK`
+- Test price: `price_1UDtq0QhLXixPYGKsHNSlWYD`
+
+Use that price ID only with a Stripe test-mode secret. Create a separate live-mode price after the full test flow passes.
 
 Until `STRIPE_SECRET_KEY` and `LOCAL_TECH_CALENDAR_URL` are both configured, the booking page intentionally falls back to the existing calendar so a deployment cannot accidentally block current bookings.
 
@@ -50,9 +58,23 @@ Clients then sign in at `/client/login.html` and use `/client/index.html` as the
 
 ## Stripe platform setup
 
-Use the Untrained Momentum Stripe account as the Connect platform. Client businesses connect their own Stripe accounts from their dashboard. The current implementation creates Express connected accounts and sends the client through Stripe-hosted onboarding.
+Use the Untrained Momentum Stripe account as the Connect platform. Client businesses connect Stripe from their Untrained Momentum dashboard and complete Stripe-hosted onboarding.
 
-Store checkout uses direct charges on the connected account. Product names and prices are loaded from D1 on the server, so a shopper cannot alter the authoritative price in browser JavaScript. When a site has a platform fee configured, checkout sets a Stripe Connect `application_fee_amount` on the PaymentIntent. This is the Untrained Momentum platform fee and should be described in client agreements as a platform/commerce fee rather than as a consumer credit-card surcharge.
+This is a SaaS-platform payment model, not a marketplace model. The client business is the merchant of record for its own customers. Store checkout therefore uses **direct charges** on the client's connected account.
+
+New connected accounts are created with controller properties rather than the legacy `type: express` shortcut. The configuration is:
+
+- `controller.fees.payer = account` — the connected merchant pays Stripe's processing fees directly.
+- `controller.losses.payments = stripe` — Stripe owns connected-account negative-balance liability for payments.
+- `controller.requirement_collection = stripe` — Stripe manages ongoing merchant verification requirements.
+- `controller.stripe_dashboard.type = express` — the merchant has the Stripe Express experience when Stripe-hosted management is needed.
+- `capabilities.card_payments.requested = true` — store checkout remains disabled until Stripe reports charges enabled.
+
+The Stripe-owned pricing/loss-liability Express combination requires the Connect preview API version documented by Stripe. The account-creation request pins that version separately so the rest of the platform does not have to use a preview API version.
+
+Product names and prices are loaded from D1 on the server, so a shopper cannot alter the authoritative price in browser JavaScript. When a site has a platform fee configured, checkout sets a Stripe Connect `application_fee_amount` on the PaymentIntent. The exact application fee is copied into Checkout metadata so order records use the fee actually requested, rather than recalculating it from a total that might later include shipping or tax.
+
+This Untrained Momentum fee should be described in client agreements as a platform/commerce fee rather than as a consumer credit-card surcharge.
 
 The `$99` local-tech booking payment is different: it is a payment directly to the Untrained Momentum platform account, not to a connected client account.
 
@@ -90,9 +112,10 @@ Do not put Stripe secret keys, webhook secrets, or the bootstrap token in GitHub
 2. Create D1, apply `schema.sql`, and bind it as `DB`.
 3. Create R2 and bind it as `MEDIA`.
 4. Add the Cloudflare environment variables/secrets above.
-5. Configure Stripe Connect and the webhook endpoint.
+5. Configure the Stripe webhook endpoint.
 6. Create the first admin at `/client/setup.html`.
 7. Test client login, content editing, image upload, and a Stripe test-mode connected account.
-8. Test a full cart checkout and verify an order appears in D1.
-9. Test the $99 local-tech booking in Stripe test mode and confirm the calendar is inaccessible until the Checkout Session is server-verified.
-10. Move Stripe keys/webhook configuration to live mode only after the complete test-mode flow passes.
+8. Verify Stripe reports charges enabled before allowing client-store checkout.
+9. Test a full cart checkout, application fee, and order record in D1.
+10. Test the $99 local-tech booking in Stripe test mode and confirm the calendar is inaccessible until the Checkout Session is server-verified.
+11. Create the live-mode $99 product/price and move Stripe keys/webhook configuration to live mode only after the complete test-mode flow passes.
