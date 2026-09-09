@@ -1,12 +1,19 @@
-import { api, escapeHtml, getSession } from '/assets/client.js';
+import { escapeHtml, getSession, supabaseRest, uploadSiteImage } from '/assets/client.js';
 
 const slug = new URL(location.href).searchParams.get('site');
 if (!slug) location.href = '/client/index.html';
 let site;
 let content;
+let session;
 const tabs = ['Basics', 'Services', 'Projects', 'Menu', 'Products', 'Gallery', 'Images'];
 const mount = document.querySelector('#editor-mount');
 const status = document.querySelector('#editor-status');
+
+const preview = document.querySelector('#site-preview');
+if (preview && slug) preview.src = `/client/preview.html?site=${encodeURIComponent(slug)}`;
+document.querySelector('#refresh-preview')?.addEventListener('click', () => {
+  if (preview) preview.src = `/client/preview.html?site=${encodeURIComponent(slug)}&t=${Date.now()}`;
+});
 
 function field(label, name, value = '', type = 'text', extra = '') {
   if (type === 'textarea') return `<label class="client-field"><span>${label}</span><textarea name="${name}" ${extra}>${escapeHtml(value)}</textarea></label>`;
@@ -45,7 +52,7 @@ function projectImagesText(item) {
 
 function projectsSection() {
   const items = Array.isArray(content.projects) ? content.projects : [];
-  return `<section class="editor-section client-panel" data-section="Projects" hidden><div class="client-panel-header"><div><h2>Projects / portfolio</h2><p class="client-muted">Each project automatically gets its own detail page. Add extra image URLs one per line for a project gallery.</p></div><button class="client-button secondary small" type="button" data-add="projects">Add project</button></div><div class="repeat-list" data-list="projects">${items.map((item, i) => itemShell('projects', i, `<input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">${field('Project title', 'title', item.title || '')}${field('Short description', 'description', item.description || '', 'textarea')}${field('Full project details', 'details', item.details || '', 'textarea', 'rows="6"')}${field('Cover image URL', 'image', item.image || '')}${field('Project gallery image URLs', 'imagesText', projectImagesText(item), 'textarea', 'rows="5" placeholder="One image URL per line"')}`, 'Project')).join('')}</div></section>`;
+  return `<section class="editor-section client-panel" data-section="Projects" hidden><div class="client-panel-header"><div><h2>Projects / portfolio</h2><p class="client-muted">Each project can include a cover image and additional project photos.</p></div><button class="client-button secondary small" type="button" data-add="projects">Add project</button></div><div class="repeat-list" data-list="projects">${items.map((item, i) => itemShell('projects', i, `<input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">${field('Project title', 'title', item.title || '')}${field('Short description', 'description', item.description || '', 'textarea')}${field('Full project details', 'details', item.details || '', 'textarea', 'rows="6"')}${field('Cover image URL', 'image', item.image || '')}${field('Project gallery image URLs', 'imagesText', projectImagesText(item), 'textarea', 'rows="5" placeholder="One image URL per line"')}`, 'Project')).join('')}</div></section>`;
 }
 
 function menuText(section) {
@@ -59,7 +66,7 @@ function menuSection() {
 
 function productsSection() {
   const items = Array.isArray(content.products) ? content.products : [];
-  return `<section class="editor-section client-panel" data-section="Products" hidden><div class="client-panel-header"><div><h2>Products + cart</h2><p class="client-muted">Each product gets its own product page. Prices are validated on the server before Stripe checkout, so shoppers cannot change them in the browser.</p></div><button class="client-button secondary small" type="button" data-add="products">Add product</button></div><div class="repeat-list" data-list="products">${items.map((item, i) => itemShell('products', i, `${field('Product name', 'name', item.name || '')}${field('Description', 'description', item.description || '', 'textarea')}<div class="client-form-row">${field('Price ($)', 'priceDollars', (Number(item.priceCents || 0) / 100).toFixed(2), 'number', 'min="0" step="0.01"')}${field('Image URL', 'image', item.image || '')}</div><label class="client-field"><span><input type="checkbox" name="active" ${item.active === false ? '' : 'checked'}> Available for sale</span></label><input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">`, 'Product')).join('')}</div></section>`;
+  return `<section class="editor-section client-panel" data-section="Products" hidden><div class="client-panel-header"><div><h2>Products</h2><p class="client-muted">Product and checkout controls are available for sites that use online sales.</p></div><button class="client-button secondary small" type="button" data-add="products">Add product</button></div><div class="repeat-list" data-list="products">${items.map((item, i) => itemShell('products', i, `${field('Product name', 'name', item.name || '')}${field('Description', 'description', item.description || '', 'textarea')}<div class="client-form-row">${field('Price ($)', 'priceDollars', (Number(item.priceCents || 0) / 100).toFixed(2), 'number', 'min="0" step="0.01"')}${field('Image URL', 'image', item.image || '')}</div><label class="client-field"><span><input type="checkbox" name="active" ${item.active === false ? '' : 'checked'}> Available for sale</span></label><input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">`, 'Product')).join('')}</div></section>`;
 }
 
 function gallerySection() {
@@ -68,7 +75,7 @@ function gallerySection() {
 }
 
 function imagesSection() {
-  return `<section class="editor-section client-panel" data-section="Images" hidden><div class="client-panel-header"><div><h2>Upload an image</h2><p class="client-muted">Upload once, then paste the returned image URL into a project, product, gallery, or visual-builder image field.</p></div></div><form class="client-form" id="image-upload-form"><label class="client-field"><span>Choose image</span><input type="file" name="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" required></label><button class="client-button" type="submit">Upload image</button><div id="image-upload-result"></div></form></section>`;
+  return `<section class="editor-section client-panel" data-section="Images" hidden><div class="client-panel-header"><div><h2>Upload an image</h2><p class="client-muted">Images are stored securely in your site's media folder. Upload once, then copy the URL into a project or gallery field.</p></div></div><form class="client-form" id="image-upload-form"><label class="client-field"><span>Choose image</span><input type="file" name="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" required></label><button class="client-button" type="submit">Upload image</button><div id="image-upload-result"></div></form></section>`;
 }
 
 function render() {
@@ -167,13 +174,19 @@ function collectAll() {
 }
 
 async function save() {
-  const button = document.querySelector('#save-site'); button.disabled = true; status.textContent = '';
+  const button = document.querySelector('#save-site');
+  button.disabled = true;
+  status.textContent = '';
   try {
     collectAll();
-    await api(`/api/client/site/${encodeURIComponent(slug)}`, { method: 'PUT', body: JSON.stringify({ content }) });
-    status.innerHTML = '<div class="client-notice good">Saved. Your hosted site will use the new content immediately.</div>';
-    const preview = document.querySelector('#site-preview');
-    if (preview) preview.src = `/api/client/preview/${encodeURIComponent(slug)}?t=${Date.now()}`;
+    const rows = await supabaseRest(`sites?slug=eq.${encodeURIComponent(slug)}&owner_user_id=eq.${encodeURIComponent(session.user.id)}`, {
+      method: 'PATCH',
+      headers: { prefer: 'return=representation' },
+      body: JSON.stringify({ content, updated_at: new Date().toISOString() })
+    });
+    if (!Array.isArray(rows) || rows.length !== 1) throw new Error('The site could not be updated.');
+    status.innerHTML = '<div class="client-notice good">Saved. Your website content and preview are updated.</div>';
+    if (preview) preview.src = `/client/preview.html?site=${encodeURIComponent(slug)}&t=${Date.now()}`;
   } catch (error) {
     status.innerHTML = `<div class="client-notice error">${escapeHtml(error.message)}</div>`;
   } finally { button.disabled = false; }
@@ -184,24 +197,24 @@ async function uploadImage(event) {
   const form = event.currentTarget;
   const result = document.querySelector('#image-upload-result');
   const button = form.querySelector('button');
+  const file = form.elements.file.files?.[0];
   button.disabled = true;
   try {
-    const data = new FormData(form);
-    data.set('site', slug);
-    const response = await api('/api/client/upload', { method: 'POST', body: data });
-    result.innerHTML = `<div class="client-notice good"><strong>Uploaded.</strong><div class="code-box">${escapeHtml(response.url)}</div><button class="client-button secondary small" type="button" data-copy-url>Copy URL</button></div>`;
-    result.querySelector('[data-copy-url]').addEventListener('click', () => navigator.clipboard.writeText(response.url));
+    const url = await uploadSiteImage(slug, file);
+    result.innerHTML = `<div class="client-notice good"><strong>Uploaded.</strong><div class="code-box">${escapeHtml(url)}</div><button class="client-button secondary small" type="button" data-copy-url>Copy URL</button></div>`;
+    result.querySelector('[data-copy-url]').addEventListener('click', () => navigator.clipboard.writeText(url));
     form.reset();
   } catch (error) {
     result.innerHTML = `<div class="client-notice error">${escapeHtml(error.message)}</div>`;
   } finally { button.disabled = false; }
 }
 
-await getSession();
+session = await getSession();
 try {
-  const data = await api(`/api/client/site/${encodeURIComponent(slug)}`);
-  site = data.site;
-  content = data.content || {};
+  const rows = await supabaseRest(`sites?slug=eq.${encodeURIComponent(slug)}&owner_user_id=eq.${encodeURIComponent(session.user.id)}&select=id,owner_user_id,slug,name,site_type,site_url,custom_domain,content,builder_enabled,status`);
+  site = Array.isArray(rows) ? rows[0] : null;
+  if (!site) throw new Error('Website not found or you do not have access to it.');
+  content = site.content || {};
   content.services ||= [];
   content.projects ||= [];
   content.menu ||= [];
@@ -209,7 +222,7 @@ try {
   content.gallery ||= [];
   document.querySelector('#site-name').textContent = site.name;
   const view = document.querySelector('#view-site');
-  view.href = site.custom_domain ? `https://${site.custom_domain}` : (site.site_url || `/api/public/site/${encodeURIComponent(site.slug)}`);
+  view.href = site.custom_domain ? `https://${site.custom_domain}` : (site.site_url || `/client/preview.html?site=${encodeURIComponent(site.slug)}`);
   render();
   document.querySelector('#save-site').addEventListener('click', save);
 } catch (error) {
