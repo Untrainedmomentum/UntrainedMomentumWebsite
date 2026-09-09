@@ -64,15 +64,21 @@ export async function onRequestPost(context) {
     if (subtotal <= 0) return json({ error: 'The cart total must be greater than zero.' }, 400);
     const feeBps = Math.max(0, Math.min(5000, Number(site.platform_fee_bps || 0)));
     const applicationFee = Math.min(subtotal - 1, Math.round(subtotal * feeBps / 10000));
+    const metadata = {
+      um_site_id: String(site.id),
+      um_site_slug: String(site.slug),
+      um_platform_fee_bps: String(feeBps),
+      um_platform_fee_amount: String(Math.max(0, applicationFee))
+    };
     const params = {
       mode: 'payment',
       line_items: lineItems,
       success_url: `${base}/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${base}/?checkout=cancelled`,
       customer_creation: 'always',
-      metadata: { um_site_id: site.id, um_site_slug: site.slug },
+      metadata,
       payment_intent_data: {
-        metadata: { um_site_id: site.id, um_site_slug: site.slug },
+        metadata,
         ...(applicationFee > 0 ? { application_fee_amount: applicationFee } : {})
       }
     };
