@@ -1,3 +1,15 @@
+const MOBILE_NAV_VERSION = '20260909-2';
+
+// Some legacy/root pages only load styles.css. Always load the hardened
+// mobile navigation stylesheet so opening the hamburger menu cannot spill
+// navigation links over page content.
+if (!document.querySelector('link[href*="mobile-nav.css"]')) {
+  const mobileNavStyles = document.createElement('link');
+  mobileNavStyles.rel = 'stylesheet';
+  mobileNavStyles.href = `/assets/mobile-nav.css?v=${MOBILE_NAV_VERSION}`;
+  document.head.appendChild(mobileNavStyles);
+}
+
 const menuButton = document.querySelector('.menu-button');
 const navLinks = document.querySelector('.nav-links');
 
@@ -10,6 +22,8 @@ function setMenuState(open) {
 }
 
 if (menuButton && navLinks) {
+  setMenuState(false);
+
   menuButton.addEventListener('click', () => {
     setMenuState(!navLinks.classList.contains('open'));
   });
@@ -31,6 +45,10 @@ if (menuButton && navLinks) {
     }
   });
 
+  window.addEventListener('pageshow', () => {
+    if (window.innerWidth <= 900) setMenuState(false);
+  });
+
   const currentPath = (window.location.pathname.replace(/\/+$/, '') || '/').toLowerCase();
   navLinks.querySelectorAll('a[href]').forEach((link) => {
     const url = new URL(link.href, window.location.origin);
@@ -40,6 +58,43 @@ if (menuButton && navLinks) {
     else link.removeAttribute('aria-current');
   });
 }
+
+function normalizeExperienceText(value = '') {
+  return String(value)
+    .replace(/more than two decades/gi, 'more than 10 years')
+    .replace(/two decades/gi, '10+ years')
+    .replace(/more than 20\+?\s*years/gi, 'more than 10 years')
+    .replace(/20\+\s*years/gi, '10+ years')
+    .replace(/20\+\s*yrs/gi, '10+ yrs');
+}
+
+function normalizeExperienceClaims() {
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    const parentTag = node.parentElement?.tagName;
+    if (parentTag === 'SCRIPT' || parentTag === 'STYLE' || parentTag === 'TEXTAREA') continue;
+    if (/two decades|20\+?\s*(?:years|yrs)/i.test(node.nodeValue || '')) nodes.push(node);
+  }
+  nodes.forEach((textNode) => {
+    textNode.nodeValue = normalizeExperienceText(textNode.nodeValue);
+  });
+
+  document.querySelectorAll('meta[content]').forEach((meta) => {
+    if (/two decades|20\+?\s*(?:years|yrs)/i.test(meta.content || '')) {
+      meta.content = normalizeExperienceText(meta.content);
+    }
+  });
+
+  document.querySelectorAll('script[type="application/ld+json"]').forEach((script) => {
+    if (/two decades|20\+?\s*(?:years|yrs)/i.test(script.textContent || '')) {
+      script.textContent = normalizeExperienceText(script.textContent);
+    }
+  });
+}
+
+normalizeExperienceClaims();
 
 const revealElements = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
