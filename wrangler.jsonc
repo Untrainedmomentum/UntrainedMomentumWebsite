@@ -1,7 +1,7 @@
 {
   "name": "untrainedmomentumwebsite",
-  "compatibility_date": "2026-09-01",
+  "compatibility_date": "2026-09-09",
   "assets": {
-    "directory": "./_site"
+    "directory": "."
   }
 }
