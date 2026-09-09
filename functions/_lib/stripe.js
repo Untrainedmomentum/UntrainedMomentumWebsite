@@ -23,7 +23,8 @@ export async function stripeRequest(env, path, options = {}) {
   if (!env.STRIPE_SECRET_KEY) throw new Error('Stripe is not configured yet');
   const method = options.method || 'POST';
   const headers = { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` };
-  if (env.STRIPE_API_VERSION) headers['Stripe-Version'] = env.STRIPE_API_VERSION;
+  const apiVersion = options.apiVersion || env.STRIPE_API_VERSION;
+  if (apiVersion) headers['Stripe-Version'] = apiVersion;
   if (options.connectedAccount) headers['Stripe-Account'] = options.connectedAccount;
   let body;
   if (method !== 'GET' && method !== 'HEAD') {
@@ -44,6 +45,10 @@ export async function stripeRequest(env, path, options = {}) {
 
 export function stripePost(env, path, params, connectedAccount = null) {
   return stripeRequest(env, path, { method: 'POST', params, connectedAccount });
+}
+
+export function stripePostVersioned(env, path, params, apiVersion, connectedAccount = null) {
+  return stripeRequest(env, path, { method: 'POST', params, apiVersion, connectedAccount });
 }
 
 export function stripeGet(env, path, connectedAccount = null) {
