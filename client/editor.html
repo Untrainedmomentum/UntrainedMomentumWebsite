@@ -1,3 +1,40 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Edit Website | Untrained Momentum</title><link rel="stylesheet" href="/assets/client.css"><style>.editor-preview-wrap{margin-top:26px}.editor-preview-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}.editor-preview-head h2{margin:0}.editor-preview{width:100%;height:680px;border:1px solid var(--rule);border-radius:14px;background:#fff}</style></head>
-<body class="client-app" data-client-page="editor"><header class="client-topbar"><div class="client-shell"><a class="client-brand" href="/client/index.html"><span class="client-brand-mark"></span><span>Untrained Momentum</span></a><nav class="client-nav"><a href="/client/index.html">Dashboard</a><a id="view-site" href="#" target="_blank" rel="noopener">Open live site</a></nav></div></header><main class="client-main"><div class="client-shell"><section class="client-hero"><div><p class="client-eyebrow">Content Editor</p><h1 id="site-name">Website</h1><p class="client-lede">Change the parts of your site you control without touching code. Your preview stays on this page so you can see what customers will see.</p></div><button class="client-button" id="save-site" type="button">Save changes</button></section><div id="editor-status" aria-live="polite"></div><nav class="editor-tabs" id="editor-tabs" aria-label="Website editor sections"></nav><div id="editor-mount"><div class="client-card">Loading editor…</div></div><section class="client-panel editor-preview-wrap"><div class="editor-preview-head"><div><p class="client-eyebrow">Front-end preview</p><h2>See the website</h2></div><button class="client-button secondary small" id="refresh-preview" type="button">Refresh preview</button></div><iframe class="editor-preview" id="site-preview" title="Website preview"></iframe></section></div></main><script>const previewSlug=new URL(location.href).searchParams.get('site');const preview=document.querySelector('#site-preview');if(previewSlug)preview.src=`/api/client/preview/${encodeURIComponent(previewSlug)}`;document.querySelector('#refresh-preview').addEventListener('click',()=>{preview.src=preview.src.split('#')[0].split('?')[0]+`?t=${Date.now()}`;});</script><script type="module" src="/assets/editor.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Edit Website | Untrained Momentum</title>
+  <link rel="stylesheet" href="/assets/client.css">
+  <style>
+    .editor-preview-wrap{margin-top:26px}
+    .editor-preview-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
+    .editor-preview-head h2{margin:0}
+    .editor-preview{width:100%;height:680px;border:1px solid var(--rule);border-radius:14px;background:#fff}
+  </style>
+</head>
+<body class="client-app" data-client-page="editor">
+  <header class="client-topbar">
+    <div class="client-shell">
+      <a class="client-brand" href="/client/index.html"><span class="client-brand-mark"></span><span>Untrained Momentum</span></a>
+      <nav class="client-nav"><a href="/client/index.html">Dashboard</a><a id="view-site" href="/client/index.html" target="_blank" rel="noopener">Open live site</a></nav>
+    </div>
+  </header>
+  <main class="client-main">
+    <div class="client-shell">
+      <section class="client-hero">
+        <div><p class="client-eyebrow">Content Editor</p><h1 id="site-name">Website</h1><p class="client-lede">Change the parts of your site you control without touching code. Your preview stays on this page so you can see the saved content.</p></div>
+        <button class="client-button" id="save-site" type="button">Save changes</button>
+      </section>
+      <div id="editor-status" aria-live="polite"></div>
+      <nav class="editor-tabs" id="editor-tabs" aria-label="Website editor sections"></nav>
+      <div id="editor-mount"><div class="client-card">Loading editor…</div></div>
+      <section class="client-panel editor-preview-wrap">
+        <div class="editor-preview-head"><div><p class="client-eyebrow">Saved-content preview</p><h2>See the website content</h2></div><button class="client-button secondary small" id="refresh-preview" type="button">Refresh preview</button></div>
+        <iframe class="editor-preview" id="site-preview" title="Website content preview"></iframe>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/assets/editor.js"></script>
+</body>
+</html>
