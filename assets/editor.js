@@ -39,9 +39,13 @@ function servicesSection() {
   return `<section class="editor-section client-panel" data-section="Services" hidden><div class="client-panel-header"><h2>Services</h2><button class="client-button secondary small" type="button" data-add="services">Add service</button></div><div class="repeat-list" data-list="services">${items.map((item, i) => itemShell('services', i, `${field('Service name', 'name', item.name || item.title || '')}${field('Description', 'description', item.description || '', 'textarea')}${field('Price / pricing note', 'price', item.price || '')}`, 'Service')).join('')}</div></section>`;
 }
 
+function projectImagesText(item) {
+  return (Array.isArray(item.images) ? item.images : []).join('\n');
+}
+
 function projectsSection() {
   const items = Array.isArray(content.projects) ? content.projects : [];
-  return `<section class="editor-section client-panel" data-section="Projects" hidden><div class="client-panel-header"><h2>Projects / portfolio</h2><button class="client-button secondary small" type="button" data-add="projects">Add project</button></div><div class="repeat-list" data-list="projects">${items.map((item, i) => itemShell('projects', i, `${field('Project title', 'title', item.title || '')}${field('Description', 'description', item.description || '', 'textarea')}${field('Image URL', 'image', item.image || '')}`, 'Project')).join('')}</div></section>`;
+  return `<section class="editor-section client-panel" data-section="Projects" hidden><div class="client-panel-header"><div><h2>Projects / portfolio</h2><p class="client-muted">Each project automatically gets its own detail page. Add extra image URLs one per line for a project gallery.</p></div><button class="client-button secondary small" type="button" data-add="projects">Add project</button></div><div class="repeat-list" data-list="projects">${items.map((item, i) => itemShell('projects', i, `<input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">${field('Project title', 'title', item.title || '')}${field('Short description', 'description', item.description || '', 'textarea')}${field('Full project details', 'details', item.details || '', 'textarea', 'rows="6"')}${field('Cover image URL', 'image', item.image || '')}${field('Project gallery image URLs', 'imagesText', projectImagesText(item), 'textarea', 'rows="5" placeholder="One image URL per line"')}`, 'Project')).join('')}</div></section>`;
 }
 
 function menuText(section) {
@@ -55,7 +59,7 @@ function menuSection() {
 
 function productsSection() {
   const items = Array.isArray(content.products) ? content.products : [];
-  return `<section class="editor-section client-panel" data-section="Products" hidden><div class="client-panel-header"><div><h2>Products + cart</h2><p class="client-muted">Prices are validated on the server before Stripe checkout, so shoppers cannot change them in the browser.</p></div><button class="client-button secondary small" type="button" data-add="products">Add product</button></div><div class="repeat-list" data-list="products">${items.map((item, i) => itemShell('products', i, `${field('Product name', 'name', item.name || '')}${field('Description', 'description', item.description || '', 'textarea')}<div class="client-form-row">${field('Price ($)', 'priceDollars', (Number(item.priceCents || 0) / 100).toFixed(2), 'number', 'min="0" step="0.01"')}${field('Image URL', 'image', item.image || '')}</div><label class="client-field"><span><input type="checkbox" name="active" ${item.active === false ? '' : 'checked'}> Available for sale</span></label><input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">`, 'Product')).join('')}</div></section>`;
+  return `<section class="editor-section client-panel" data-section="Products" hidden><div class="client-panel-header"><div><h2>Products + cart</h2><p class="client-muted">Each product gets its own product page. Prices are validated on the server before Stripe checkout, so shoppers cannot change them in the browser.</p></div><button class="client-button secondary small" type="button" data-add="products">Add product</button></div><div class="repeat-list" data-list="products">${items.map((item, i) => itemShell('products', i, `${field('Product name', 'name', item.name || '')}${field('Description', 'description', item.description || '', 'textarea')}<div class="client-form-row">${field('Price ($)', 'priceDollars', (Number(item.priceCents || 0) / 100).toFixed(2), 'number', 'min="0" step="0.01"')}${field('Image URL', 'image', item.image || '')}</div><label class="client-field"><span><input type="checkbox" name="active" ${item.active === false ? '' : 'checked'}> Available for sale</span></label><input type="hidden" name="id" value="${escapeHtml(item.id || crypto.randomUUID())}">`, 'Product')).join('')}</div></section>`;
 }
 
 function gallerySection() {
@@ -81,7 +85,7 @@ function showTab(name) {
 function blankItem(type) {
   const map = {
     services: { name: '', description: '', price: '' },
-    projects: { title: '', description: '', image: '' },
+    projects: { id: crypto.randomUUID(), title: '', description: '', details: '', image: '', images: [] },
     menu: { name: '', items: [] },
     products: { id: crypto.randomUUID(), name: '', description: '', priceCents: 0, image: '', active: true },
     gallery: { url: '', alt: '' }
@@ -93,6 +97,7 @@ function wireEditor() {
   document.querySelectorAll('.editor-tab').forEach((button) => button.addEventListener('click', () => showTab(button.dataset.tab)));
   document.querySelectorAll('[data-add]').forEach((button) => button.addEventListener('click', () => {
     collectAll();
+    content[button.dataset.add] ||= [];
     content[button.dataset.add].push(blankItem(button.dataset.add));
     render();
     const sectionName = button.dataset.add === 'menu' ? 'Menu' : button.dataset.add[0].toUpperCase() + button.dataset.add.slice(1);
@@ -126,6 +131,16 @@ function readRepeat(type) {
         active: item.querySelector('[name="active"]').checked
       };
     }
+    if (type === 'projects') {
+      return {
+        id: item.querySelector('[name="id"]').value || crypto.randomUUID(),
+        title: item.querySelector('[name="title"]').value,
+        description: item.querySelector('[name="description"]').value,
+        details: item.querySelector('[name="details"]').value,
+        image: item.querySelector('[name="image"]').value,
+        images: item.querySelector('[name="imagesText"]').value.split(/\n+/).map((value) => value.trim()).filter(Boolean)
+      };
+    }
     if (type === 'menu') {
       const text = item.querySelector('[name="itemsText"]').value;
       return {
@@ -157,6 +172,8 @@ async function save() {
     collectAll();
     await api(`/api/client/site/${encodeURIComponent(slug)}`, { method: 'PUT', body: JSON.stringify({ content }) });
     status.innerHTML = '<div class="client-notice good">Saved. Your hosted site will use the new content immediately.</div>';
+    const preview = document.querySelector('#site-preview');
+    if (preview) preview.src = `/api/client/preview/${encodeURIComponent(slug)}?t=${Date.now()}`;
   } catch (error) {
     status.innerHTML = `<div class="client-notice error">${escapeHtml(error.message)}</div>`;
   } finally { button.disabled = false; }
@@ -185,6 +202,11 @@ try {
   const data = await api(`/api/client/site/${encodeURIComponent(slug)}`);
   site = data.site;
   content = data.content || {};
+  content.services ||= [];
+  content.projects ||= [];
+  content.menu ||= [];
+  content.products ||= [];
+  content.gallery ||= [];
   document.querySelector('#site-name').textContent = site.name;
   const view = document.querySelector('#view-site');
   view.href = site.custom_domain ? `https://${site.custom_domain}` : (site.site_url || `/api/public/site/${encodeURIComponent(site.slug)}`);
