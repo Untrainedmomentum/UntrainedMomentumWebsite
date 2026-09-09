@@ -1,7 +1,9 @@
 const encoder = new TextEncoder();
-const SESSION_COOKIE = 'um_session';
-const SESSION_DAYS = 14;
+const SESSION_COOKIE = '__Host-um_session';
+const SESSION_MAX_AGE = 12 * 60 * 60;
 const PBKDF2_ITERATIONS = 210000;
+const MIN_PASSWORD_LENGTH = 12;
+const MAX_PASSWORD_LENGTH = 128;
 
 function b64url(bytes) {
   let binary = '';
@@ -39,19 +41,25 @@ function constantTimeEqual(a, b) {
 }
 
 export async function hashPassword(password) {
-  if (!password || String(password).length < 10) throw new Error('Password must be at least 10 characters');
+  const value = String(password || '');
+  if (value.length < MIN_PASSWORD_LENGTH) throw new Error(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
+  if (value.length > MAX_PASSWORD_LENGTH) throw new Error(`Password must be ${MAX_PASSWORD_LENGTH} characters or fewer`);
   const salt = crypto.getRandomValues(new Uint8Array(16));
-  const hash = await pbkdf2(String(password), salt);
+  const hash = await pbkdf2(value, salt);
   return `v1$${PBKDF2_ITERATIONS}$${b64url(salt)}$${b64url(hash)}`;
 }
 
 export async function verifyPassword(password, stored) {
   try {
+    const value = String(password || '');
+    if (value.length > MAX_PASSWORD_LENGTH) return false;
     const [version, rounds, saltValue, hashValue] = String(stored || '').split('$');
     if (version !== 'v1') return false;
+    const iterations = Number(rounds);
+    if (!Number.isInteger(iterations) || iterations < 100000 || iterations > 1000000) return false;
     const salt = fromB64url(saltValue);
     const expected = fromB64url(hashValue);
-    const actual = await pbkdf2(String(password), salt, Number(rounds));
+    const actual = await pbkdf2(value, salt, iterations);
     return constantTimeEqual(actual, expected);
   } catch {
     return false;
@@ -70,7 +78,7 @@ function parseCookies(request) {
   return output;
 }
 
-export function sessionCookie(token, maxAge = SESSION_DAYS * 86400) {
+export function sessionCookie(token, maxAge = SESSION_MAX_AGE) {
   return `${SESSION_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
 }
 
@@ -83,7 +91,7 @@ export async function createSession(db, userId) {
   const token = b64url(raw);
   const tokenHash = b64url(await sha256(token));
   const id = crypto.randomUUID();
-  const expiresAt = new Date(Date.now() + SESSION_DAYS * 86400000).toISOString();
+  const expiresAt = new Date(Date.now() + SESSION_MAX_AGE * 1000).toISOString();
   await db.prepare(
     'INSERT INTO sessions (id, token_hash, user_id, expires_at, created_at) VALUES (?, ?, ?, ?, ?)'
   ).bind(id, tokenHash, userId, expiresAt, new Date().toISOString()).run();
@@ -103,7 +111,7 @@ export async function getUser(db, request) {
   const tokenHash = b64url(await sha256(token));
   const now = new Date().toISOString();
   const row = await db.prepare(`
-    SELECT u.id, u.email, u.name, u.role, u.created_at
+    SELECT u.id, u.email, u.name, u.role, u.must_change_password, u.created_at
     FROM sessions s
     JOIN users u ON u.id = s.user_id
     WHERE s.token_hash = ? AND s.expires_at > ? AND u.disabled = 0
@@ -121,4 +129,43 @@ export async function requireUser(context, role = null) {
 
 export async function deleteExpiredSessions(db) {
   await db.prepare('DELETE FROM sessions WHERE expires_at <= ?').bind(new Date().toISOString()).run();
+}
+
+export async function rateLimitKey(scope, request, identity = '') {
+  const ip = String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || 'unknown').split(',')[0].trim();
+  return `${scope}:${b64url(await sha256(`${scope}|${ip}|${String(identity).toLowerCase()}`))}`;
+}
+
+export async function checkRateLimit(db, key) {
+  const now = Date.now();
+  const row = await db.prepare('SELECT failures, window_started_at, blocked_until FROM auth_rate_limits WHERE key = ? LIMIT 1').bind(key).first();
+  if (!row) return { blocked: false };
+  const blockedUntil = row.blocked_until ? Date.parse(row.blocked_until) : 0;
+  if (blockedUntil > now) return { blocked: true, retryAfter: Math.max(1, Math.ceil((blockedUntil - now) / 1000)) };
+  const windowStarted = Date.parse(row.window_started_at || '');
+  if (!Number.isFinite(windowStarted) || now - windowStarted > 15 * 60 * 1000) {
+    await db.prepare('DELETE FROM auth_rate_limits WHERE key = ?').bind(key).run();
+  }
+  return { blocked: false };
+}
+
+export async function recordRateLimitFailure(db, key) {
+  const now = Date.now();
+  const nowIso = new Date(now).toISOString();
+  const row = await db.prepare('SELECT failures, window_started_at FROM auth_rate_limits WHERE key = ? LIMIT 1').bind(key).first();
+  const windowStarted = row ? Date.parse(row.window_started_at || '') : NaN;
+  const withinWindow = Number.isFinite(windowStarted) && now - windowStarted <= 15 * 60 * 1000;
+  const failures = withinWindow ? Number(row.failures || 0) + 1 : 1;
+  const start = withinWindow ? row.window_started_at : nowIso;
+  const blockedUntil = failures >= 5 ? new Date(now + 15 * 60 * 1000).toISOString() : null;
+  await db.prepare(`
+    INSERT INTO auth_rate_limits (key, failures, window_started_at, blocked_until, updated_at)
+    VALUES (?, ?, ?, ?, ?)
+    ON CONFLICT(key) DO UPDATE SET failures=excluded.failures, window_started_at=excluded.window_started_at,
+      blocked_until=excluded.blocked_until, updated_at=excluded.updated_at
+  `).bind(key, failures, start, blockedUntil, nowIso).run();
+}
+
+export async function clearRateLimit(db, key) {
+  await db.prepare('DELETE FROM auth_rate_limits WHERE key = ?').bind(key).run();
 }
