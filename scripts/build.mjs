@@ -90,27 +90,18 @@ function applyPublishedOverrides(name, source) {
 
   // Keep the currently published local-tech launch pricing centralized until
   // the long-form source pages are converted to data-driven pricing fields.
+  // Current on-site pricing is $99 for the first hour and $75/hour after that.
   if (name === 'local-tech-help.html') {
-    output = output
-      .replaceAll('"price": "75"', '"price": "50"')
-      .replaceAll('"price": "99"', '"price": "75"')
-      .replaceAll('$75', '$50')
-      .replaceAll('$99', '$75');
-
-    const heroPricing = 'then <strong>$50/hour</strong> if additional time is needed.\n          </p>';
-    const heroPricingWithTravel = 'then <strong>$50/hour</strong> if additional time is needed.\n            <br>Travel within <strong>15 miles of Big Rapids</strong> is included. Longer trips are quoted before booking.\n          </p>';
+    const heroPricing = 'then <strong>$75/hour</strong> if additional time is needed.\n          </p>';
+    const heroPricingWithTravel = 'then <strong>$75/hour</strong> if additional time is needed.\n            <br>Travel within <strong>15 miles of Big Rapids</strong> is included. Longer trips are quoted before booking.\n          </p>';
     if (output.includes(heroPricing) && !/15 miles of Big Rapids/i.test(output)) {
       output = output.replace(heroPricing, heroPricingWithTravel);
     }
   }
 
   if (name === 'terms.html') {
-    output = output
-      .replaceAll('$99 for the first hour of on-site technology help', '$75 for the first hour of on-site technology help')
-      .replaceAll('$75 per hour for additional on-site time', '$50 per hour for additional on-site time');
-
-    const pricingList = '          <li>$50 per hour for additional on-site time</li>\n        </ul>';
-    const pricingListWithTravel = '          <li>$50 per hour for additional on-site time</li>\n        </ul>\n\n        <p>\n          On-site pricing includes travel within 15 miles of Big Rapids.\n          Longer trips may require an additional travel fee,\n          which will be quoted before booking.\n        </p>';
+    const pricingList = '          <li>$75 per hour for additional on-site time</li>\n        </ul>';
+    const pricingListWithTravel = '          <li>$75 per hour for additional on-site time</li>\n        </ul>\n\n        <p>\n          On-site pricing includes travel within 15 miles of Big Rapids.\n          Longer trips may require an additional travel fee,\n          which will be quoted before booking.\n        </p>';
     if (output.includes(pricingList) && !/15 miles of Big Rapids/i.test(output)) {
       output = output.replace(pricingList, pricingListWithTravel);
     }
@@ -166,8 +157,7 @@ async function build() {
     }
 
     if (name === 'local-tech-help.html') {
-      if (rendered.includes('$99')) errors.push(`${name}: stale $99 local-tech price remains`);
-      if (!rendered.includes('$75') || !rendered.includes('$50')) errors.push(`${name}: current $75/$50 pricing missing`);
+      if (!rendered.includes('$99') || !rendered.includes('$75')) errors.push(`${name}: current $99/$75 on-site pricing missing`);
       if (!/15 miles of Big Rapids/i.test(rendered)) errors.push(`${name}: service radius missing`);
     }
 
