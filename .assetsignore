@@ -1,0 +1,22 @@
+# Only upload browser-facing files when Wrangler serves the repository root.
+*
+
+!*.html
+!*.png
+!*.jpg
+!*.jpeg
+!*.svg
+!*.pdf
+!*.zip
+
+!assets/
+!assets/**
+!client/
+!client/**
+
+!_headers
+!_redirects
+!robots.txt
+!sitemap.xml
+!CNAME
+!.nojekyll
