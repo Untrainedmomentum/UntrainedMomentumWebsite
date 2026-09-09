@@ -107,7 +107,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .brand-mark { width: 68px; height: 68px; background: url('../Logo_Red_SVG.svg') center / contain no-repeat; mix-blend-mode: multiply; }
 .brand-mark + span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .site-footer .brand-mark { width: 112px; height: 112px; mix-blend-mode: normal; }
-.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; align-items: center; gap: 22px; }
 .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 0.88rem; font-weight: 750; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--red); }
 .nav-cta { padding: 11px 17px; color: var(--white) !important; background: var(--ink); border-radius: 999px; }
