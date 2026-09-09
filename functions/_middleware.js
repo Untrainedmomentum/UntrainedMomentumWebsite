@@ -1,4 +1,4 @@
-import { renderHostedSite } from './_lib/render.js';
+import { renderHostedRoute } from './_lib/render.js';
 
 const PRIMARY_HOSTS = new Set(['untrainedmomentum.com', 'www.untrainedmomentum.com']);
 
@@ -30,12 +30,12 @@ export async function onRequest(context) {
 
   if (!site) return new Response('Website not found', { status: 404 });
 
-  const markup = renderHostedSite(site);
-  return new Response(context.request.method === 'HEAD' ? null : markup, {
-    status: 200,
+  const rendered = renderHostedRoute(site, { pathname: url.pathname });
+  return new Response(context.request.method === 'HEAD' ? null : rendered.html, {
+    status: rendered.status,
     headers: {
       'content-type': 'text/html; charset=utf-8',
-      'cache-control': 'public, max-age=30, must-revalidate',
+      'cache-control': rendered.status === 200 ? 'public, max-age=30, must-revalidate' : 'no-store',
       'x-content-type-options': 'nosniff',
       'referrer-policy': 'strict-origin-when-cross-origin'
     }
