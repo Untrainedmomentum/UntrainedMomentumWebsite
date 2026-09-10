@@ -25,6 +25,31 @@ function storeSession(payload) {
   return session;
 }
 
+export function consumeAuthRedirect() {
+  const hash = String(location.hash || '').replace(/^#/, '');
+  if (!hash) return false;
+
+  const params = new URLSearchParams(hash);
+  const errorMessage = params.get('error_description') || params.get('error');
+  if (errorMessage) {
+    history.replaceState({}, document.title, `${location.pathname}${location.search}`);
+    throw new Error(errorMessage);
+  }
+
+  const accessToken = params.get('access_token');
+  const refreshToken = params.get('refresh_token');
+  if (!accessToken || !refreshToken) return false;
+
+  storeSession({
+    access_token: accessToken,
+    refresh_token: refreshToken,
+    token_type: params.get('token_type') || 'bearer',
+    expires_in: Number(params.get('expires_in') || 3600)
+  });
+  history.replaceState({}, document.title, `${location.pathname}${location.search}`);
+  return true;
+}
+
 function clearSession() {
   try { localStorage.removeItem(SESSION_KEY); } catch { /* ignore */ }
 }
