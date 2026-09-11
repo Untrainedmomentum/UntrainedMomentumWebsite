@@ -24,12 +24,13 @@ export async function initClientTracker(session,notice){
   ]);
   const names={customers:byId(customers),sites:byId(sites)};
   const select=document.querySelector('#request-site'),form=document.querySelector('#request-form'),mount=document.querySelector('#client-work-list');
-  select.required=false;
-  select.innerHTML=`<option value="">General request</option>`+sites.map(site=>`<option value="${site.id}">${escapeHtml(site.name)}</option>`).join('');
+  select.required=!customer;
+  select.innerHTML=(customer?'<option value="">General request</option>':'')+sites.map(site=>`<option value="${site.id}">${escapeHtml(site.name)}</option>`).join('');
+  if(!customer&&sites.length)select.value=sites[0].id;
   const balance=entries.reduce((sum,entry)=>sum+Number(entry.balance_effect_cents||0),0);
   document.querySelector('#client-account-summary').innerHTML=`<article><strong>${money(balance)}</strong><span>Current balance</span></article><article><strong>${work.filter(item=>openWork.has(item.status)).length}</strong><span>Open requests</span></article><article><strong>${work.filter(item=>['complete','invoiced','paid'].includes(item.status)).length}</strong><span>Completed work</span></article>`;
   document.querySelector('#client-account-list').innerHTML=entries.length?entries.map(entry=>`<div class="ledger-row"><div><strong>${escapeHtml(entry.description)}</strong><span>${date(entry.occurred_at)}</span></div><strong class="${Number(entry.balance_effect_cents)>0?'balance-due':'balance-credit'}">${Number(entry.balance_effect_cents)>0?'+':''}${money(entry.balance_effect_cents)}</strong></div>`).join(''):'<p class="client-muted">No charges or payments have been posted to your account.</p>';
   const render=()=>{mount.innerHTML=work.length?work.map(item=>workCard(item,names)).join(''):'<div class="tracker-empty"><h3>No requests yet</h3><p>Your requests and completed work will appear here.</p></div>'};render();
   if(!customer&&!sites.length){form.querySelector('button[type="submit"]').disabled=true;notice('Your portal account is active, but it has not been linked to a client record yet. Contact Untrained Momentum to finish setup.','error');return}
-  form.addEventListener('submit',async event=>{event.preventDefault();const values=Object.fromEntries(new FormData(form));try{const [created]=await write('work_items','POST',{customer_id:customer?.id||null,site_id:nullable(values.site_id),requester_user_id:session.user.id,title:values.title,description:values.description,category:values.category,priority:values.priority});work.unshift(created);form.reset();select.value='';render();notice('Your work request was sent.','good')}catch(error){notice(error.message,'error')}});
+  form.addEventListener('submit',async event=>{event.preventDefault();const values=Object.fromEntries(new FormData(form));try{const [created]=await write('work_items','POST',{customer_id:customer?.id||null,site_id:nullable(values.site_id),requester_user_id:session.user.id,title:values.title,description:values.description,category:values.category,priority:values.priority});work.unshift(created);form.reset();select.value=customer?'':(sites[0]?.id||'');render();notice('Your work request was sent.','good')}catch(error){notice(error.message,'error')}});
 }
