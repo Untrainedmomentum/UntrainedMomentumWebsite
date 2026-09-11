@@ -151,6 +151,19 @@ if (await exists(termsPath)) {
   }
 }
 
+const trackerChecks = [
+  ['client/admin.html', /id=["']work-list["']/, 'admin work queue'],
+  ['client/admin.html', /id=["']customer-form["']/, 'customer form'],
+  ['client/requests.html', /id=["']request-form["']/, 'client request form'],
+  ['client/requests.html', /id=["']client-work-list["']/, 'client work history']
+];
+for (const [name, pattern, label] of trackerChecks) {
+  const target = path.join(root, name);
+  if (!await exists(target)) continue;
+  const source = await fs.readFile(target, 'utf8');
+  if (!pattern.test(source)) errors.push(`${name}: missing ${label}`);
+}
+
 for (const required of [
   'index.html',
   '404.html',
@@ -161,7 +174,11 @@ for (const required of [
   'assets/styles.css',
   'assets/mobile-nav.css',
   'assets/site.js',
-  'client/login.html'
+  'client/login.html',
+  'assets/tracker.css',
+  'assets/tracker.js',
+  'client/admin.html',
+  'client/requests.html'
 ]) {
   if (!await exists(path.join(root, required))) errors.push(`output missing ${required}`);
 }
