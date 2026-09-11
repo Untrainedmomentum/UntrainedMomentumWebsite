@@ -1,4 +1,4 @@
-const MOBILE_NAV_VERSION = '20260909-2';
+const MOBILE_NAV_VERSION = '20260911-1';
 
 // Some legacy/root pages only load styles.css. Always load the hardened
 // mobile navigation stylesheet so opening the hamburger menu cannot spill
@@ -58,6 +58,56 @@ if (menuButton && navLinks) {
     else link.removeAttribute('aria-current');
   });
 }
+
+function normalizeConsultationCtas() {
+  document.querySelectorAll('a[href]').forEach((link) => {
+    let url;
+    try {
+      url = new URL(link.getAttribute('href'), window.location.href);
+    } catch {
+      return;
+    }
+
+    if (url.origin !== window.location.origin) return;
+
+    const path = url.pathname.toLowerCase();
+    const isConsultationLink = /\/(?:book|book-business|book-smart-home)\.html$/.test(path);
+    const text = (link.textContent || '').replace(/\s+/g, ' ').trim();
+
+    if (link.classList.contains('nav-cta') && isConsultationLink) {
+      link.textContent = 'Free Consultation';
+      return;
+    }
+
+    if (/^book a call$/i.test(text)) {
+      link.textContent = 'Free Consultation';
+      return;
+    }
+
+    if (/schedule a business call/i.test(text)) {
+      link.textContent = 'Schedule a Free Business Consultation →';
+      return;
+    }
+
+    if (/schedule home tech help/i.test(text) || /schedule smart-home consultation/i.test(text)) {
+      link.textContent = 'Schedule a Free Home Tech Consultation →';
+      return;
+    }
+
+    if (/request on-site help/i.test(text) || /request local help/i.test(text) || /request an appointment/i.test(text)) {
+      link.href = '/book-smart-home.html';
+      link.textContent = 'Start with a Free Consultation →';
+      return;
+    }
+
+    if (/request (?:senior tech|printer|wi-fi|wifi) help/i.test(text)) {
+      link.href = '/book-smart-home.html';
+      link.textContent = 'Start with a Free Consultation →';
+    }
+  });
+}
+
+normalizeConsultationCtas();
 
 function normalizeExperienceText(value = '') {
   return String(value)
