@@ -1,7 +1,97 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Customer & Work Tracker | Untrained Momentum</title><link rel="stylesheet" href="/assets/client.css"><link rel="stylesheet" href="/assets/tracker.css"></head>
-<body class="client-app" data-tracker-page="admin"><header class="client-topbar"><div class="client-shell"><a class="client-brand" href="/client/admin.html"><span class="client-brand-mark"></span><span>Untrained Momentum</span></a><nav class="client-nav"><a href="/client/index.html">Website portal</a><button type="button" data-logout>Sign out</button></nav></div></header>
-<main class="client-main"><div class="client-shell"><section class="client-hero"><div><p class="client-eyebrow">Operations</p><h1>Customers & work</h1><p class="client-lede">Track customers, requests, work in progress, time, and billing—without mixing them into the sales tracker.</p></div></section><div id="tracker-status" aria-live="polite"></div><section class="tracker-stats" id="tracker-stats" aria-label="Work summary"></section>
-<div class="tracker-layout"><section class="client-panel tracker-main-panel"><div class="client-panel-header tracker-toolbar"><div><p class="client-eyebrow">Work queue</p><h2>All work</h2></div><label class="client-field tracker-filter"><span>Status</span><select id="work-filter"><option value="open">Open work</option><option value="all">All work</option><option value="requested">Requested</option><option value="in_progress">In progress</option><option value="waiting_client">Waiting on client</option><option value="complete">Complete</option><option value="invoiced">Invoiced</option><option value="paid">Paid</option></select></label></div><div class="tracker-list" id="work-list"><p>Loading work…</p></div></section>
-<aside><section class="client-panel"><div class="client-panel-header"><div><p class="client-eyebrow">Add work</p><h2>New item</h2></div></div><form class="client-form" id="work-form"><label class="client-field"><span>Work title</span><input name="title" maxlength="180" required></label><label class="client-field"><span>Customer</span><select name="customer_id" id="work-customer"><option value="">No customer selected</option></select></label><label class="client-field"><span>Website</span><select name="site_id" id="work-site"><option value="">No website selected</option></select></label><div class="client-form-row"><label class="client-field"><span>Category</span><select name="category"><option value="website">Website</option><option value="tech_support">Tech support</option><option value="content">Content</option><option value="maintenance">Maintenance</option><option value="other">Other</option></select></label><label class="client-field"><span>Priority</span><select name="priority"><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option><option value="low">Low</option></select></label></div><label class="client-field"><span>Details</span><textarea name="description"></textarea></label><div class="client-form-row"><label class="client-field"><span>Due date</span><input name="due_date" type="date"></label><label class="client-field"><span>Estimated hours</span><input name="estimated_hours" type="number" min="0" step="0.25"></label></div><button class="client-button" type="submit">Add work item</button></form></section></aside></div>
-<section class="client-panel"><div class="client-panel-header"><div><p class="client-eyebrow">Customer list</p><h2>Customers</h2></div></div><form class="tracker-inline-form" id="customer-form"><label class="client-field"><span>Company</span><input name="company_name" required maxlength="160"></label><label class="client-field"><span>Contact</span><input name="contact_name"></label><label class="client-field"><span>Email</span><input name="email" type="email"></label><label class="client-field"><span>Phone</span><input name="phone" type="tel"></label><label class="client-field"><span>Services</span><input name="services" placeholder="Website, tech support…"></label><button class="client-button" type="submit">Add customer</button></form><div class="tracker-customer-grid" id="customer-list"><p>Loading customers…</p></div></section>
-<section class="client-panel"><div class="client-panel-header"><div><p class="client-eyebrow">Website access</p><h2>Client websites</h2></div></div><div class="tracker-customer-grid" id="admin-site-list"><p>Loading websites…</p></div></section></div></main><script type="module" src="/assets/tracker.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Operations Console | Untrained Momentum</title>
+  <link rel="stylesheet" href="/assets/client.css">
+  <link rel="stylesheet" href="/assets/tracker.css">
+</head>
+<body class="client-app" data-tracker-page="admin">
+<header class="client-topbar">
+  <div class="client-shell">
+    <a class="client-brand" href="/client/admin.html"><span class="client-brand-mark"></span><span>Untrained Momentum</span></a>
+    <nav class="client-nav"><a href="/client/index.html">Website portal</a><button type="button" data-logout>Sign out</button></nav>
+  </div>
+</header>
+<main class="client-main">
+  <div class="client-shell">
+    <section class="client-hero">
+      <div><p class="client-eyebrow">Owner workspace</p><h1>Operations console</h1><p class="client-lede">Leads, clients, work, balances, inventory, and hosted websites in one place.</p></div>
+    </section>
+    <nav class="tracker-subnav" aria-label="Operations sections">
+      <a href="#work">Work</a><a href="#leads">Leads</a><a href="#customers">Clients</a><a href="#inventory">Inventory</a><a href="#websites">Websites</a>
+    </nav>
+    <div id="tracker-status" aria-live="polite"></div>
+    <section class="tracker-stats" id="tracker-stats" aria-label="Operations summary"></section>
+
+    <section id="work" class="tracker-section">
+      <div class="tracker-layout">
+        <section class="client-panel tracker-main-panel">
+          <div class="client-panel-header tracker-toolbar"><div><p class="client-eyebrow">Work queue</p><h2>Client work</h2></div><label class="client-field tracker-filter"><span>Status</span><select id="work-filter"><option value="open">Open work</option><option value="all">All work</option><option value="requested">Requested</option><option value="scheduled">Scheduled</option><option value="in_progress">In progress</option><option value="waiting_client">Waiting on client</option><option value="complete">Complete</option><option value="invoiced">Invoiced</option><option value="paid">Paid</option><option value="cancelled">Cancelled</option></select></label></div>
+          <div class="tracker-list" id="work-list"><p>Loading work…</p></div>
+        </section>
+        <aside><section class="client-panel"><div class="client-panel-header"><div><p class="client-eyebrow">Add work</p><h2>New work item</h2></div></div>
+          <form class="client-form" id="work-form">
+            <label class="client-field"><span>Work title</span><input name="title" maxlength="180" required></label>
+            <label class="client-field"><span>Client</span><select name="customer_id" id="work-customer"><option value="">No client selected</option></select></label>
+            <label class="client-field"><span>Website (optional)</span><select name="site_id" id="work-site"><option value="">No website selected</option></select></label>
+            <div class="client-form-row"><label class="client-field"><span>Category</span><select name="category"><option value="website">Website</option><option value="tech_support">Tech support</option><option value="content">Content</option><option value="maintenance">Maintenance</option><option value="other">Other</option></select></label><label class="client-field"><span>Priority</span><select name="priority"><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option><option value="low">Low</option></select></label></div>
+            <label class="client-field"><span>Details</span><textarea name="description"></textarea></label>
+            <div class="client-form-row"><label class="client-field"><span>Due date</span><input name="due_date" type="date"></label><label class="client-field"><span>Estimated hours</span><input name="estimated_hours" type="number" min="0" step="0.25"></label></div>
+            <button class="client-button" type="submit">Add work item</button>
+          </form>
+        </section></aside>
+      </div>
+    </section>
+
+    <section id="leads" class="client-panel tracker-section">
+      <div class="client-panel-header"><div><p class="client-eyebrow">CRM</p><h2>Lead pipeline</h2><p class="client-muted">Track outreach, follow-ups, proposals, and wins before someone becomes a client.</p></div></div>
+      <form class="tracker-inline-form tracker-lead-form" id="lead-form">
+        <label class="client-field"><span>Company</span><input name="company_name"></label>
+        <label class="client-field"><span>Contact</span><input name="contact_name"></label>
+        <label class="client-field"><span>Email</span><input name="email" type="email"></label>
+        <label class="client-field"><span>Phone</span><input name="phone" type="tel"></label>
+        <label class="client-field"><span>Interest</span><input name="services_interest" placeholder="Website, automation…"></label>
+        <button class="client-button" type="submit">Add lead</button>
+      </form>
+      <div class="tracker-list" id="lead-list"><p>Loading leads…</p></div>
+    </section>
+
+    <section id="customers" class="client-panel tracker-section">
+      <div class="client-panel-header"><div><p class="client-eyebrow">Clients</p><h2>Client accounts</h2><p class="client-muted">Link portal access, track balances, and add charges or payments.</p></div></div>
+      <form class="tracker-inline-form" id="customer-form">
+        <label class="client-field"><span>Company</span><input name="company_name" required maxlength="160"></label>
+        <label class="client-field"><span>Contact</span><input name="contact_name"></label>
+        <label class="client-field"><span>Email</span><input name="email" type="email"></label>
+        <label class="client-field"><span>Phone</span><input name="phone" type="tel"></label>
+        <label class="client-field"><span>Services</span><input name="services" placeholder="Website, tech support…"></label>
+        <button class="client-button" type="submit">Add client</button>
+      </form>
+      <div class="tracker-customer-grid" id="customer-list"><p>Loading clients…</p></div>
+    </section>
+
+    <section id="inventory" class="client-panel tracker-section">
+      <div class="client-panel-header"><div><p class="client-eyebrow">Inventory</p><h2>Parts & equipment</h2><p class="client-muted">Track purchases, usage, sales, returns, and stock adjustments.</p></div></div>
+      <form class="tracker-inline-form tracker-inventory-form" id="inventory-form">
+        <label class="client-field"><span>Item</span><input name="name" required maxlength="160"></label>
+        <label class="client-field"><span>SKU</span><input name="sku"></label>
+        <label class="client-field"><span>Category</span><input name="category"></label>
+        <label class="client-field"><span>Location</span><input name="location"></label>
+        <label class="client-field"><span>Reorder at</span><input name="reorder_level" type="number" min="0" step="1" value="0"></label>
+        <label class="client-field"><span>Unit cost</span><input name="unit_cost" type="number" min="0" step="0.01"></label>
+        <button class="client-button" type="submit">Add item</button>
+      </form>
+      <div class="tracker-customer-grid" id="inventory-list"><p>Loading inventory…</p></div>
+    </section>
+
+    <section id="websites" class="client-panel tracker-section">
+      <div class="client-panel-header"><div><p class="client-eyebrow">Website access</p><h2>Hosted client websites</h2></div></div>
+      <div class="tracker-customer-grid" id="admin-site-list"><p>Loading websites…</p></div>
+    </section>
+  </div>
+</main>
+<script type="module" src="/assets/tracker.js"></script>
+</body>
+</html>
