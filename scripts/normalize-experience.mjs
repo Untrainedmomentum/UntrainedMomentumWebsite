@@ -9,7 +9,20 @@ function normalize(source) {
     .replace(/two decades/gi, '10+ years')
     .replace(/more than 20\+?\s*years/gi, 'more than 10 years')
     .replace(/20\+\s*years/gi, '10+ years')
-    .replace(/20\+\s*yrs/gi, '10+ yrs');
+    .replace(/20\+\s*yrs/gi, '10+ yrs')
+    .replace(/href=(['"])\/?contact\.html\?service=(?:local|printer|wifi|senior-tech)\1/gi, 'href="/book-smart-home.html"')
+    .replace(/>\s*Book a Call\s*</gi, '>Free Consultation<')
+    .replace(/>\s*Book a Free 30-Minute Call\s*→?\s*</gi, '>Schedule a Free Consultation →<')
+    .replace(/>\s*Schedule Smart-Home Help\s*→?\s*</gi, '>Schedule a Free Consultation →<')
+    .replace(/>\s*Schedule Home Tech Help\s*→?\s*</gi, '>Schedule a Free Consultation →<')
+    .replace(/>\s*Request Local Help\s*→?\s*</gi, '>Start with a Free Consultation →<')
+    .replace(/>\s*Request On-Site Help\s*→?\s*</gi, '>Start with a Free Consultation →<')
+    .replace(/>\s*Request Printer Help\s*→?\s*</gi, '>Start with a Free Consultation →<')
+    .replace(/>\s*Request Wi-Fi Help\s*→?\s*</gi, '>Start with a Free Consultation →<')
+    .replace(/>\s*Request Senior Tech Help\s*→?\s*</gi, '>Start with a Free Consultation →<')
+    .replace(/>\s*Request an Appointment\s*</gi, '>Free Consultation<')
+    .replace(/>\s*Choose a Time\s*→?\s*</gi, '>Start with a Free Consultation →<')
+    .replace(/>\s*Schedule Help\s*</gi, '>Free Consultation<');
 }
 
 async function walk(dir) {
@@ -33,4 +46,4 @@ for (const file of htmlFiles) {
   }
 }
 
-console.log(`Normalized experience claims in ${changed} generated HTML file(s).`);
+console.log(`Normalized generated HTML in ${changed} file(s).`);
