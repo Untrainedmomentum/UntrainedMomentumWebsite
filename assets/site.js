@@ -171,6 +171,9 @@ if (contactForm) {
   const requestedService = new URLSearchParams(window.location.search).get('service');
   const serviceMap = {
     local: 'local',
+    wifi: 'local',
+    printer: 'local',
+    'senior-tech': 'local',
     business: 'business',
     'business-tech': 'business',
     assessment: 'automation',
