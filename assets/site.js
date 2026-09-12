@@ -1,4 +1,4 @@
-const MOBILE_NAV_VERSION = '20260911-1';
+const MOBILE_NAV_VERSION = '20260912-2';
 
 // Some legacy/root pages only load styles.css. Always load the hardened
 // mobile navigation stylesheet so opening the hamburger menu cannot spill
@@ -170,17 +170,25 @@ const contactForm = document.querySelector('[data-contact-form]');
 if (contactForm) {
   const requestedService = new URLSearchParams(window.location.search).get('service');
   const serviceMap = {
-    local: 'Local home or senior technology configuration',
-    business: 'Not sure—business technology or operations',
-    assessment: 'Business process or automation',
-    project: 'Technology project or vendor coordination',
-    ongoing: 'Microsoft 365 or workplace technology',
-    website: 'Website subscription or digital operations',
-    startup: 'Business Foundation Setup',
-    agent: 'Michigan resident agent service',
-    coaching: 'Monthly business planning and accountability',
-    group: 'Monthly Momentum Group',
-    personal: 'Personal Business Launch Partnership'
+    local: 'local',
+    business: 'business',
+    'business-tech': 'business',
+    assessment: 'automation',
+    intake: 'automation',
+    automation: 'automation',
+    project: 'project',
+    ongoing: 'business',
+    website: 'website',
+    'managed-website': 'website',
+    startup: 'startup',
+    agent: 'agent',
+    coaching: 'planning',
+    planning: 'planning',
+    group: 'planning',
+    personal: 'planning',
+    microsoft365: 'microsoft365',
+    'smart-home': 'smart-home',
+    other: 'other'
   };
 
   const serviceField = contactForm.elements?.service;
