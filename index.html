@@ -3,27 +3,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Small Business Technology, Websites & Operations Support | Untrained Momentum</title>
-  <meta name="description" content="Untrained Momentum helps small businesses with managed websites, business technology, software setup and integration, workflow automation, business startup support, and practical systems help.">
+  <title>Business & Home Technology Help | Untrained Momentum</title>
+  <meta name="description" content="Untrained Momentum provides business technology, managed websites, workflow automation, Michigan registered agent support, and practical home technology help in Mid-Michigan and remotely across the U.S.">
   <link rel="canonical" href="https://untrainedmomentum.com/">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="theme-color" content="#171716">
+  <meta name="theme-color" content="#fffdf8">
 
-  <meta property="og:title" content="Small Business Technology, Websites & Operations Support | Untrained Momentum">
-  <meta property="og:description" content="Practical help with websites, technology, software, systems, and workflows for small businesses.">
+  <meta property="og:title" content="Business & Home Technology Help | Untrained Momentum">
+  <meta property="og:description" content="Websites, IT support, automation, registered agent services, and practical home technology help from one point of contact.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://untrainedmomentum.com/">
   <meta property="og:site_name" content="Untrained Momentum">
   <meta property="og:locale" content="en_US">
   <meta property="og:image" content="https://untrainedmomentum.com/og-image.png">
-  <meta property="og:image:alt" content="Untrained Momentum small business technology and website support">
+  <meta property="og:image:alt" content="Untrained Momentum business and home technology support">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Small Business Technology, Websites & Operations Support | Untrained Momentum">
-  <meta name="twitter:description" content="Practical small-business help with websites, technology, software, workflows, and systems.">
+  <meta name="twitter:title" content="Business & Home Technology Help | Untrained Momentum">
+  <meta name="twitter:description" content="Websites, IT support, automation, registered agent services, and practical home technology help.">
   <meta name="twitter:image" content="https://untrainedmomentum.com/og-image.png">
 
   <link rel="stylesheet" href="assets/styles.css">
+
+  <style>
+    .home-hero{background:var(--white);padding:clamp(70px,9vw,128px) 0 clamp(62px,8vw,112px);border-bottom:1px solid var(--rule)}
+    .home-hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:clamp(42px,7vw,90px);align-items:center}
+    .home-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--red);font-size:.76rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+    .home-kicker:before{content:"";width:32px;height:2px;background:currentColor}
+    .home-hero h1{max-width:860px;margin:0 0 24px;font-family:"Aptos","Segoe UI",Arial,sans-serif;font-size:clamp(3.2rem,7.1vw,6.45rem);font-weight:850;line-height:.92;letter-spacing:-.065em}
+    .home-hero h1 .accent{color:var(--red)}
+    .home-hero-copy{max-width:720px;margin:0 0 30px;color:#47443f;font-size:clamp(1.12rem,2vw,1.34rem);line-height:1.55}
+    .home-hero .button{border-radius:10px;min-height:54px;padding:13px 23px}
+    .home-hero .button-secondary{background:transparent;color:var(--ink)}
+    .home-side-card{padding:30px;border:1px solid var(--rule);border-radius:22px;background:var(--paper);box-shadow:0 22px 55px rgba(23,23,22,.08)}
+    .home-side-card h2{margin:0 0 12px;font-family:"Aptos","Segoe UI",Arial,sans-serif;font-size:1.65rem;font-weight:850;line-height:1.08;letter-spacing:-.035em}
+    .home-side-card p{margin:0 0 20px;color:var(--muted);font-size:.96rem;line-height:1.55}
+    .quick-list{display:grid;gap:0;border-top:1px solid var(--rule)}
+    .quick-list a{display:flex;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid var(--rule);text-decoration:none;font-weight:800;font-size:.93rem}
+    .quick-list a span{color:var(--red)}
+
+    .audience-section{background:var(--paper);padding:clamp(58px,7vw,92px) 0}
+    .audience-heading{max-width:720px;margin-bottom:34px}
+    .audience-heading h2,.services-heading h2{font-family:"Aptos","Segoe UI",Arial,sans-serif;font-weight:850;letter-spacing:-.045em;line-height:1;font-size:clamp(2.4rem,5.2vw,4.7rem)}
+    .audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .audience-card{display:flex;flex-direction:column;min-height:330px;padding:34px;border-radius:20px;text-decoration:none;border:1px solid var(--rule);transition:transform .18s ease,box-shadow .18s ease}
+    .audience-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .audience-card.business{background:var(--ink);color:var(--white)}
+    .audience-card.home{background:var(--white)}
+    .audience-label{margin-bottom:auto;font-size:.74rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase;color:var(--red)}
+    .audience-card.business .audience-label{color:#ec8b7c}
+    .audience-card h3{margin:46px 0 12px;font-size:clamp(1.7rem,3vw,2.65rem);font-weight:850;letter-spacing:-.04em}
+    .audience-card p{max-width:520px;margin:0 0 22px;line-height:1.55;color:var(--muted)}
+    .audience-card.business p{color:rgba(255,255,255,.68)}
+
+    .services-home{background:var(--white);padding:clamp(64px,8vw,110px) 0}
+    .services-heading{display:grid;grid-template-columns:1fr .72fr;gap:40px;align-items:end;margin-bottom:40px}
+    .services-heading p{margin:0;color:var(--muted);max-width:560px}
+    .service-home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .service-home-card{display:flex;flex-direction:column;min-height:255px;padding:28px;border:1px solid var(--rule);border-radius:18px;background:#fff;box-shadow:0 8px 28px rgba(23,23,22,.045)}
+    .service-home-card .service-number{margin-bottom:42px;color:var(--red);font-size:.75rem;font-weight:850;letter-spacing:.12em}
+    .service-home-card h3{font-size:1.2rem;font-weight:850;letter-spacing:-.025em}
+    .service-home-card p{color:var(--muted);font-size:.94rem;line-height:1.55}
+    .service-home-card .text-link{margin-top:auto;font-size:.9rem}
+
+    .proof-home{background:var(--ink);color:var(--white);padding:clamp(58px,7vw,88px) 0}
+    .proof-home-inner{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(42px,8vw,100px);align-items:center}
+    .proof-home blockquote{margin:0;font-size:clamp(1.65rem,3.6vw,3rem);font-weight:750;line-height:1.2;letter-spacing:-.035em}
+    .proof-home .proof-name{margin:18px 0 0;color:rgba(255,255,255,.63)}
+    .proof-home .text-link{color:#ec8b7c}
+
+    @media(max-width:900px){
+      .home-hero-grid,.services-heading,.proof-home-inner{grid-template-columns:1fr}
+      .home-side-card{max-width:none}
+      .service-home-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:620px){
+      .home-hero{padding:48px 0 58px}
+      .home-hero h1{font-size:clamp(2.7rem,13.5vw,4rem);line-height:.96}
+      .home-hero-copy{font-size:1.05rem}
+      .home-side-card{padding:24px 20px}
+      .audience-grid,.service-home-grid{grid-template-columns:1fr}
+      .audience-card{min-height:280px;padding:26px 22px}
+      .service-home-card{min-height:220px;padding:24px 21px}
+      .service-home-card .service-number{margin-bottom:30px}
+      .home-hero .button{width:100%}
+    }
+  </style>
 
   <script type="application/ld+json">
   {
@@ -38,7 +103,7 @@
         "image":"https://untrainedmomentum.com/og-image.png",
         "telephone":"+12312875169",
         "email":"info@untrainedmomentum.com",
-        "description":"Small-business technology, managed websites, software integration, workflow automation, systems, and project support.",
+        "description":"Business technology, managed websites, workflow automation, Michigan registered agent support, and practical home technology help.",
         "address":{"@type":"PostalAddress","addressLocality":"Big Rapids","addressRegion":"MI","postalCode":"49307","addressCountry":"US"},
         "areaServed":[{"@type":"Country","name":"United States"},{"@type":"AdministrativeArea","name":"Mid-Michigan"}],
         "sameAs":["https://www.facebook.com/UntrainedMomentum","https://www.instagram.com/untrainedmomentum/?hl=en","https://www.linkedin.com/company/untrained-momentum","https://share.google/w8NU02UMsezD8NNVC"]
@@ -74,78 +139,132 @@
   </header>
 
   <main id="main">
-    <section class="hero hero-compact section-dark">
-      <div class="hero-inner shell">
-        <p class="eyebrow">One Point of Contact</p>
-        <h1>Your website, technology, software, and workflow <span class="red">should work together.</span></h1>
-        <p class="hero-copy">I help small businesses connect the pieces behind everyday operations so you are not juggling a different person or provider for every problem.</p>
-        <div class="button-row">
-          <a class="button" href="book.html">Book a Call <span aria-hidden="true">→</span></a>
-          <a class="button button-secondary" href="#services">See How I Can Help</a>
+    <section class="home-hero">
+      <div class="shell home-hero-grid">
+        <div>
+          <p class="home-kicker">Business + Home Technology</p>
+          <h1>Technology should make life <span class="accent">easier.</span></h1>
+          <p class="home-hero-copy">Websites, IT support, automation, registered agent services, and practical home technology help—without bouncing between a different provider for every problem.</p>
+          <div class="button-row">
+            <a class="button" href="business-services.html">Business Services <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="local-tech-help.html">Home Tech Help</a>
+          </div>
         </div>
+
+        <aside class="home-side-card" aria-label="Popular services">
+          <p class="home-kicker">Start Here</p>
+          <h2>What do you need help with?</h2>
+          <p>Pick the problem, not the technical category. I will help you figure out the rest.</p>
+          <div class="quick-list">
+            <a href="managed-website-rental.html">Website help <span>→</span></a>
+            <a href="business-services.html">Business IT &amp; systems <span>→</span></a>
+            <a href="workflow-automation-small-business.html">Workflow automation <span>→</span></a>
+            <a href="business-startup-support.html">Michigan registered agent <span>→</span></a>
+            <a href="local-tech-help.html">Home &amp; smart tech <span>→</span></a>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="section section-white" id="services">
+    <section class="audience-section" id="services">
       <div class="shell">
-        <p class="eyebrow">Choose What You Need</p>
-        <h2>Start with the part of your business you want to improve.</h2>
-        <p class="lede">Choose an area below to learn more. You do not need to sort through every service at once.</p>
+        <div class="audience-heading">
+          <p class="eyebrow">Two Ways I Help</p>
+          <h2>For your business. For your home.</h2>
+        </div>
 
-        <div class="grid-3">
-          <article class="service-card reveal">
-            <h3>Managed Websites</h3>
-            <p>Get a professional website without having to manage the technical side yourself.</p>
-            <a class="text-link" href="managed-website-rental.html">Learn About Managed Websites →</a>
-          </article>
+        <div class="audience-grid">
+          <a class="audience-card business" href="business-services.html">
+            <span class="audience-label">For Businesses</span>
+            <h3>One person who can see the whole system.</h3>
+            <p>Websites, devices, cloud tools, forms, customer workflows, onboarding, documentation, automation, and ongoing technology support.</p>
+            <span class="text-link">Explore Business Services →</span>
+          </a>
 
-          <article class="service-card reveal">
+          <a class="audience-card home" href="local-tech-help.html">
+            <span class="audience-label">For Homes</span>
+            <h3>Practical technology help where you live.</h3>
+            <p>Computers, printers, Wi-Fi, cameras, video doorbells, sensors, smart locks, streaming, and connected-home technology.</p>
+            <span class="text-link">Explore Home Tech Help →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-home">
+      <div class="shell">
+        <div class="services-heading">
+          <div>
+            <p class="eyebrow">What Untrained Momentum Does</p>
+            <h2>Support without the runaround.</h2>
+          </div>
+          <p>Start with one problem or bring me the messy pile. Services can stand alone or work together as your needs grow.</p>
+        </div>
+
+        <div class="service-home-grid">
+          <article class="service-home-card">
+            <span class="service-number">01</span>
             <h3>Business Technology</h3>
-            <p>Computers, printers, POS systems, Wi-Fi, devices, setup, troubleshooting, and everyday technology support.</p>
-            <a class="text-link" href="business-services.html">Explore Business Technology →</a>
+            <p>Computers, printers, Wi-Fi, POS, account access, cloud tools, onboarding, troubleshooting, and managed support.</p>
+            <a class="text-link" href="business-services.html">Business IT Support →</a>
           </article>
 
-          <article class="service-card reveal">
-            <h3>Secure &amp; Connect Your Software</h3>
-            <p>Organize accounts and access, improve permissions, connect the software you already use, and reduce duplicate work between systems.</p>
-            <a class="text-link" href="business-services.html#services">Explore Software &amp; Systems Help →</a>
+          <article class="service-home-card">
+            <span class="service-number">02</span>
+            <h3>Websites &amp; Digital Systems</h3>
+            <p>Managed websites, hosting, forms, booking, quote requests, updates, and customer-facing tools that are easier to maintain.</p>
+            <a class="text-link" href="managed-website-rental.html">Website Services →</a>
           </article>
 
-          <article class="service-card reveal">
-            <h3>Automate Your Workflow</h3>
-            <p>Reduce repetitive work with better forms, follow-up, alerts, approvals, handoffs, and automation.</p>
-            <a class="text-link" href="workflow-automation-small-business.html">Explore Workflow Automation →</a>
+          <article class="service-home-card">
+            <span class="service-number">03</span>
+            <h3>Automation &amp; Operations</h3>
+            <p>Reduce repetitive work with better forms, alerts, approvals, follow-up, documentation, handoffs, and workflow automation.</p>
+            <a class="text-link" href="workflow-automation-small-business.html">Workflow Automation →</a>
           </article>
 
-          <article class="service-card reveal">
-            <h3>Business Registration &amp; Setup</h3>
-            <p>Get help with registration, domains, business accounts, technology, website setup, and the practical pieces needed to launch.</p>
-            <a class="text-link" href="business-startup-support.html">Explore Business Setup →</a>
+          <article class="service-home-card">
+            <span class="service-number">04</span>
+            <h3>Business Startup Support</h3>
+            <p>Practical help getting the basics in place—from domains and business systems to accounts, technology, and launch setup.</p>
+            <a class="text-link" href="business-startup-support.html">Startup Support →</a>
           </article>
 
-          <article class="service-card reveal">
-            <h3>Tech in the Home</h3>
-            <p>Local Mid-Michigan help with Wi-Fi, computers, printers, cameras, smart-home devices, streaming, and everyday technology.</p>
-            <a class="text-link" href="local-tech-help.html">Explore Home Tech Help →</a>
+          <article class="service-home-card">
+            <span class="service-number">05</span>
+            <h3>Michigan Registered Agent</h3>
+            <p>Registered agent support for Michigan businesses, with help understanding the practical filing and business setup pieces around it.</p>
+            <a class="text-link" href="business-startup-support.html">Registered Agent Service →</a>
+          </article>
+
+          <article class="service-home-card">
+            <span class="service-number">06</span>
+            <h3>Home &amp; Smart Technology</h3>
+            <p>Local help with computers, printers, Wi-Fi, Ring and Blink devices, cameras, sensors, locks, streaming, and smart-home setup.</p>
+            <a class="text-link" href="local-tech-help.html">Home Tech Help →</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section section-white">
-      <div class="narrow">
-        <p class="eyebrow">Client Experience</p>
-        <blockquote style="font-size:1.08rem;line-height:1.75;margin:1.5rem 0;">“What a game changer it’s been bringing Untrained Momentum onboard to help us out.”</blockquote>
-        <p><strong>John McAlisair</strong><br>CEO, HonorBound Heroes</p>
-        <a class="text-link" href="work.html">See Selected Work →</a>
+    <section class="proof-home">
+      <div class="shell proof-home-inner">
+        <div>
+          <p class="eyebrow">Client Experience</p>
+          <a class="text-link" href="work.html">See Selected Work →</a>
+        </div>
+        <div>
+          <blockquote>“What a game changer it’s been bringing Untrained Momentum onboard to help us out.”</blockquote>
+          <p class="proof-name"><strong>John McAlisair</strong><br>CEO, HonorBound Heroes</p>
+        </div>
       </div>
     </section>
 
     <section class="cta-band">
       <div class="cta-band-inner shell">
         <div>
-          <p class="eyebrow cta-eyebrow">Not sure which service fits?</p>
-          <h2>Tell me what you are trying to fix or improve.</h2>
+          <p class="eyebrow cta-eyebrow">Not sure where your problem fits?</p>
+          <h2>Tell me what is not working.</h2>
         </div>
         <div class="button-row">
           <a class="button" href="book.html">Book a Call <span aria-hidden="true">→</span></a>
@@ -159,22 +278,22 @@
     <div class="footer-grid shell">
       <div>
         <a class="brand" href="index.html"><img class="brand-logo" src="Logo_Red_SVG.svg" alt="Untrained Momentum"></a>
-        <p class="footer-copy">Small-business technology, managed websites, software integration, workflow automation, and practical support.</p>
+        <p class="footer-copy">Business technology, managed websites, workflow automation, Michigan registered agent support, and practical home technology help.</p>
       </div>
       <div>
-        <p class="footer-label">Services</p>
+        <p class="footer-label">Business</p>
         <div class="footer-links">
-          <a href="managed-website-rental.html">Managed Websites</a>
           <a href="business-services.html">Business Technology</a>
-          <a href="business-services.html#services">Software &amp; Systems</a>
+          <a href="managed-website-rental.html">Managed Websites</a>
           <a href="workflow-automation-small-business.html">Workflow Automation</a>
-          <a href="business-startup-support.html">Business Registration &amp; Setup</a>
-          <a href="local-tech-help.html">Tech in the Home</a>
+          <a href="business-startup-support.html">Business Startup Support</a>
+          <a href="business-startup-support.html">Registered Agent</a>
         </div>
       </div>
       <div>
-        <p class="footer-label">Contact</p>
+        <p class="footer-label">Home &amp; Contact</p>
         <div class="footer-links">
+          <a href="local-tech-help.html">Home Tech Help</a>
           <a href="tel:+12312875169">(231) 287-5169</a>
           <a href="mailto:info@untrainedmomentum.com">info@untrainedmomentum.com</a>
           <a href="https://www.facebook.com/UntrainedMomentum" target="_blank" rel="noopener noreferrer">Facebook</a>
