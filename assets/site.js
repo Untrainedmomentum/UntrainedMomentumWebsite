@@ -189,7 +189,7 @@ if (contactForm) {
     planning: 'planning',
     group: 'planning',
     personal: 'planning',
-    microsoft365: 'microsoft365',
+    'ai-agents': 'ai-agents',
     'smart-home': 'smart-home',
     other: 'other'
   };
