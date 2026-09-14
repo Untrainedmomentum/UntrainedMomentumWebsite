@@ -26,9 +26,7 @@
   <link rel="stylesheet" href="assets/styles.css?v=20260914-3">
 
   <style>
-    .home-hero{position:relative;isolation:isolate;overflow:hidden;background:var(--white);padding:clamp(70px,9vw,128px) 0 clamp(62px,8vw,112px);border-bottom:1px solid var(--rule)}
-    .home-hero:before{content:"";position:absolute;z-index:-2;inset:0;background-image:linear-gradient(rgba(8,8,8,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(8,8,8,.045) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(90deg,transparent 0,#000 62%,#000 100%)}
-    .home-hero:after{content:"";position:absolute;z-index:-1;width:min(44vw,620px);aspect-ratio:1;right:-13vw;top:-19vw;border:2px solid rgba(215,25,32,.22);border-radius:50%;box-shadow:0 0 0 70px rgba(215,25,32,.045),0 0 0 140px rgba(215,25,32,.025);animation:hero-orbit 12s ease-in-out infinite alternate}
+    .home-hero{background:var(--white);padding:clamp(70px,9vw,128px) 0 clamp(62px,8vw,112px);border-bottom:1px solid var(--rule)}
     .home-hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:clamp(42px,7vw,90px);align-items:center}
     .home-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--red);font-size:.76rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
     .home-kicker:before{content:"";width:32px;height:2px;background:currentColor}
@@ -37,19 +35,7 @@
     .home-hero-copy{max-width:720px;margin:0 0 30px;color:#333333;font-size:clamp(1.12rem,2vw,1.34rem);line-height:1.55}
     .home-hero .button{border-radius:10px;min-height:54px;padding:13px 23px}
     .home-hero .button-secondary{background:transparent;color:var(--ink)}
-    .home-side-card{position:relative;overflow:hidden;padding:30px;border:1px solid var(--rule);border-radius:22px;background:var(--paper);box-shadow:0 22px 55px rgba(0,0,0,.10)}
-    .momentum-graphic{width:100%;height:auto;margin:-4px 0 24px;border-bottom:1px solid var(--rule)}
-    .momentum-graphic .flow-line{stroke-dasharray:7 10;animation:flow-forward 7s linear infinite}
-    .momentum-graphic .flow-line:nth-of-type(2){animation-delay:-2s}
-    .momentum-graphic .flow-line:nth-of-type(3){animation-delay:-4s}
-    .momentum-graphic .signal{transform-box:fill-box;transform-origin:center;animation:signal-pulse 2.8s ease-in-out infinite}
-    .momentum-graphic .signal:nth-of-type(2){animation-delay:-.9s}
-    .momentum-graphic .signal:nth-of-type(3){animation-delay:-1.8s}
-    .momentum-graphic .momentum-arrow{transform-box:fill-box;transform-origin:center;animation:arrow-drive 3.2s ease-in-out infinite}
-    @keyframes flow-forward{to{stroke-dashoffset:-68}}
-    @keyframes signal-pulse{50%{transform:scale(1.35);opacity:.58}}
-    @keyframes arrow-drive{50%{transform:translate(4px,-4px)}}
-    @keyframes hero-orbit{to{transform:translate(-28px,22px) scale(1.04)}}
+    .home-side-card{padding:30px;border:1px solid var(--rule);border-radius:22px;background:var(--paper);box-shadow:0 22px 55px rgba(0,0,0,.10)}
     .home-side-card h2{margin:0 0 12px;font-family:"Aptos","Segoe UI",Arial,sans-serif;font-size:1.65rem;font-weight:850;line-height:1.08;letter-spacing:-.035em}
     .home-side-card p{margin:0 0 20px;color:var(--muted);font-size:.96rem;line-height:1.55}
     .quick-list{display:grid;gap:0;border-top:1px solid var(--rule)}
@@ -120,7 +106,7 @@
       .service-home-grid{grid-template-columns:1fr 1fr}
     }
     @media(prefers-reduced-motion:reduce){
-      .home-hero:after,.momentum-graphic *,.system-track:before{animation:none!important}
+      .system-track:before{animation:none!important}
       .system-track:before{transform:scaleX(1)}
     }
     @media(max-width:620px){
@@ -199,28 +185,6 @@
         </div>
 
         <aside class="home-side-card reveal" aria-label="Popular services">
-          <svg class="momentum-graphic" viewBox="0 0 360 135" role="img" aria-labelledby="momentum-title momentum-desc">
-            <title id="momentum-title">From scattered problems to forward momentum</title>
-            <desc id="momentum-desc">Three uneven paths become one structured path moving upward.</desc>
-            <g fill="none" stroke="#080808" stroke-width="3" stroke-linecap="round">
-              <path class="flow-line" d="M24 27 C75 4 84 68 156 68"/>
-              <path class="flow-line" d="M24 67 C72 98 101 46 156 68"/>
-              <path class="flow-line" d="M24 108 C83 132 91 76 156 68"/>
-            </g>
-            <g fill="#080808">
-              <circle class="signal" cx="24" cy="27" r="6"/>
-              <circle class="signal" cx="24" cy="67" r="6"/>
-              <circle class="signal" cx="24" cy="108" r="6"/>
-            </g>
-            <circle cx="159" cy="68" r="10" fill="#d71920"/>
-            <g class="momentum-arrow" fill="none" stroke="#d71920" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M169 68 H215 L265 28 H324"/>
-              <path d="M303 8 L324 28 L303 48"/>
-            </g>
-            <g stroke="#d71920" stroke-width="3" stroke-linecap="round" opacity=".55">
-              <path d="M204 91 H292"/><path d="M224 106 H292"/><path d="M244 121 H292"/>
-            </g>
-          </svg>
           <p class="home-kicker">Start Here</p>
           <h2>What do you need help with?</h2>
           <p>Pick the problem, not the technical category. I will help you figure out the rest.</p>
