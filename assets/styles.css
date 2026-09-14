@@ -1,15 +1,15 @@
 :root {
-  --ink: #171716;
-  --ink-soft: #2d2c2a;
-  --paper: #f3f0e9;
-  --paper-deep: #e7e1d7;
-  --white: #fffdf8;
-  --red: #b53a2a;
-  --red-dark: #8e2c20;
-  --sage: #4e6256;
-  --muted: #6f6b64;
-  --rule: rgba(23, 23, 22, 0.16);
-  --shadow: 0 24px 70px rgba(27, 24, 19, 0.12);
+  --ink: #080808;
+  --ink-soft: #242424;
+  --paper: #ffffff;
+  --paper-deep: #f1f1f1;
+  --white: #ffffff;
+  --red: #d71920;
+  --red-dark: #a50f15;
+  --sage: #222222;
+  --muted: #5f5f5f;
+  --rule: rgba(8, 8, 8, 0.16);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.14);
   --radius: 18px;
   --max: 1180px;
 }
@@ -52,8 +52,8 @@ button, input, textarea, select { font: inherit; }
   letter-spacing: 0.16em; text-transform: uppercase;
 }
 .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; }
-.section-dark .eyebrow { color: #ec8b7c; }
-.section-dark .red { color: #ec8b7c; }
+.section-dark .eyebrow { color: #ff4b52; }
+.section-dark .red { color: #ff4b52; }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { text-wrap: balance; }
 h1 {
@@ -75,7 +75,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .contact-card p:last-child,
 .founder-copy p:last-child { margin-bottom: 0; }
 .lede { max-width: 720px; color: var(--ink-soft); font-size: clamp(1.12rem, 2vw, 1.35rem); line-height: 1.55; }
-.section-dark .lede, .section-dark .muted { color: rgba(255, 253, 248, 0.72); }
+.section-dark .lede, .section-dark .muted { color: rgba(255, 255, 255, 0.72); }
 .muted { color: var(--muted); }
 .red { color: var(--red); }
 
@@ -138,7 +138,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .button-secondary { color: var(--ink); background: transparent; }
 .button-secondary:hover { color: var(--white); background: var(--ink); border-color: var(--ink); }
 .section-dark .button { background: var(--white); border-color: var(--white); color: var(--ink); }
-.section-dark .button:hover { background: #ec8b7c; border-color: #ec8b7c; }
+.section-dark .button:hover { background: #ff4b52; border-color: #ff4b52; }
 .section-dark .button-secondary { color: var(--white); background: transparent; }
 
 .trust-strip { background: var(--ink); color: var(--white); }
@@ -168,7 +168,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .choice-card p { max-width: 520px; margin-bottom: 26px; color: var(--muted); }
 .choice-card.business p { color: rgba(255,255,255,0.67); }
 .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--red); font-weight: 850; text-decoration: none; }
-.business .text-link, .section-dark .text-link { color: #ec8b7c; }
+.business .text-link, .section-dark .text-link { color: #ff4b52; }
 
 .path-section { padding: clamp(58px, 7vw, 88px) 0; background: var(--white); border-top: 1px solid var(--rule); }
 .section-heading-small { max-width: none; margin-bottom: 32px; font-size: clamp(2rem, 4vw, 3.3rem); }
@@ -177,7 +177,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .path-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .path-card-primary { background: var(--ink); color: var(--white); }
 .path-label { margin-bottom: auto; color: var(--red); font-size: .72rem; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
-.path-card-primary .path-label, .path-card-primary .text-link { color: #ec8b7c; }
+.path-card-primary .path-label, .path-card-primary .text-link { color: #ff4b52; }
 .path-card h3 { margin: 46px 0 14px; font-family: Georgia, serif; font-size: clamp(1.65rem, 3vw, 2.5rem); font-weight: 400; }
 .path-card p { margin-bottom: 22px; color: var(--muted); line-height: 1.5; }
 .path-card-primary p { color: rgba(255,255,255,.7); }
@@ -188,7 +188,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .problem-list strong, .problem-list span { display: block; }
 .problem-list strong { margin-bottom: 7px; font-size: 1.08rem; }
 .problem-list span { color: rgba(255,255,255,.63); font-size: .92rem; line-height: 1.5; }
-.problem-list a:hover strong { color: #ec8b7c; }
+.problem-list a:hover strong { color: #ff4b52; }
 
 .proof-section { background: var(--paper-deep); }
 .proof-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin: 40px 0 46px; background: var(--rule); border: 1px solid var(--rule); }
@@ -222,7 +222,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 
 .founder { overflow: hidden; border-radius: var(--radius); background: var(--ink); color: var(--white); }
 .founder-grid { display: grid; grid-template-columns: minmax(280px, 0.78fr) 1.22fr; }
-.founder-photo { display: flex; align-items: center; justify-content: center; min-height: 0; padding: clamp(20px, 3vw, 38px); background: #242321; }
+.founder-photo { display: flex; align-items: center; justify-content: center; min-height: 0; padding: clamp(20px, 3vw, 38px); background: #181818; }
 .founder-photo img { width: 100%; height: auto; max-height: 540px; object-fit: contain; object-position: center; filter: saturate(0.75) contrast(1.03); }
 .founder-copy { padding: clamp(38px, 7vw, 80px); align-self: center; }
 .founder-copy p { color: rgba(255,255,255,0.72); }
@@ -266,7 +266,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 
 .contact-grid { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 50px; }
 .contact-card { padding: 28px; border-radius: var(--radius); background: var(--ink); color: var(--white); }
-.contact-card a { color: #ec8b7c; text-decoration: none; }
+.contact-card a { color: #ff4b52; text-decoration: none; }
 .contact-card p { color: rgba(255,255,255,0.68); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field { display: flex; flex-direction: column; gap: 7px; }
@@ -302,7 +302,7 @@ h3 { margin-bottom: 12px; font-size: 1.22rem; line-height: 1.25; }
 .footer-label { margin-bottom: 12px; color: rgba(255,255,255,0.42); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
 .footer-links { display: flex; flex-direction: column; gap: 8px; }
 .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; }
-.footer-links a:hover { color: #ec8b7c; }
+.footer-links a:hover { color: #ff4b52; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 24px; margin-top: 50px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); font-size: 0.78rem; }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 600ms ease, transform 600ms ease; }
