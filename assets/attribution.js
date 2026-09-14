@@ -112,6 +112,27 @@
     input.value = clean(value, 800);
   }
 
+  function addHoneypot(form) {
+    if (!form || form.querySelector('input[name="_gotcha"]')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('aria-hidden', 'true');
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-10000px';
+    wrapper.style.width = '1px';
+    wrapper.style.height = '1px';
+    wrapper.style.overflow = 'hidden';
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = '_gotcha';
+    input.tabIndex = -1;
+    input.autocomplete = 'off';
+
+    wrapper.appendChild(input);
+    form.appendChild(wrapper);
+  }
+
   function attachAttribution(form) {
     const latest = readState();
     const elapsedSeconds = latest.started_at ? Math.max(0, Math.round((Date.now() - latest.started_at) / 1000)) : 0;
@@ -137,7 +158,11 @@
   });
 
   forms.forEach((form) => {
+    addHoneypot(form);
     attachAttribution(form);
-    form.addEventListener('submit', () => attachAttribution(form));
+    form.addEventListener('submit', () => {
+      addHoneypot(form);
+      attachAttribution(form);
+    });
   });
 })();
