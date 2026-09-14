@@ -255,7 +255,13 @@ export async function loadDashboard() {
   if (!mount) return;
   const session = await getSession();
   document.querySelector('[data-user-name]').textContent = session.user.name;
-  const sites = await supabaseRest(`sites?owner_user_id=eq.${encodeURIComponent(session.user.id)}&select=id,slug,name,site_type,site_url,custom_domain,stripe_account_id,stripe_details_submitted,stripe_charges_enabled,builder_enabled,status,updated_at&order=created_at.asc`);
+  if (session.user.role === 'admin') {
+    const adminMount = document.querySelector('#admin-mount');
+    if (adminMount) adminMount.innerHTML = '<section class="client-card admin-launch-card"><div><p class="client-eyebrow">Owner workspace</p><h2>Customer & work tracker</h2><p>Manage customers, requests, hours, billing, and every hosted website.</p></div><a class="client-button dark" href="/client/admin.html">Open tracker</a></section>';
+    document.querySelector('[data-client-requests]')?.setAttribute('href', '/client/admin.html');
+  }
+  const siteFilter = session.user.role === 'admin' ? '' : `owner_user_id=eq.${encodeURIComponent(session.user.id)}&`;
+  const sites = await supabaseRest(`sites?${siteFilter}select=id,slug,name,site_type,site_url,custom_domain,stripe_account_id,stripe_details_submitted,stripe_charges_enabled,builder_enabled,status,updated_at&order=created_at.asc`);
   mount.innerHTML = sites.length ? sites.map(renderSite).join('') : '<div class="client-card"><h2>No sites yet</h2><p>Your websites will appear here after Untrained Momentum assigns one to your account.</p></div>';
 }
 
