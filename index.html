@@ -74,24 +74,6 @@
     .service-home-card p{color:var(--muted);font-size:.94rem;line-height:1.55}
     .service-home-card .text-link{margin-top:auto;font-size:.9rem}
 
-    .momentum-system{position:relative;overflow:hidden;padding:clamp(70px,8vw,108px) 0;background:var(--ink);color:var(--white)}
-    .momentum-system:after{content:"UM";position:absolute;right:-.04em;bottom:-.34em;color:rgba(255,255,255,.025);font-size:clamp(14rem,30vw,32rem);font-weight:900;line-height:1;letter-spacing:-.12em;pointer-events:none}
-    .system-heading{position:relative;z-index:1;display:grid;grid-template-columns:1fr .72fr;gap:40px;align-items:end;margin-bottom:52px}
-    .system-heading h2{margin:0;font-family:"Aptos","Segoe UI",Arial,sans-serif;font-size:clamp(2.4rem,5.2vw,4.7rem);font-weight:850;letter-spacing:-.05em;line-height:1}
-    .system-heading p:last-child{margin:0;color:rgba(255,255,255,.67)}
-    .system-track{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .system-track:before{content:"";position:absolute;z-index:-1;left:10%;right:10%;top:31px;height:2px;background:linear-gradient(90deg,var(--red),#ff4b52);transform:scaleX(0);transform-origin:left;animation:system-line 1.4s .35s cubic-bezier(.2,.8,.2,1) forwards}
-    .system-step{position:relative;min-height:245px;padding:62px 24px 25px;border:1px solid rgba(255,255,255,.15);border-radius:16px;background:rgba(255,255,255,.045);backdrop-filter:blur(8px);transition:transform .22s ease,border-color .22s ease,background .22s ease}
-    .system-step:before{content:attr(data-step);position:absolute;top:20px;left:24px;display:grid;place-items:center;width:24px;height:24px;border:5px solid var(--ink);border-radius:50%;background:var(--red);color:transparent;box-shadow:0 0 0 1px rgba(255,255,255,.22)}
-    .system-step:hover{transform:translateY(-6px);border-color:rgba(255,75,82,.62);background:rgba(255,255,255,.075)}
-    .system-step strong{display:block;margin-bottom:14px;color:#ff4b52;font-size:.76rem;letter-spacing:.16em}
-    .system-step h3{margin-bottom:12px;font-size:1.25rem}
-    .system-step p{margin:0;color:rgba(255,255,255,.63);font-size:.91rem;line-height:1.55}
-    .system-track .reveal:nth-child(2){transition-delay:100ms}
-    .system-track .reveal:nth-child(3){transition-delay:200ms}
-    .system-track .reveal:nth-child(4){transition-delay:300ms}
-    @keyframes system-line{to{transform:scaleX(1)}}
-
     .proof-home{background:var(--ink);color:var(--white);padding:clamp(58px,7vw,88px) 0;border-top:1px solid rgba(255,255,255,.12)}
     .proof-home-inner{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(42px,8vw,100px);align-items:center}
     .proof-home blockquote{margin:0;font-size:clamp(1.65rem,3.6vw,3rem);font-weight:750;line-height:1.2;letter-spacing:-.035em}
@@ -99,23 +81,16 @@
     .proof-home .text-link{color:#ff4b52}
 
     @media(max-width:900px){
-      .home-hero-grid,.services-heading,.system-heading,.proof-home-inner{grid-template-columns:1fr}
-      .system-track{grid-template-columns:1fr 1fr}
-      .system-track:before{display:none}
+      .home-hero-grid,.services-heading,.proof-home-inner{grid-template-columns:1fr}
       .home-side-card{max-width:none}
       .service-home-grid{grid-template-columns:1fr 1fr}
-    }
-    @media(prefers-reduced-motion:reduce){
-      .system-track:before{animation:none!important}
-      .system-track:before{transform:scaleX(1)}
     }
     @media(max-width:620px){
       .home-hero{padding:48px 0 58px}
       .home-hero h1{font-size:clamp(2.7rem,13.5vw,4rem);line-height:.96}
       .home-hero-copy{font-size:1.05rem}
       .home-side-card{padding:24px 20px}
-      .audience-grid,.service-home-grid,.system-track{grid-template-columns:1fr}
-      .system-step{min-height:0;padding-top:58px}
+      .audience-grid,.service-home-grid{grid-template-columns:1fr}
       .audience-card{min-height:280px;padding:26px 22px}
       .service-home-card{min-height:220px;padding:24px 21px}
       .service-home-card .service-number{margin-bottom:30px}
@@ -275,40 +250,6 @@
             <h3>Home &amp; Smart Technology</h3>
             <p>Local help with computers, printers, Wi-Fi, Ring and Blink devices, cameras, sensors, locks, streaming, and smart-home setup.</p>
             <a class="text-link" href="local-tech-help.html">Home Tech Help →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="momentum-system" aria-labelledby="momentum-system-title">
-      <div class="shell">
-        <div class="system-heading reveal">
-          <div>
-            <p class="eyebrow">How the Work Connects</p>
-            <h2 id="momentum-system-title">Build the system, not another patch.</h2>
-          </div>
-          <p>The goal is not more technology. It is a cleaner path from first contact to better service, stronger follow-through, and continuous improvement.</p>
-        </div>
-        <div class="system-track">
-          <article class="system-step reveal" data-step="01">
-            <strong>01 / ATTRACT</strong>
-            <h3>Make the right first impression.</h3>
-            <p>Clear websites and digital touchpoints help the right people find you and understand what you do.</p>
-          </article>
-          <article class="system-step reveal" data-step="02">
-            <strong>02 / CONVERT</strong>
-            <h3>Turn interest into action.</h3>
-            <p>Booking, forms, quotes, and follow-up create a clear next step without unnecessary friction.</p>
-          </article>
-          <article class="system-step reveal" data-step="03">
-            <strong>03 / RETAIN</strong>
-            <h3>Deliver with consistency.</h3>
-            <p>Connected tools, documentation, and support keep the customer experience from depending on memory.</p>
-          </article>
-          <article class="system-step reveal" data-step="04">
-            <strong>04 / IMPROVE</strong>
-            <h3>Keep building momentum.</h3>
-            <p>Review what is working, remove bottlenecks, and make the system better as the business grows.</p>
           </article>
         </div>
       </div>
