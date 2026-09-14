@@ -61,15 +61,6 @@ if (menuButton && navLinks) {
 
 function normalizeConsultationCtas() {
   document.querySelectorAll('a[href]').forEach((link) => {
-    const rawText = (link.textContent || '').replace(/\s+/g, ' ').trim();
-    const rawHref = link.getAttribute('href') || '';
-
-    if (/^call now$/i.test(rawText) && /^tel:/i.test(rawHref)) {
-      link.href = '/book.html';
-      link.textContent = 'Book a Free Consultation →';
-      return;
-    }
-
     let url;
     try {
       url = new URL(link.getAttribute('href'), window.location.href);
