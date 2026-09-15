@@ -1,4 +1,5 @@
 const MOBILE_NAV_VERSION = '20260912-2';
+const READABILITY_VERSION = '20260915-1';
 
 // Some legacy/root pages only load styles.css. Always load the hardened
 // mobile navigation stylesheet so opening the hamburger menu cannot spill
@@ -8,6 +9,14 @@ if (!document.querySelector('link[href*="mobile-nav.css"]')) {
   mobileNavStyles.rel = 'stylesheet';
   mobileNavStyles.href = `/assets/mobile-nav.css?v=${MOBILE_NAV_VERSION}`;
   document.head.appendChild(mobileNavStyles);
+}
+
+// Load readability overrides on every page that uses the shared site script.
+if (!document.querySelector('link[href*="readability.css"]')) {
+  const readabilityStyles = document.createElement('link');
+  readabilityStyles.rel = 'stylesheet';
+  readabilityStyles.href = `/assets/readability.css?v=${READABILITY_VERSION}`;
+  document.head.appendChild(readabilityStyles);
 }
 
 const menuButton = document.querySelector('.menu-button');
