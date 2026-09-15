@@ -29,11 +29,12 @@
     .price-card h3{margin:8px 0 8px;font-size:2rem}.amount{font-size:3.4rem;font-weight:900;line-height:1;letter-spacing:-.04em}.amount small{font-size:1rem;font-weight:750;color:var(--muted)}
     .price-card p{color:var(--muted)}.price-card ul{padding-left:20px;color:var(--muted)}.price-card .button{margin-top:auto;align-self:flex-start}
     .booking-bridge{margin-top:26px;padding:26px 30px;border-left:4px solid var(--red);background:var(--paper-deep)}
+    .remote-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}.remote-step{padding:24px;border:1px solid var(--rule);border-radius:var(--radius);background:#fff}.remote-step .step-no{display:inline-grid;width:34px;height:34px;place-items:center;margin-bottom:14px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900}.remote-step h3{margin:0 0 8px;font-size:1.2rem}.remote-step p{margin:0;color:var(--muted)}.remote-prep-note{margin-top:22px;padding:24px;border-left:4px solid var(--red);background:var(--paper-deep)}
     .experience{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:46px;align-items:center}.experience img{width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--shadow)}
     .cred-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}.cred-grid div{padding:18px;border-left:3px solid var(--red);background:var(--paper-deep)}
     .focused-links{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}.focused-links a{display:block;padding:22px;border:1px solid var(--rule);border-radius:var(--radius);background:#fff;color:var(--ink);font-weight:850;text-decoration:none}.focused-links a:hover{border-color:var(--red)}
     .final-cta{padding:50px;border-radius:var(--radius);background:var(--ink);color:#fff}.final-cta h2{max-width:760px;margin:8px 0 16px;color:#fff;font-size:clamp(2.3rem,5vw,4rem)}.final-cta p{max-width:700px;color:rgba(255,255,255,.78)}
-    @media(max-width:850px){.tech-hero-grid,.pricing-wrap,.experience{grid-template-columns:1fr}.problem-grid,.focused-links{grid-template-columns:1fr}.cred-grid{grid-template-columns:1fr}.tech-hero{padding-top:54px}}
+    @media(max-width:850px){.tech-hero-grid,.pricing-wrap,.experience{grid-template-columns:1fr}.problem-grid,.focused-links,.remote-steps{grid-template-columns:1fr}.cred-grid{grid-template-columns:1fr}.tech-hero{padding-top:54px}}
   </style>
   <script type="application/ld+json">
   {
@@ -130,6 +131,22 @@
           </article>
         </div>
         <div class="booking-bridge"><strong>Most appointments are completed within the first hour.</strong> If additional time is needed, you will know the hourly rate before booking and your saved payment method can be used for the remaining balance after the work is complete.</div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="remote-prep">
+      <div class="shell">
+        <p class="eyebrow">Remote Appointment Setup</p>
+        <h2>Four simple steps. No home visit needed.</h2>
+        <p class="lede">If your issue can be handled remotely, getting connected is simple. You do not need to know anything technical before we start.</p>
+        <div class="remote-steps">
+          <article class="remote-step"><span class="step-no">1</span><h3>Install remote support</h3><p>Click the button below and follow the prompts on your computer.</p></article>
+          <article class="remote-step"><span class="step-no">2</span><h3>Open support at appointment time</h3><p>When your appointment starts, open the remote support page again.</p></article>
+          <article class="remote-step"><span class="step-no">3</span><h3>Generate your code</h3><p>Choose <strong>Generate Code</strong>. The code works one time only.</p></article>
+          <article class="remote-step"><span class="step-no">4</span><h3>Send me the code</h3><p>I will tell you exactly where to send it when we begin.</p></article>
+        </div>
+        <div class="button-row" style="margin-top:24px"><a class="button" href="https://remotedesktop.google.com/support" target="_blank" rel="noopener noreferrer">Install Remote Support →</a></div>
+        <div class="remote-prep-note"><strong>You stay in control.</strong> You approve the connection before I can access your computer, and you can end the session at any time. If you get stuck during setup, stop there—we can walk through it together at the start of your appointment.</div>
       </div>
     </section>
 
