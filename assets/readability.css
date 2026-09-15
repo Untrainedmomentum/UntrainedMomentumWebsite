@@ -1,44 +1,127 @@
-/* Site-wide readability tuned for comfortable reading without visual overload */
+/* Global design refinement: responsive, professional, and easier on the eyes */
+:root {
+  --ink: #171717;
+  --ink-soft: #343434;
+  --paper: #fbfaf8;
+  --paper-deep: #f2f0ed;
+  --white: #ffffff;
+  --muted: #626262;
+  --rule: rgba(23, 23, 23, 0.13);
+  --shadow: 0 14px 38px rgba(0, 0, 0, 0.09);
+  --radius: 16px;
+}
+
 html { font-size: 100%; }
 body {
-  font-size: 18px;
-  line-height: 1.65;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: clamp(16px, calc(15px + 0.22vw), 18px);
+  line-height: 1.6;
 }
 
-p, li, dd, dt {
-  line-height: 1.65;
+p, li, dd, dt { line-height: 1.62; }
+
+h1 {
+  font-size: clamp(2.75rem, 6.2vw, 5.6rem);
+  line-height: 0.99;
+  letter-spacing: -0.045em;
 }
 
-.nav-links a {
-  font-size: 0.95rem;
+h2 {
+  font-size: clamp(2rem, 4.3vw, 3.8rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 
+h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+  line-height: 1.28;
+}
+
+.lede,
+.hero-copy {
+  font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  letter-spacing: 0.11em;
+}
+
+.nav-links a { font-size: 0.95rem; }
 .button,
 button,
 input,
 textarea,
-select {
-  font-size: 0.98rem;
-}
-
+select { font-size: 0.98rem; }
 .button {
-  min-height: 54px;
-  padding: 13px 22px;
+  min-height: 52px;
+  padding: 12px 21px;
 }
 
-.eyebrow {
-  font-size: 0.82rem;
-  line-height: 1.35;
-  letter-spacing: 0.12em;
+/* Larger, better-balanced header branding across every page. */
+.site-header,
+.nav { min-height: 104px; }
+.brand-logo,
+.brand-mark {
+  width: 124px;
+  height: 96px;
+}
+.site-footer .brand-logo,
+.site-footer .brand-mark {
+  width: 150px;
+  height: 140px;
 }
 
-.lede {
-  font-size: clamp(1.12rem, 1.8vw, 1.34rem);
-}
+/* Reduce dead space site-wide. */
+.section { padding: clamp(52px, 6vw, 84px) 0; }
+.section-tight { padding: clamp(38px, 4.5vw, 62px) 0; }
+.path-section { padding: clamp(46px, 5vw, 70px) 0; }
+.page-hero { padding: clamp(58px, 7vw, 92px) 0 clamp(44px, 5vw, 66px); }
+.hero { min-height: auto; }
+.hero-inner { padding: clamp(58px, 7vw, 86px) 0 clamp(64px, 7vw, 92px); }
+.hero-compact .hero-inner { padding: clamp(44px, 5vw, 66px) 0; }
 
-h3 {
-  font-size: 1.28rem;
+/* Warm white surfaces instead of hard black/white contrast. */
+.section-white { background: var(--paper); }
+.proof-section,
+.website-service { background: var(--paper-deep); }
+.site-header { background: rgba(251, 250, 248, 0.96); }
+
+/* Dark sections are accents, not the default look. */
+.section-dark { background: #262626; color: #f7f5f2; }
+.choice-card.business,
+.path-card-primary,
+.founder,
+.contact-card { background: #262626; }
+.site-footer { background: #222222; }
+
+.trust-strip {
+  background: #ece9e5;
+  color: var(--ink);
+  border-block: 1px solid var(--rule);
 }
+.trust-item { border-color: var(--rule); }
+.trust-item strong { color: var(--ink); }
+.trust-item span { color: var(--muted); }
+
+/* Softer cards and more compact presentation. */
+.choice-card,
+.path-card,
+.service-card,
+.price-card,
+.page-note,
+.lead-magnet-card,
+.recommendation,
+.local-service-photo { box-shadow: none; }
+.choice-card:hover,
+.path-card:hover { box-shadow: var(--shadow); }
+.choice-card { min-height: 390px; }
+.path-card { min-height: 260px; }
+.service-card,
+.price-card { padding: clamp(24px, 3vw, 30px); }
 
 .hero-plain,
 .hero-reassurance,
@@ -58,45 +141,53 @@ h3 {
 .choice-card .tag,
 .website-plan .plan-label,
 .website-plan .price span,
-.credential {
-  font-size: 0.9rem;
-}
+.credential { font-size: 0.9rem; }
 
-.field label {
-  font-size: 0.95rem;
-}
-
+.field label { font-size: 0.95rem; }
 .field input,
 .field textarea,
 .field select {
   min-height: 50px;
   padding: 13px 15px;
 }
-
 .text-link,
 .footer-links a,
-.faq summary {
-  font-size: 0.98rem;
-}
+.faq summary { font-size: 0.98rem; }
 
 @media (max-width: 900px) {
+  .site-header,
+  .nav { min-height: 88px; }
+  .brand-logo,
+  .brand-mark {
+    width: 108px;
+    height: 80px;
+  }
+  .nav-links { inset: 88px 0 0; }
   .nav-links a {
     font-size: 1.05rem;
     padding: 13px;
   }
+  .choice-card { min-height: 330px; }
 }
 
 @media (max-width: 620px) {
-  body {
-    font-size: 17px;
+  body { font-size: 16px; }
+  .site-header,
+  .nav { min-height: 78px; }
+  .brand-logo,
+  .brand-mark {
+    width: 96px;
+    height: 70px;
   }
-
+  .nav-links { inset: 78px 0 0; }
+  h1 { font-size: clamp(2.6rem, 13vw, 3.85rem); }
+  h2 { font-size: clamp(2rem, 9.5vw, 3rem); }
+  .section { padding: 48px 0; }
+  .section-tight { padding: 36px 0; }
+  .hero-inner { padding: 48px 0 58px; }
   .button {
     font-size: 1rem;
-    min-height: 54px;
+    min-height: 52px;
   }
-
-  .eyebrow {
-    font-size: 0.84rem;
-  }
+  .eyebrow { font-size: 0.8rem; }
 }
