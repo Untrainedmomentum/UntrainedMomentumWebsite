@@ -10,18 +10,22 @@
   <meta name="theme-color" content="#171716">
   <link rel="stylesheet" href="assets/styles.css?v=20260915-3">
   <style>
-    .booking-hero{padding:76px 0 48px;background:linear-gradient(180deg,#fff 0%,var(--paper) 100%)}
-    .booking-hero h1{max-width:900px;margin:12px 0 18px;font-size:clamp(3rem,7vw,5.8rem);line-height:.96;letter-spacing:-.05em}
-    .booking-hero .lede{max-width:780px;font-size:clamp(1.12rem,2vw,1.34rem);line-height:1.55}
-    .booking-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:34px;align-items:start}
-    .info-card,.calendar-card{padding:32px;border:1px solid var(--rule);border-radius:var(--radius);background:#fff}
-    .calendar-card{border:2px solid var(--red);box-shadow:var(--shadow)}
-    .price-line{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin:18px 0}.price-line strong{font-size:3.2rem;line-height:1}.price-line span{font-weight:850;color:var(--muted)}
-    .expectations{margin:24px 0 0;padding:0;list-style:none}.expectations li{padding:13px 0;border-bottom:1px solid var(--rule)}.expectations li:last-child{border-bottom:0}
-    .calendar-embed{width:100%;min-height:650px;margin-top:18px;border:0;border-radius:12px;background:#fff}
-    .switch-card{margin-top:28px;padding:24px 28px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--paper-deep)}
-    .policy{margin-top:28px;padding:26px;border-radius:var(--radius);background:var(--ink);color:#fff}.policy h3{margin-top:0;color:#fff}.policy p{color:rgba(255,255,255,.82)}
-    @media(max-width:850px){.booking-layout{grid-template-columns:1fr}.calendar-embed{min-height:760px}.booking-hero{padding-top:54px}}
+    .booking-hero{padding:68px 0 42px;background:linear-gradient(180deg,#fff 0%,var(--paper) 100%)}
+    .booking-hero h1{max-width:900px;margin:12px 0 18px;font-size:clamp(2.8rem,6vw,5.2rem);line-height:.98;letter-spacing:-.045em}
+    .booking-hero .lede{max-width:820px;font-size:clamp(1.08rem,2vw,1.28rem);line-height:1.6}
+    .booking-section{padding:54px 0 76px}
+    .booking-layout{display:grid;grid-template-columns:minmax(320px,.72fr) minmax(500px,1.28fr);gap:48px;align-items:start}
+    .info-card,.calendar-card{padding:34px;border:1px solid var(--rule);border-radius:var(--radius);background:#fff}
+    .calendar-card{padding:38px;border:2px solid var(--red);box-shadow:var(--shadow)}
+    .info-card h2,.calendar-card h2{margin:8px 0 16px;font-size:clamp(2rem,3.5vw,3.5rem);line-height:1.05;letter-spacing:-.035em}
+    .calendar-card>p{max-width:720px;line-height:1.6}
+    .price-line{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin:20px 0 24px}.price-line strong{font-size:3rem;line-height:1}.price-line span{font-weight:850;color:var(--muted)}
+    .expectations{margin:18px 0 0;padding:0;list-style:none}.expectations li{padding:16px 0;border-bottom:1px solid var(--rule);line-height:1.55}.expectations li:last-child{border-bottom:0}
+    .switch-card{margin-top:24px;padding:24px 26px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--paper-deep)}.switch-card p{margin:8px 0 12px;line-height:1.55}
+    .policy-alert{margin:28px 0 30px;padding:26px 28px;border:2px solid var(--red);border-radius:14px;background:#fff5f5}.policy-alert .policy-label{display:block;margin-bottom:8px;color:var(--red);font-size:.82rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.policy-alert h3{margin:0 0 10px;font-size:1.45rem}.policy-alert p{margin:0 0 10px;line-height:1.6}.policy-alert p:last-child{margin-bottom:0}
+    .calendar-embed{width:100%;min-height:650px;margin-top:8px;border:0;border-radius:12px;background:#fff}
+    @media(max-width:980px){.booking-layout{grid-template-columns:1fr;gap:28px}.calendar-card{padding:30px}.booking-hero{padding-top:52px}}
+    @media(max-width:640px){.booking-section{padding-top:34px}.info-card,.calendar-card{padding:24px}.calendar-embed{min-height:760px}.policy-alert{padding:22px}.booking-hero h1{font-size:clamp(2.6rem,14vw,4rem)}}
   </style>
 </head>
 <body>
@@ -31,7 +35,7 @@
   <main id="main">
     <section class="booking-hero"><div class="shell"><p class="eyebrow">On-Site Tech Support · Big Rapids Area</p><h1>Book hands-on help at your location.</h1><p class="lede">Choose an on-site visit when the problem requires someone to physically work with the equipment, device placement, smart-home setup, hardware access or troubleshooting that cannot reasonably be completed remotely.</p></div></section>
 
-    <section class="section section-soft"><div class="shell booking-layout">
+    <section class="section-soft booking-section"><div class="shell booking-layout">
       <div>
         <div class="info-card">
           <p class="eyebrow">Before You Book</p>
@@ -48,11 +52,23 @@
         </div>
 
         <div class="switch-card"><strong>Not sure you actually need an in-home visit?</strong><p>Software, email, accounts, settings, updates, printer software and many computer problems can usually be handled remotely for less.</p><a class="text-link" href="book-remote-tech-help.html">Switch to Remote Support →</a></div>
-
-        <div class="policy"><h3>Cancellation & refunds</h3><p>Appointments may be canceled or rescheduled with at least 24 hours’ notice. Late cancellations may result in the payment or deposit being forfeited. No-shows are non-refundable. If a refund is issued, any Stripe processing fees that Stripe does not return will be deducted from the refund amount.</p></div>
       </div>
 
-      <div class="calendar-card"><p class="eyebrow">Choose Your Time</p><h2>Reserve your on-site appointment.</h2><p>Select an available time below and complete the booking details and payment shown in the scheduler.</p><iframe class="calendar-embed" src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1G3q-YwYo5gHPEwWRM5JQbDsSm4s6qvL4Pb5L7ITPx9SaumaTgg_aFvtn6PyfBe6aKyzr4RVs1?gv=true" width="100%" height="650" frameborder="0" title="Book on-site tech support with Untrained Momentum"></iframe><div class="button-row" style="margin-top:18px"><a class="text-link" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1G3q-YwYo5gHPEwWRM5JQbDsSm4s6qvL4Pb5L7ITPx9SaumaTgg_aFvtn6PyfBe6aKyzr4RVs1?gv=true" target="_blank" rel="noopener noreferrer">Open scheduler in a new tab →</a></div></div>
+      <div class="calendar-card">
+        <p class="eyebrow">Choose Your Time</p>
+        <h2>Reserve your on-site appointment.</h2>
+        <p>Select an available time below and complete the booking details and payment shown in the scheduler.</p>
+
+        <div class="policy-alert">
+          <span class="policy-label">Cancellation policy</span>
+          <h3>Please review before booking.</h3>
+          <p>Appointments may be canceled or rescheduled with at least 24 hours’ notice. Late cancellations may result in the payment or deposit being forfeited, and no-shows are non-refundable.</p>
+          <p>If a refund is issued, any Stripe processing fees that Stripe does not return will be deducted from the refund amount.</p>
+        </div>
+
+        <iframe class="calendar-embed" src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1G3q-YwYo5gHPEwWRM5JQbDsSm4s6qvL4Pb5L7ITPx9SaumaTgg_aFvtn6PyfBe6aKyzr4RVs1?gv=true" width="100%" height="650" frameborder="0" title="Book on-site tech support with Untrained Momentum"></iframe>
+        <div class="button-row" style="margin-top:18px"><a class="text-link" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1G3q-YwYo5gHPEwWRM5JQbDsSm4s6qvL4Pb5L7ITPx9SaumaTgg_aFvtn6PyfBe6aKyzr4RVs1?gv=true" target="_blank" rel="noopener noreferrer">Open scheduler in a new tab →</a></div>
+      </div>
     </div></section>
   </main>
 
