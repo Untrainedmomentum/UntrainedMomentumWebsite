@@ -1,0 +1,101 @@
+/* Site-wide readability improvements for easier scanning and older visitors */
+html { font-size: 100%; }
+body {
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+p, li, dd, dt {
+  line-height: 1.7;
+}
+
+.nav-links a {
+  font-size: 1rem;
+}
+
+.button,
+button,
+input,
+textarea,
+select {
+  font-size: 1rem;
+}
+
+.button {
+  min-height: 56px;
+  padding: 14px 24px;
+}
+
+.eyebrow {
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.lede {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+.hero-plain,
+.hero-reassurance,
+.local-service-photo figcaption,
+.service-card p,
+.problem-list span,
+.metric span,
+.page-note p,
+.price-card li,
+.recommendation .recommendation-role,
+.form-note,
+.consent-row,
+.footer-bottom,
+.footer-label,
+.trust-item span,
+.path-label,
+.choice-card .tag,
+.website-plan .plan-label,
+.website-plan .price span,
+.credential {
+  font-size: 0.95rem;
+}
+
+.field label {
+  font-size: 1rem;
+}
+
+.field input,
+.field textarea,
+.field select {
+  min-height: 52px;
+  padding: 14px 16px;
+}
+
+.text-link,
+.footer-links a,
+.faq summary {
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .nav-links a {
+    font-size: 1.15rem;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 620px) {
+  body {
+    font-size: 18px;
+  }
+
+  .button {
+    font-size: 1.02rem;
+    min-height: 58px;
+  }
+
+  .eyebrow {
+    font-size: 0.9rem;
+  }
+}
