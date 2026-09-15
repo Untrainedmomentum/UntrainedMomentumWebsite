@@ -12,13 +12,14 @@ export async function onRequestPost(context) {
     const now = new Date().toISOString();
 
     if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
-      if (object.metadata?.service === 'local-tech-first-hour' && context.env.DB) {
+      const bookingServices = new Set(['remote-tech-first-hour', 'onsite-tech-first-hour']);
+      if (bookingServices.has(object.metadata?.service) && context.env.DB) {
         await context.env.DB.prepare(`
           INSERT INTO booking_payments (id, stripe_checkout_session_id, service, customer_email, amount_total, currency, payment_status, created_at, updated_at)
-          VALUES (?, ?, 'local-tech-first-hour', ?, ?, ?, ?, ?, ?)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(stripe_checkout_session_id) DO UPDATE SET payment_status=excluded.payment_status, customer_email=excluded.customer_email, updated_at=excluded.updated_at
         `).bind(
-          crypto.randomUUID(), object.id, object.customer_details?.email || object.customer_email || null,
+          crypto.randomUUID(), object.id, object.metadata.service, object.customer_details?.email || object.customer_email || null,
           Number(object.amount_total || 0), object.currency || 'usd', object.payment_status || 'paid', now, now
         ).run();
       }

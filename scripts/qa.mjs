@@ -139,7 +139,7 @@ if (await exists(localTechPath)) {
   if (!local.includes('$99') || !local.includes('$75')) {
     errors.push('local-tech-help.html: expected current $99 first-hour / $75 additional-hour on-site pricing');
   }
-  if (!/15 miles of Big Rapids/i.test(local)) errors.push('local-tech-help.html: 15-mile included travel area is not stated');
+  if (!/30 miles/i.test(local)) errors.push('local-tech-help.html: 30-mile travel-fee threshold is not stated');
 }
 
 const termsPath = path.join(root, 'terms.html');

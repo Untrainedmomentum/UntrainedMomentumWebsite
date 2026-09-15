@@ -158,7 +158,7 @@ async function build() {
 
     if (name === 'local-tech-help.html') {
       if (!rendered.includes('$99') || !rendered.includes('$75')) errors.push(`${name}: current $99/$75 on-site pricing missing`);
-      if (!/15 miles of Big Rapids/i.test(rendered)) errors.push(`${name}: service radius missing`);
+      if (!/30 miles/i.test(rendered)) errors.push(`${name}: service travel-fee radius missing`);
     }
 
     if (!checkOnly) await fs.writeFile(path.join(out, name), rendered);
