@@ -11,7 +11,7 @@ const SERVICES = {
   onsite: {
     amount: 9900,
     name: 'On-Site Tech Help — First Hour',
-    description: 'Includes the first on-site hour. Additional on-site time is $75/hour. Travel over 30 miles may cost more.',
+    description: 'Includes the first on-site hour. Additional on-site time is $75/hour. Travel more than 30 miles from Big Rapids, MI may cost more.',
     metadataService: 'onsite-tech-first-hour'
   }
 };
@@ -59,7 +59,7 @@ export async function onRequestPost(context) {
       },
       custom_text: {
         submit: {
-          message: `Deposit includes the first hour. The remaining balance is charged when service is completed or within 24 hours at ${serviceKey === 'remote' ? '$60/hour' : '$75/hour'} under the authorization accepted on the booking page.${serviceKey === 'onsite' ? ' Travel over 30 miles may cost more.' : ''}`
+          message: `Deposit includes the first hour. The remaining balance is charged when service is completed or within 24 hours at ${serviceKey === 'remote' ? '$60/hour' : '$75/hour'} under the authorization accepted on the booking page.${serviceKey === 'onsite' ? ' Travel more than 30 miles from Big Rapids, MI may cost more.' : ''}`
         }
       }
     });
