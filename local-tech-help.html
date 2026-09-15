@@ -26,7 +26,7 @@
     .problem-card{padding:26px;border:1px solid var(--rule);border-radius:var(--radius);background:#fff}.problem-card h3{margin:0 0 9px;font-size:1.3rem}.problem-card p{margin:0;color:var(--muted)}
     .pricing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
     .price-card{display:flex;flex-direction:column;padding:34px;border:2px solid var(--rule);border-radius:var(--radius);background:#fff}.price-card.featured{border-color:var(--red)}
-    .price-card h3{margin:8px 0 8px;font-size:2rem}.amount{font-size:3.4rem;font-weight:900;line-height:1;letter-spacing:-.04em}.amount small{font-size:1rem;font-weight:750;color:var(--muted)}
+    .price-card h3{margin:8px 0 8px;font-size:2rem}.amount{font-size:3.4rem;font-weight:900;line-height:1;letter-spacing:-.04em}.appointment-includes{display:block;margin-top:8px;font-size:1rem;font-weight:800;color:var(--muted)}
     .price-card p{color:var(--muted)}.price-card ul{padding-left:20px;color:var(--muted)}.price-card .button{margin-top:auto;align-self:flex-start}
     .booking-bridge{margin-top:26px;padding:26px 30px;border-left:4px solid var(--red);background:var(--paper-deep)}
     .remote-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}.remote-step{padding:24px;border:1px solid var(--rule);border-radius:var(--radius);background:#fff}.remote-step .step-no{display:inline-grid;width:34px;height:34px;place-items:center;margin-bottom:14px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900}.remote-step h3{margin:0 0 8px;font-size:1.2rem}.remote-step p{margin:0;color:var(--muted)}.remote-prep-note{margin-top:22px;padding:24px;border-left:4px solid var(--red);background:var(--paper-deep)}
@@ -110,27 +110,29 @@
     <section class="section section-soft" id="pricing">
       <div class="shell">
         <p class="eyebrow">Know the Cost</p>
-        <h2>Clear pricing before you book.</h2>
-        <p class="lede">Choose the type of help you need. Your first hour is paid when you confirm the appointment.</p>
+        <h2>Clear appointment pricing before you book.</h2>
+        <p class="lede">Choose remote or on-site support. Each appointment includes up to the first hour of service.</p>
         <div class="pricing-wrap">
           <article class="price-card featured">
-            <p class="eyebrow">Remote Support</p>
+            <p class="eyebrow">Remote Appointment</p>
             <h3>Most computer problems can be handled remotely.</h3>
-            <div class="amount">$60 <small>/ first hour</small></div>
+            <div class="amount">$60</div>
+            <span class="appointment-includes">Appointment price · includes up to 1 hour</span>
             <p>Best for software problems, settings, email, printers, updates, accounts and troubleshooting that does not require hands-on hardware work.</p>
-            <ul><li>First hour included</li><li>Additional time: $60/hour</li><li>Secure remote connection with your approval</li></ul>
+            <ul><li>Up to 1 hour included</li><li>If more time is needed: $60/hour</li><li>Secure remote connection with your approval</li></ul>
             <a class="button" href="book-tech-help.html?service=remote">Book Remote Help →</a>
           </article>
           <article class="price-card">
-            <p class="eyebrow">On-Site Support</p>
+            <p class="eyebrow">On-Site Appointment</p>
             <h3>When someone needs to be there in person.</h3>
-            <div class="amount">$99 <small>/ first hour</small></div>
+            <div class="amount">$99</div>
+            <span class="appointment-includes">Appointment price · includes up to 1 hour</span>
             <p>Best for installation, device placement, smart-home setup, hardware access, wiring-related troubleshooting and issues that cannot be resolved remotely.</p>
-            <ul><li>First hour included</li><li>Additional time: $75/hour</li><li>Travel over 30 miles may have an additional fee</li></ul>
+            <ul><li>Up to 1 hour included</li><li>If more time is needed: $75/hour</li><li>Travel over 30 miles may have an additional fee</li></ul>
             <a class="button" href="book-tech-help.html?service=onsite">Book On-Site Help →</a>
           </article>
         </div>
-        <div class="booking-bridge"><strong>Most appointments are completed within the first hour.</strong> If additional time is needed, you will know the hourly rate before booking and your saved payment method can be used for the remaining balance after the work is complete.</div>
+        <div class="booking-bridge"><strong>Most appointments are completed within the included hour.</strong> If more time is needed, the additional rate is shown above and only applies beyond the included appointment time.</div>
       </div>
     </section>
 
@@ -187,7 +189,7 @@
       <div class="shell final-cta">
         <p class="eyebrow">Ready When You Are</p>
         <h2>Know the cost. Choose a time. Get it fixed.</h2>
-        <p>Pick remote or on-site support, choose an available appointment, and confirm with the first-hour payment.</p>
+        <p>Pick remote or on-site support, choose an available appointment, and confirm your appointment online.</p>
         <div class="button-row"><a class="button" href="book-tech-help.html">Book an Appointment →</a></div>
       </div>
     </section>
