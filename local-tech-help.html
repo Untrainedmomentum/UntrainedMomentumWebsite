@@ -14,29 +14,26 @@
   <meta property="og:url" content="https://untrainedmomentum.com/local-tech-help.html">
   <meta property="og:image" content="https://untrainedmomentum.com/og-image.png">
   <link rel="stylesheet" href="assets/styles.css?v=20260915-4">
+  <link rel="stylesheet" href="assets/readability.css?v=20260915-2">
   <style>
-    .tech-hero{padding:58px 0 34px;background:linear-gradient(180deg,#fff 0%,var(--paper) 100%)}
-    .tech-hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:34px;align-items:center}
-    .tech-hero h1{max-width:860px;margin:10px 0 16px;font-size:clamp(3rem,7vw,5.6rem);line-height:.96;letter-spacing:-.05em}
-    .tech-hero .lede{max-width:760px;font-size:clamp(1.12rem,2vw,1.3rem);line-height:1.55}
-    .quick-prices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
-    .quick-price{display:block;padding:20px 22px;border:2px solid var(--rule);border-radius:var(--radius);background:#fff;color:var(--ink);text-decoration:none}
-    .quick-price.featured{border-color:var(--red)}
-    .quick-price span{display:block;font-size:.82rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-    .quick-price strong{display:block;margin:6px 0 4px;font-size:2.5rem;line-height:1}
-    .quick-price small{font-weight:750;color:var(--muted)}
-    .quick-price:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-    .hero-card{padding:26px 28px;border-radius:var(--radius);background:var(--ink);color:#fff}
-    .hero-card h2{margin:6px 0 12px;color:#fff;font-size:1.8rem}.hero-card p{margin:0;color:rgba(255,255,255,.8);line-height:1.6}
-    .pricing-section{padding:38px 0 44px}.pricing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
-    .price-card{display:flex;flex-direction:column;padding:28px;border:2px solid var(--rule);border-radius:var(--radius);background:#fff}.price-card.featured{border-color:var(--red)}
-    .price-card h3{margin:6px 0 8px;font-size:1.8rem}.amount{font-size:3.2rem;font-weight:900;line-height:1;letter-spacing:-.04em}.appointment-includes{display:block;margin-top:7px;font-weight:800;color:var(--muted)}
-    .price-card p{margin:14px 0;color:var(--muted);line-height:1.55}.price-card ul{margin:0 0 18px;padding-left:20px;color:var(--muted)}.price-card .button{margin-top:auto;align-self:flex-start}
-    .choice-note{margin-top:18px;padding:18px 22px;border-left:4px solid var(--red);background:var(--paper-deep);line-height:1.55}
-    .experience-strip{padding:34px 0}.experience-strip .shell{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);gap:30px;align-items:center}.experience-strip img{width:100%;border-radius:var(--radius)}
-    .experience-strip h2{margin:6px 0 10px}.experience-strip p{margin:0 0 12px;line-height:1.6}
-    .specific-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.specific-links a{font-weight:800}
-    @media(max-width:850px){.tech-hero-grid,.pricing-wrap,.experience-strip .shell{grid-template-columns:1fr}.quick-prices{grid-template-columns:1fr}.tech-hero{padding-top:44px}}
+    .tech-hero{padding:52px 0 40px;background:linear-gradient(180deg,#fff 0%,var(--paper) 100%)}
+    .tech-hero h1{max-width:820px;margin:10px 0 14px;font-size:clamp(2.8rem,6vw,5rem);line-height:.98;letter-spacing:-.045em}
+    .tech-hero .lede{max-width:760px;margin-bottom:10px;font-size:clamp(1.1rem,1.8vw,1.28rem);line-height:1.55}
+    .tech-hero .support-note{max-width:820px;margin-bottom:24px;color:var(--muted)}
+    .appointment-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:980px;margin-top:24px}
+    .appointment-card{display:flex;flex-direction:column;padding:26px 28px;border:2px solid var(--rule);border-radius:16px;background:#fff;text-decoration:none;transition:transform 160ms ease,box-shadow 160ms ease,border-color 160ms ease}
+    .appointment-card:hover{transform:translateY(-2px);box-shadow:0 16px 42px rgba(0,0,0,.09);border-color:var(--ink)}
+    .appointment-card.featured{border-color:var(--red)}
+    .appointment-label{margin-bottom:8px;color:var(--muted);font-size:.9rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    .appointment-price{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}.appointment-price strong{font-size:3rem;line-height:1}.appointment-price span{color:var(--muted);font-weight:750}
+    .appointment-card p{margin:0 0 16px;color:var(--ink-soft);line-height:1.55}
+    .appointment-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:auto;padding-top:14px;border-top:1px solid var(--rule);color:var(--muted);font-size:.95rem;font-weight:700}
+    .appointment-cta{margin-top:18px;color:var(--red);font-weight:900}
+    .choice-note{max-width:980px;margin-top:18px;padding:16px 18px;border-left:4px solid var(--red);background:var(--paper-deep);line-height:1.55}
+    .experience-strip{padding:38px 0}.experience-strip .shell{display:grid;grid-template-columns:minmax(220px,.68fr) minmax(0,1.32fr);gap:30px;align-items:center}.experience-strip figure{margin:0}.experience-strip img{width:100%;border-radius:var(--radius)}
+    .experience-strip h2{margin:6px 0 10px;font-size:clamp(2rem,4vw,3.35rem)}.experience-strip p{margin:0 0 12px;line-height:1.6}
+    .specific-links{display:flex;gap:14px 20px;flex-wrap:wrap;margin-top:18px}.specific-links a{font-weight:800;color:var(--red);text-decoration:none}
+    @media(max-width:850px){.appointment-grid,.experience-strip .shell{grid-template-columns:1fr}.tech-hero{padding-top:40px}.appointment-card{padding:24px}}
   </style>
   <script type="application/ld+json">
   {
@@ -64,55 +61,37 @@
         <a href="smart-home-setup-big-rapids.html">Smart Home</a>
         <a href="work.html">Work</a>
         <a href="about.html">About</a>
-        <a class="nav-cta" href="#pricing">Book an Appointment</a>
       </div>
     </nav>
   </header>
 
   <main id="main">
     <section class="tech-hero">
-      <div class="shell tech-hero-grid">
-        <div>
-          <p class="eyebrow">Home Technology Support · Big Rapids & Mid-Michigan</p>
-          <h1>Get the technology working again.</h1>
-          <p class="lede">Computers, Wi-Fi, printers, smart-home devices, accounts, new equipment or just something that is not working the way it should.</p>
-          <p>Most computer and software problems can be handled remotely. If I need to physically be there, choose on-site instead.</p>
-          <div class="quick-prices">
-            <a class="quick-price featured" href="book-remote-tech-help.html"><span>Remote Help</span><strong>$60</strong><small>Up to 1 hour · book remote →</small></a>
-            <a class="quick-price" href="book-onsite-tech-help.html"><span>On-Site Help</span><strong>$99</strong><small>Up to 1 hour · book on-site →</small></a>
-          </div>
-        </div>
-        <aside class="hero-card">
-          <p class="eyebrow">Not sure which one?</p>
-          <h2>Start remote unless the job obviously needs hands-on work.</h2>
-          <p>Software, email, accounts, settings, updates and many printer or computer problems can usually be handled remotely. Installation, device placement, hardware access and smart-home work are usually better on-site.</p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section-soft pricing-section" id="pricing">
       <div class="shell">
-        <p class="eyebrow">Pricing</p>
-        <h2>Know the price before you book.</h2>
-        <div class="pricing-wrap">
-          <article class="price-card featured">
-            <p class="eyebrow">Remote Appointment</p>
-            <div class="amount">$60</div>
-            <span class="appointment-includes">includes up to 1 hour</span>
-            <p>We can use Zoom for screen sharing and some remote control. Chrome Remote Desktop is available if we need more direct access.</p>
-            <ul><li>Additional time: $60/hour</li><li>Remote appointments are non-refundable</li><li>If you are unsure, email me before booking</li></ul>
-            <a class="button" href="book-remote-tech-help.html">Book Remote Help — $60 →</a>
-          </article>
-          <article class="price-card">
-            <p class="eyebrow">On-Site Appointment</p>
-            <div class="amount">$99</div>
-            <span class="appointment-includes">includes up to 1 hour</span>
-            <p>I come to you for work that needs someone physically there with the equipment or devices.</p>
-            <ul><li>Additional time: $75/hour</li><li>Travel over 30 miles may cost extra</li><li>24-hour cancellation policy applies</li></ul>
-            <a class="button" href="book-onsite-tech-help.html">Book On-Site Help — $99 →</a>
-          </article>
+        <p class="eyebrow">Home Technology Support · Big Rapids & Mid-Michigan</p>
+        <h1>Get the technology working again.</h1>
+        <p class="lede">Computer problems, Wi-Fi, printers, smart-home devices, account issues, new equipment or something that simply is not working the way it should.</p>
+        <p class="support-note">Choose remote support when the problem can be handled from your computer. Choose on-site when I need to physically work with the equipment or be in the space.</p>
+
+        <div class="appointment-grid" id="pricing">
+          <a class="appointment-card featured" href="book-remote-tech-help.html">
+            <span class="appointment-label">Remote appointment</span>
+            <div class="appointment-price"><strong>$60</strong><span>up to 1 hour</span></div>
+            <p>Best for software, email, accounts, settings, updates, printer troubleshooting and most everyday computer problems.</p>
+            <div class="appointment-meta"><span>Additional time: $60/hour</span><span>Zoom or remote access</span></div>
+            <span class="appointment-cta">Book remote support →</span>
+          </a>
+
+          <a class="appointment-card" href="book-onsite-tech-help.html">
+            <span class="appointment-label">On-site appointment</span>
+            <div class="appointment-price"><strong>$99</strong><span>up to 1 hour</span></div>
+            <p>Best for installation, hardware access, smart-home setup, device placement and anything that needs hands-on work.</p>
+            <div class="appointment-meta"><span>Additional time: $75/hour</span><span>Over 30 miles may cost extra</span></div>
+            <span class="appointment-cta">Book on-site support →</span>
+          </a>
         </div>
-        <div class="choice-note"><strong>One important difference:</strong> if we start a $60 remote appointment and discover the problem needs an in-person visit, the remote appointment is still paid and the on-site visit is a separate $99 appointment. If you are not sure, email <a href="mailto:info@untrainedmomentum.com?subject=Which%20tech%20appointment%20do%20I%20need%3F">info@untrainedmomentum.com</a> first.</div>
+
+        <div class="choice-note"><strong>Not sure which one to book?</strong> Email <a href="mailto:info@untrainedmomentum.com?subject=Which%20tech%20appointment%20do%20I%20need%3F">info@untrainedmomentum.com</a> and tell me what is going on. If a remote session has already started and we discover the issue needs an in-person visit, the remote appointment is still paid and the $99 on-site appointment is separate.</div>
       </div>
     </section>
 
@@ -121,8 +100,8 @@
         <figure><img src="assets/local-tech-senior-support-v2.png" alt="One-on-one home technology support" width="1664" height="936"></figure>
         <div>
           <p class="eyebrow">Experienced Support</p>
-          <h2>More than 10 years of professional IT support.</h2>
-          <p>I have spent more than a decade troubleshooting technology for people remotely and in person. The goal is simple: figure out what is wrong, fix what I can, and explain anything you need to know without making it more complicated than it needs to be.</p>
+          <h2>Professional IT support without the runaround.</h2>
+          <p>I have spent more than 10 years troubleshooting technology remotely and in person. I’ll figure out what is wrong, fix what I can, and explain what matters without making it more complicated than it needs to be.</p>
           <div class="specific-links">
             <a href="printer-setup-big-rapids.html">Printer help →</a>
             <a href="wifi-help-big-rapids.html">Wi-Fi help →</a>
