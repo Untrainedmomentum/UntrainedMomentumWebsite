@@ -11,13 +11,30 @@
   --radius: 16px;
 }
 
-html { font-size: 100%; }
+html {
+  font-size: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 body {
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
   font-size: clamp(16px, calc(15px + 0.22vw), 18px);
   line-height: 1.6;
 }
+main, section, .shell, .narrow,
+.grid-2, .grid-3, .split, .founder-grid, .page-hero-grid,
+.contact-grid, .recommendation-grid, .problem-layout, .founder-intro,
+.path-grid, .choice-grid, .proof-summary,
+.grid-2 > *, .grid-3 > *, .split > *, .founder-grid > *, .page-hero-grid > *,
+.contact-grid > *, .recommendation-grid > *, .problem-layout > *, .founder-intro > *,
+.path-grid > *, .choice-grid > *, .proof-summary > * {
+  min-width: 0;
+}
+img, video, iframe { max-width: 100%; }
+h1, h2, h3, p, a, span, li { overflow-wrap: anywhere; }
 
 p, li, dd, dt { line-height: 1.62; }
 
@@ -154,6 +171,21 @@ select { font-size: 0.98rem; }
 .footer-links a,
 .faq summary { font-size: 0.98rem; }
 
+@media (max-width: 1050px) {
+  h1 { font-size: clamp(2.7rem, 7vw, 4.8rem); }
+  h2 { font-size: clamp(2rem, 5vw, 3.2rem); }
+  .split,
+  .founder-grid,
+  .page-hero-grid,
+  .contact-grid,
+  .recommendation-grid,
+  .problem-layout,
+  .founder-intro {
+    grid-template-columns: 1fr;
+  }
+  .sticky { position: static; }
+}
+
 @media (max-width: 900px) {
   .site-header,
   .nav { min-height: 88px; }
@@ -180,11 +212,11 @@ select { font-size: 0.98rem; }
     height: 70px;
   }
   .nav-links { inset: 78px 0 0; }
-  h1 { font-size: clamp(2.6rem, 13vw, 3.85rem); }
-  h2 { font-size: clamp(2rem, 9.5vw, 3rem); }
-  .section { padding: 48px 0; }
-  .section-tight { padding: 36px 0; }
-  .hero-inner { padding: 48px 0 58px; }
+  h1 { font-size: clamp(2.45rem, 12vw, 3.5rem); }
+  h2 { font-size: clamp(1.9rem, 8.5vw, 2.7rem); }
+  .section { padding: 46px 0; }
+  .section-tight { padding: 34px 0; }
+  .hero-inner { padding: 46px 0 54px; }
   .button {
     font-size: 1rem;
     min-height: 52px;
