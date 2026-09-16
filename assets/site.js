@@ -1,9 +1,6 @@
 const MOBILE_NAV_VERSION = '20260912-2';
-const READABILITY_VERSION = '20260915-1';
+const READABILITY_VERSION = '20260915-3';
 
-// Some legacy/root pages only load styles.css. Always load the hardened
-// mobile navigation stylesheet so opening the hamburger menu cannot spill
-// navigation links over page content.
 if (!document.querySelector('link[href*="mobile-nav.css"]')) {
   const mobileNavStyles = document.createElement('link');
   mobileNavStyles.rel = 'stylesheet';
@@ -11,13 +8,58 @@ if (!document.querySelector('link[href*="mobile-nav.css"]')) {
   document.head.appendChild(mobileNavStyles);
 }
 
-// Load readability overrides on every page that uses the shared site script.
 if (!document.querySelector('link[href*="readability.css"]')) {
   const readabilityStyles = document.createElement('link');
   readabilityStyles.rel = 'stylesheet';
   readabilityStyles.href = `/assets/readability.css?v=${READABILITY_VERSION}`;
   document.head.appendChild(readabilityStyles);
 }
+
+function standardizeHeader() {
+  const nav = document.querySelector('.site-header .nav');
+  if (!nav) return;
+
+  let brand = nav.querySelector('.brand');
+  if (!brand) {
+    brand = document.createElement('a');
+    brand.className = 'brand';
+    nav.prepend(brand);
+  }
+  brand.href = '/';
+  brand.setAttribute('aria-label', 'Untrained Momentum home');
+  brand.innerHTML = '<img class="brand-logo" src="/Logo%20Black.png" alt="Untrained Momentum">';
+
+  let menu = nav.querySelector('.menu-button');
+  if (!menu) {
+    menu = document.createElement('button');
+    menu.className = 'menu-button';
+    menu.type = 'button';
+    menu.innerHTML = '<span></span><span></span><span></span>';
+    brand.insertAdjacentElement('afterend', menu);
+  }
+  menu.setAttribute('aria-label', 'Open menu');
+  menu.setAttribute('aria-expanded', 'false');
+  menu.setAttribute('aria-controls', 'primary-navigation');
+
+  let links = nav.querySelector('.nav-links');
+  if (!links) {
+    links = document.createElement('div');
+    links.className = 'nav-links';
+    nav.appendChild(links);
+  }
+  links.id = 'primary-navigation';
+  links.innerHTML = `
+    <a href="/business-services.html">Business Services</a>
+    <a href="/managed-website-rental.html">Managed Websites</a>
+    <a href="/business-startup-support.html">Business Start Up</a>
+    <a href="/local-tech-help.html">Home Tech</a>
+    <a href="/work.html">Work</a>
+    <a href="/about.html">About</a>
+    <a href="/client/login.html">Client Login</a>
+    <a class="nav-cta" href="/book.html">Free Consultation</a>`;
+}
+
+standardizeHeader();
 
 const menuButton = document.querySelector('.menu-button');
 const navLinks = document.querySelector('.nav-links');
